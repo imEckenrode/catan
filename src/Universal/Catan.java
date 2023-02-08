@@ -4,7 +4,7 @@ import Player.Player;
 
 import java.util.ArrayList;
 
-public class Main {
+public class Catan {
 
     ArrayList<Player> players;
     Dice dice;
