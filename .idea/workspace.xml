@@ -30,19 +30,15 @@
       <change afterPath="$PROJECT_DIR$/src/Universal/Turn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Universal/Main.java" afterDir="false" />
+    <list default="true" id="a324a19f-8beb-4459-ba67-c5e8bfe9daf5" name="Changes" comment="Connecting my laptop to Git">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Catan.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -104,7 +100,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created project with IntelliJ IDEA" />
-    <MESSAGE value="Created project with IntelliJ IDEA (continued)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created project with IntelliJ IDEA (continued)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created project with IntelliJ IDEA" />
   </component>
 </project>
