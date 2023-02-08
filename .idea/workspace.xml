@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a324a19f-8beb-4459-ba67-c5e8bfe9daf5" name="Changes" comment="Created project with IntelliJ IDEA">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a324a19f-8beb-4459-ba67-c5e8bfe9daf5" name="Changes" comment="Created project with IntelliJ IDEA (continued)">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BoardData/BoardManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BoardData/Edge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BoardData/EdgeItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BoardData/Hexagon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BoardData/Vertex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BoardData/VertexItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/BoardGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/CardGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/GamePieceGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/StaticGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Hand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/HandCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/PlaceableItems.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Road.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Player/Settlement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/BuildingCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/Dice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/DownCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/Port.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/Resource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/ResourceHex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/Robber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/SpecialVP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Universal/Turn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Universal/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -16,7 +51,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2KA1qxbulUEiz8U51Ys1YgaadgQ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -24,7 +61,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -43,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673402801152</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created project with IntelliJ IDEA (continued)">
+      <created>1673402858436</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673402858436</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -59,6 +104,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created project with IntelliJ IDEA" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created project with IntelliJ IDEA" />
+    <MESSAGE value="Created project with IntelliJ IDEA (continued)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created project with IntelliJ IDEA (continued)" />
   </component>
 </project>
