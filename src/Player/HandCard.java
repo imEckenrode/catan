@@ -1,4 +1,7 @@
 package Player;
 
-public class HandCard {
+import GUI.CardGUI;
+
+public class HandCard implements CardGUI {
+
 }
