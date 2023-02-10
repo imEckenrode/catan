@@ -1,4 +1,4 @@
 package Universal;
 
-public class Port {
+public class Port extends DownCard{
 }

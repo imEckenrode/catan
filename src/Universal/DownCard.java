@@ -1,4 +1,6 @@
 package Universal;
 
-public class DownCard {
+import GUI.CardGUI;
+
+public class DownCard implements CardGUI {
 }
