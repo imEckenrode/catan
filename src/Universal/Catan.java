@@ -8,7 +8,7 @@ public class Catan {
 
     ArrayList<Player> players;
     Dice dice;
-
+    public enum Resource{WOOD,ORE,GRAIN,WOOL,CLAY}
 
     public static void main(String[] args) {
         System.out.println("Hello world!");

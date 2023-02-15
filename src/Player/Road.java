@@ -5,4 +5,6 @@ import GUI.GamePieceGUI;
 
 public class Road extends EdgeItem implements GamePieceGUI {
 
+    public Road() {
+    }
 }
