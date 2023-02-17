@@ -32,18 +32,18 @@ public class BoardManager {
             }
         }
 
-        int j = 1;
+        int j = 1;  //TODO: Select all 6 of the r=1 tiles efficiently...or just have the below list to 2,2
         int i = 1;
                  hMap[j][i].radius1Attachment(2, new Hexagon[]{hMap[j - 1][i], hMap[j][i + 1],
                                                                         hMap[j + 1][i + 1], hMap[j + 1][i],
                                                                         hMap[j][i - 1],hMap[j - 1][i - 1]});
-
-                 //new Hexagon[]{hMap[j - 1][i]}
 
                 System.out.println(hMap[j + 1][i+1].edges[5]);
                 System.out.println(hMap[j][i].edges[2]);
             //}
         //}
 
+        //TODO: Ports and Numbering (do them at the same time)
+        hMap[0][0].edges[5].setPort(new Port(DESERT));
     }
 }
