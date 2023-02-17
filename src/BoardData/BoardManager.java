@@ -1,10 +1,12 @@
 package BoardData;
 
-import java.sql.Array;
+import Universal.Catan;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Random;
 
+import static Universal.Catan.Resource.*;
 import static java.lang.Math.*;
 
 public class BoardManager {
@@ -13,23 +15,22 @@ public class BoardManager {
 
     Hexagon[][] hMap;
 
+    ArrayList resources;
     ArrayList<ArrayList<Hexagon>> numberToTile;
-    int[] number = new int[]{5,2,6,3,8,10,9,12,11,4,8,10,9,4,5,6,3,11};
+    int[] number = new int[]{5,2,6,3,8,10,9,12,11,4,8,10,9,4,5,6,3,11}; //TODO: assign numbers to hexes
         //Remember to skip the desert though, so assign resources to hex's as we go.
         //May need to reverse order of tilings so we can pop out as we go
     public BoardManager() {
+        Random rng = new Random();
+        resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
+
         hMap = new Hexagon[5][7];
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
-            for(int i=max(j-2,0); i<=min(j+2,4); i++){       //Generates one more out to allow for easy indexing with the connection functions (otherwise do try catch)
-                //If the tile is on the board, create it.
-                hMap[j][i] = new Hexagon();
-                //For an arrayList, would need fullMap.get(j).set(i, abs(j-i)>2 ? new Hexagon() : null);
-                //System.out.println(abs(j-i));
+            for(int i=max(j-2,0); i<=min(j+2,4); i++){
+                Catan.Resource resource = (Catan.Resource) resources.remove(rng.nextInt(resources.size()));
+                hMap[j][i] = new Hexagon(resource);
             }
         }
-        //Now generate connections for 11,12,23,33,32,21 (the r=1 ring)
-        //for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
-            //for(int i=max(j-2,0); i<=min(j+2,4); i++){   //This remains within the board
 
         int j = 1;
         int i = 1;

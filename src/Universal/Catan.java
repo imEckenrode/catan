@@ -10,7 +10,7 @@ public class Catan {
     ArrayList<Player> players;
     Dice dice;
     BoardManager boardManager;
-    public enum Resource{NONE,WOOD,ORE,GRAIN,WOOL,CLAY} //Could call it DESERT instead
+    public enum Resource{DESERT,WOOD,ORE,GRAIN,WOOL,CLAY} //Could call it NONE instead
 
     public Catan() {
         players = new ArrayList<>();    //Choose your colors then add

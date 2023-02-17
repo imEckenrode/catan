@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hexagon {
-    ResourceHex resourceHex;
-
+    Catan.Resource resource;
     public Edge[] edges;
     public Vertex[] vertices;
+
+    int tokenNum;
+    boolean hasRobber;
 
 
     public void generateAllSides(){
@@ -51,17 +53,17 @@ public class Hexagon {
         generateAllSides();
     }
 
-    public Hexagon(ResourceHex resourceHex) {
-        this.resourceHex = resourceHex;
+    public Hexagon(Catan.Resource resource) {
+        this.resource = resource;
         generateAllSides();
     }
 
-    public ResourceHex getResourceHex() {
-        return resourceHex;
+    public Catan.Resource getResourceType() {
+        return resource;
     }
 
-    public void setResourceHex(ResourceHex resourceHex) {
-        this.resourceHex = resourceHex;
+    public void setResourceType(Catan.Resource resource) {
+        this.resource = resource;
     }
 
     public Edge getEdge(int index){
