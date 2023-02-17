@@ -9,22 +9,43 @@ import java.util.List;
 public class Hexagon {
     ResourceHex resourceHex;
 
-    Edge[] edges;
-    Vertex[] vertices;
+    public Edge[] edges;
+    public Vertex[] vertices;
 
 
     public void generateAllSides(){
+        edges = new Edge[6];
+        vertices = new Vertex[6];
         for(int i = 0; i<6;i++){
             edges[i] = new Edge();
             vertices[i] = new Vertex();
         }
     }
 
-    public void attachThree(Hexagon hexR, Hexagon hexDR, Hexagon hexDL){
-        if(hexR != null){
-            //Attach it in here, and do the same for the next two
+    public void radius1Attachment(int dir, Hexagon[] hexes){
+        if(dir>5 || dir<1){
+            dir = 6;    //Keep orientation within the range, don't even accept outside
         }
-    }
+
+        //Connect (almost) all edges directly attached to hexagon
+                // Have to be careful here, add 5 to the orientation to avoid negatives
+        for(int currentDir = dir; currentDir != (dir+5)%6; currentDir=(currentDir+1)%6) {
+            hexes[currentDir].setEdge((currentDir + 3) % 6, edges[currentDir]);
+        }
+        for(int currentDir = (dir+1)%6; currentDir != (dir+4)%6; currentDir=(currentDir+1)%6){
+            hexes[currentDir].setVertex((currentDir+4)%6, vertices[currentDir]);
+            hexes[(currentDir+5)%6].setVertex((currentDir+2)%6, vertices[currentDir]);
+        }
+
+        //Now connect the needed edges and vertices for the 2nd ring of hexagons, with dir + 3 providing the objects
+        hexes[(dir+2)%6].setEdge((dir+4)%6, hexes[(dir + 3)%6].edges[(dir+1)%6]);
+        hexes[(dir+2)%6].setVertex((dir+4)%6, hexes[(dir + 3)%6].vertices[(dir+2)%6]);
+
+        hexes[(dir+4)%6].setEdge((dir+2)%6, hexes[(dir + 3)%6].edges[(dir+5)%6]);
+        hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].vertices[(dir+2)%6]);
+            //Add one to the right-hex vertex index to align the correct vertex
+
+    }   //Orientation is what side of the hexagon is the middle
 
     public Hexagon() {
         generateAllSides();
@@ -32,6 +53,7 @@ public class Hexagon {
 
     public Hexagon(ResourceHex resourceHex) {
         this.resourceHex = resourceHex;
+        generateAllSides();
     }
 
     public ResourceHex getResourceHex() {
@@ -55,7 +77,7 @@ public class Hexagon {
         return vertices[index%6];
     }
 
-    public boolean setEdge(int index, Vertex newVertex){
+    public boolean setVertex(int index, Vertex newVertex){
         vertices[index%6] = newVertex;
         return true;
     }
