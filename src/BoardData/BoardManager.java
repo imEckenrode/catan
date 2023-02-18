@@ -25,9 +25,10 @@ public class BoardManager {
         resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
 
         hMap = new Hexagon[5][7];
+        Catan.Resource resource = null;
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
             for(int i=max(j-2,0); i<=min(j+2,4); i++){
-                Catan.Resource resource = (Catan.Resource) resources.remove(rng.nextInt(resources.size()));
+                resource = (Catan.Resource) resources.remove(rng.nextInt(resources.size()));
                 hMap[j][i] = new Hexagon(resource);
             }
         }
