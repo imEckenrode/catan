@@ -21,4 +21,5 @@ public class Catan {
     public static void main(String[] args) {
         Catan game = new Catan();
     }
+
 }

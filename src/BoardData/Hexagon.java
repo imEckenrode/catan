@@ -25,7 +25,7 @@ public class Hexagon {
     }
 
     public void radius1Attachment(int dir, Hexagon[] hexes){
-        if(dir>5 || dir<1){
+        if(dir>6 || dir<1){
             dir = 6;    //Keep orientation within the range, don't even accept outside
         }
 

@@ -2,6 +2,7 @@ package BoardData;
 
 import Universal.Catan;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -32,15 +33,20 @@ public class BoardManager {
                 hMap[j][i] = new Hexagon(resource);
             }
         }
+        //loops through the middle circle of hexes
+        ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(2,1,3,2,3,3,2,3,1,2,1,1));
+       for (int temp1 = 0; temp1<12; temp1+=2) {
+           int j = indices.get(temp1);
+           int i = indices.get(temp1 + 1);
 
-        int j = 1;  //TODO: Select all 6 of the r=1 tiles efficiently...or just have the below list to 2,2
-        int i = 1;
-                 hMap[j][i].radius1Attachment(2, new Hexagon[]{hMap[j - 1][i], hMap[j][i + 1],
-                                                                        hMap[j + 1][i + 1], hMap[j + 1][i],
-                                                                        hMap[j][i - 1],hMap[j - 1][i - 1]});
 
-                System.out.println(hMap[j + 1][i+1].edges[5]);
-                System.out.println(hMap[j][i].edges[2]);
+           hMap[j][i].radius1Attachment(2, new Hexagon[]{hMap[j - 1][i], hMap[j][i + 1],
+                   hMap[j + 1][i + 1], hMap[j + 1][i],
+                   hMap[j][i - 1], hMap[j - 1][i - 1]});
+
+          //System.out.println(hMap[j + 1][i + 1].edges[5]);
+           //System.out.println(hMap[j][i].edges[2]);
+       }
             //}
         //}
 
