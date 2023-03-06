@@ -3,13 +3,14 @@ package BoardData;
 
 import Universal.Catan;
 
-import java.util.ArrayList;
-import java.util.List;
+import static BoardData.Dir6.rot60;
 
 public class Hexagon {
     Catan.Resource resource;
     public Edge[] edges;
     public Vertex[] vertices;
+
+    public Hexagon[] adjacentHexes;
 
     int tokenNum;
     boolean hasRobber;
@@ -29,14 +30,16 @@ public class Hexagon {
             dir = 6;    //Keep orientation within the range, don't even accept outside
         }
 
+        adjacentHexes = hexes.clone();
+
         //Connect (almost) all edges directly attached to hexagon
                 // Have to be careful here, add 5 to the orientation to avoid negatives
-        for(int currentDir = dir; currentDir != (dir+5)%6; currentDir=(currentDir+1)%6) {
-            hexes[currentDir].setEdge((currentDir + 3) % 6, edges[currentDir]);
+        for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
+            hexes[cDir].setEdge((cDir+3)%6, edges[cDir]);
         }
-        for(int currentDir = (dir+1)%6; currentDir != (dir+4)%6; currentDir=(currentDir+1)%6){
-            hexes[currentDir].setVertex((currentDir+4)%6, vertices[currentDir]);
-            hexes[(currentDir+5)%6].setVertex((currentDir+2)%6, vertices[currentDir]);
+        for(int cDir = (dir+1)%6; cDir != (dir+4)%6; cDir=(cDir+1)%6){
+            hexes[cDir].setVertex((cDir+4)%6, vertices[cDir]);
+            hexes[(cDir+5)%6].setVertex((cDir+2)%6, vertices[cDir]);
         }
 
         //Now connect the needed edges and vertices for the 2nd ring of hexagons, with dir + 3 providing the objects
