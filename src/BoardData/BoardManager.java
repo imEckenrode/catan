@@ -39,8 +39,8 @@ public class BoardManager {
            int j = indices.get(temp1);
            int i = indices.get(temp1 + 1);
 
-
-           hMap[j][i].radius1Attachment(2, new Hexagon[]{hMap[j - 1][i], hMap[j][i + 1],
+            //Division by 2 passed as an integer should automatically floor for positive numbers
+           hMap[j][i].radius1Attachment(temp1/2, new Hexagon[]{hMap[j - 1][i], hMap[j][i + 1],
                    hMap[j + 1][i + 1], hMap[j + 1][i],
                    hMap[j][i - 1], hMap[j - 1][i - 1]});
 
@@ -51,6 +51,6 @@ public class BoardManager {
         //}
 
         //TODO: Ports and Numbering (do them at the same time)
-        hMap[0][0].edges[5].setPort(new Port(DESERT));
+        //hMap[0][0].edges[5].setPort(new Port(DESERT));
     }
 }
