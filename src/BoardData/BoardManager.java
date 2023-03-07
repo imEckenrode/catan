@@ -54,13 +54,9 @@ public class BoardManager {
                     hMap[j + 1][i + 1], hMap[j + 1][i],
                     hMap[j][i - 1], hMap[j - 1][i - 1]});
 
-            //System.out.println(hMap[j + 1][i + 1].edges[5]);
-            //System.out.println(hMap[j][i].edges[2]);
         }
-        //}
-        //}
 
-        //TODO: Ports and Numbering (do them at the same time)
+        //TODO: Ports (DO AS BELOW, MOST LIKELY)
         //hMap[0][0].edges[5].setPort(new Port(DESERT));
 
         Hexagon nextHex = hMap[0][0];
