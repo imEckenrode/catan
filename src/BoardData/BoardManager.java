@@ -18,7 +18,7 @@ public class BoardManager {
 
     ArrayList resources;
     ArrayList<ArrayList<Hexagon>> numberToTile;
-    int[] number = new int[]{5,2,6,3,8,10,9,12,11,4,8,10,9,4,5,6,3,11}; //TODO: assign numbers to hexes
+    ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(new Integer[]{5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11})); //TODO: assign numbers to hexes
         //Remember to skip the desert though, so assign resources to hex's as we go.
         //May need to reverse order of tilings so we can pop out as we go
     public BoardManager() {
@@ -52,5 +52,19 @@ public class BoardManager {
 
         //TODO: Ports and Numbering (do them at the same time)
         //hMap[0][0].edges[5].setPort(new Port(DESERT));
+
+        /*
+        Hexagon nextHex = hMap[0][0];
+        int dir = 1;
+         for(int i = 0; i<20; i++){
+             if(nextHex.resource != DESERT){
+                int num = numberList.remove(0);
+                nextHex.setTokenNum(num);
+                numberToTile.get(num).add(nextHex);
+             }
+             nextHex = nextHex.getNextHex(dir);
+         }
+
+         */
     }
 }

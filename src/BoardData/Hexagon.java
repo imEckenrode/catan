@@ -56,6 +56,7 @@ public class Hexagon {
     }   //Orientation is what side of the hexagon is the middle
 
     public Hexagon() {
+        adjacentHexes = new Hexagon[6];
         generateAllSides();
     }
 
@@ -64,6 +65,20 @@ public class Hexagon {
         adjacentHexes = new Hexagon[6];
         generateAllSides();
     }
+
+    //public Hexagon getNextHex(int dir){
+    //    for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
+            //try{
+             //   if(adjacentHexes[cDir].getTokenNum() == null){
+             //       return
+             //   }
+            //}catch(Exception )
+
+        //}
+        //adjacentHexes[dir]
+    //    return adjacentHexes[dir];
+    //}
+
 
     public Catan.Resource getResourceType() {
         return resource;
@@ -98,5 +113,25 @@ public class Hexagon {
     public boolean setVertex(int index, Vertex newVertex){
         vertices[index%6] = newVertex;
         return true;
+    }
+
+
+    public int getTokenNum() {
+        return tokenNum;
+    }
+
+    public void setTokenNum(int tokenNum) {
+        this.tokenNum = tokenNum;
+    }
+
+    public boolean hasRobber() {
+        return hasRobber;
+    }
+
+    public void activateRobber() {
+        this.hasRobber = true;
+    }
+    public void removeRobber() {
+        this.hasRobber = false;
     }
 }
