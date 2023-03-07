@@ -7,6 +7,13 @@ public class Player {
     int victoryPoints;  //This could be an array!
     Color color;
 
+
+    public Player(Color color) {
+        this.hand = new Hand();
+        this.victoryPoints = 0;
+        this.color = color;
+    }
+
     public Player(Hand hand, int victoryPoints, Color color) {
         this.hand = hand;
         this.victoryPoints = victoryPoints;

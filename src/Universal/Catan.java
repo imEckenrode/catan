@@ -3,6 +3,7 @@ package Universal;
 import BoardData.BoardManager;
 import Player.Player;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Catan {
@@ -14,6 +15,12 @@ public class Catan {
 
     public Catan() {
         players = new ArrayList<>();    //Choose your colors then add
+        //Abstract these 4 into an actual function call
+        players.add(new Player(Color.RED));
+        players.add(new Player(Color.YELLOW));
+        players.add(new Player(Color.BLUE));
+        players.add(new Player(Color.GREEN));
+
         dice = new Dice();
         boardManager = new BoardManager();
     }
