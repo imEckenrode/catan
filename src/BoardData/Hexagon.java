@@ -43,12 +43,12 @@ public class Hexagon {
         }
 
         //Now connect the needed components for the 2nd ring of hexagons, with dir + 3 providing the objects
-        hexes[(dir+2)%6].setAdjHex((dir+4)%6, hexes[(dir + 3)%6].getAdjHex((dir+1)%6));
+        hexes[(dir+2)%6].setAdjHex((dir+4)%6, hexes[(dir + 3)%6].getAdjHex((dir+2)%6));
         hexes[(dir+2)%6].setEdge((dir+4)%6, hexes[(dir + 3)%6].getEdge((dir+1)%6));
         hexes[(dir+2)%6].setVertex((dir+4)%6, hexes[(dir + 3)%6].getVertex((dir+2)%6));
 
                 //TODO: Make sure setAdjHex works correctly
-        hexes[(dir+4)%6].setAdjHex((dir+2)%6, hexes[(dir + 3)%6].getAdjHex((dir+1)%6));
+        hexes[(dir+4)%6].setAdjHex((dir+3)%6, hexes[(dir + 3)%6].getAdjHex((dir+2)%6));
         hexes[(dir+4)%6].setEdge((dir+2)%6, hexes[(dir + 3)%6].getEdge((dir+5)%6));
         hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].getVertex((dir+2)%6));
             //Add one to the right-hex vertex index to align the correct vertex
