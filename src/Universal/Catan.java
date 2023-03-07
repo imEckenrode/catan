@@ -23,6 +23,10 @@ public class Catan {
 
         dice = new Dice();
         boardManager = new BoardManager();
+
+        //Snake to start
+
+        //Now play the game!
     }
 
     public static void main(String[] args) {
