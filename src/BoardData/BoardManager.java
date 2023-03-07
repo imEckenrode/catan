@@ -2,7 +2,6 @@ package BoardData;
 
 import Universal.Catan;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -17,8 +16,6 @@ public class BoardManager {
     Hexagon[][] hMap;
 
     ArrayList<ArrayList<Hexagon>> numberToTile;
-        //Remember to skip the desert though, so assign resources to hex's as we go
-        //May need to reverse order of tilings so we can pop out as we go
 
     public BoardManager() {
         //Initialize the 2d ArrayList
@@ -36,10 +33,10 @@ public class BoardManager {
         ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11));
         hMap = new Hexagon[5][7];
 
-        Catan.Resource resource = null;
+        Catan.Resource resource;
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
             for(int i=max(j-2,0); i<=min(j+2,4); i++){
-                resource = (Catan.Resource) resources.remove(rng.nextInt(resources.size()));
+                resource = resources.remove(rng.nextInt(resources.size()));
                 hMap[j][i] = new Hexagon(resource);
             }
         }
