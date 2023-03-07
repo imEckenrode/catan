@@ -27,7 +27,7 @@ public class Hexagon {
 
     public void radius1Attachment(int dir, Hexagon[] hexes){
         if(dir>6 || dir<1){
-            dir = 6;    //Keep orientation within the range, don't even accept outside
+            dir = 0;    //Keep orientation within the range, don't even accept outside
         }
 
         adjacentHexes = hexes.clone();
@@ -66,18 +66,20 @@ public class Hexagon {
         generateAllSides();
     }
 
-    //public Hexagon getNextHex(int dir){
-    //    for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
-            //try{
-             //   if(adjacentHexes[cDir].getTokenNum() == null){
-             //       return
-             //   }
-            //}catch(Exception )
+    // Spin around clockwise until you find a hex without a token
+    public Hexagon getNextTokenlessHex(int dir) throws IndexOutOfBoundsException {
+        for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
+            try{
+                if(!adjacentHexes[cDir].hasTokenNum()){
+                    return adjacentHexes[cDir];
+                }
+            }catch(Exception e){        //If there is not a hex in that direction, catch.
+                continue;
+            }
 
-        //}
-        //adjacentHexes[dir]
-    //    return adjacentHexes[dir];
-    //}
+        }
+        throw new IndexOutOfBoundsException("No hexes found");
+    }
 
 
     public Catan.Resource getResourceType() {
@@ -115,13 +117,16 @@ public class Hexagon {
         return true;
     }
 
-
     public int getTokenNum() {
         return tokenNum;
     }
 
     public void setTokenNum(int tokenNum) {
         this.tokenNum = tokenNum;
+    }
+
+    public boolean hasTokenNum(){
+        return tokenNum>0;
     }
 
     public boolean hasRobber() {

@@ -2,7 +2,7 @@ package BoardData;
 
 import Universal.Catan;
 
-import java.lang.reflect.Array;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -16,14 +16,20 @@ public class BoardManager {
 
     Hexagon[][] hMap;
 
-    ArrayList resources;
     ArrayList<ArrayList<Hexagon>> numberToTile;
-    ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(new Integer[]{5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11})); //TODO: assign numbers to hexes
-        //Remember to skip the desert though, so assign resources to hex's as we go.
+        //Remember to skip the desert though, so assign resources to hex's as we go
         //May need to reverse order of tilings so we can pop out as we go
+
     public BoardManager() {
         Random rng = new Random();
-        resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
+        ArrayList<Catan.Resource> resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
+        ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11));
+
+        //Initialize the 2d ArrayList
+        numberToTile = new ArrayList<>();
+        for(int i = 0; i<13;i++){
+            numberToTile.add(new ArrayList<>());
+        }
 
         hMap = new Hexagon[5][7];
         Catan.Resource resource = null;
@@ -53,18 +59,19 @@ public class BoardManager {
         //TODO: Ports and Numbering (do them at the same time)
         //hMap[0][0].edges[5].setPort(new Port(DESERT));
 
-        /*
         Hexagon nextHex = hMap[0][0];
         int dir = 1;
-         for(int i = 0; i<20; i++){
+         while(!numberList.isEmpty()){
              if(nextHex.resource != DESERT){
                 int num = numberList.remove(0);
                 nextHex.setTokenNum(num);
                 numberToTile.get(num).add(nextHex);
              }
-             nextHex = nextHex.getNextHex(dir);
+             try {
+                 nextHex = nextHex.getNextTokenlessHex(dir);
+             }catch(IndexOutOfBoundsException e){   //Once there are no more to number, we are done
+                 break;
+             }
          }
-
-         */
     }
 }
