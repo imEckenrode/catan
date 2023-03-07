@@ -25,4 +25,6 @@ public class Port {
     public void setOwned(boolean owned) {
         this.owned = owned;
     }
+
+
 }

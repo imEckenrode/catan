@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.CatanGUI">
   <grid id="27dc6" binding="CatanPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="530" height="505"/>
+      <xy x="20" y="20" width="673" height="504"/>
     </constraints>
     <properties/>
     <border type="none"/>

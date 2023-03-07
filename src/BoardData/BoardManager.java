@@ -54,7 +54,16 @@ public class BoardManager {
         }
 
         //TODO: Ports (DO AS BELOW, MOST LIKELY)
-        //hMap[0][0].edges[5].setPort(new Port(DESERT));
+
+        hMap[0][0].edges[5].setPort(new Port(DESERT));
+        hMap[0][1].edges[0].setPort(new Port(GRAIN));
+        hMap[1][3].edges[0].setPort(new Port(ORE));
+        hMap[2][4].edges[1].setPort(new Port(DESERT));
+        hMap[3][4].edges[2].setPort(new Port(WOOL));
+        hMap[4][3].edges[2].setPort(new Port(DESERT));
+        hMap[4][2].edges[3].setPort(new Port(DESERT));
+        hMap[3][1].edges[4].setPort(new Port(CLAY));
+        hMap[1][0].edges[4].setPort(new Port(GRAIN));
 
         Hexagon nextHex = hMap[0][0];
         int dir = 1;
