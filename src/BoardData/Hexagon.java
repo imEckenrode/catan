@@ -3,7 +3,7 @@ package BoardData;
 
 import Universal.Catan;
 
-import static BoardData.Dir6.rot60;
+//import static BoardData.Dir6.rot60;
 
 public class Hexagon {
     Catan.Resource resource;
@@ -42,12 +42,15 @@ public class Hexagon {
             hexes[(cDir+5)%6].setVertex((cDir+2)%6, vertices[cDir]);
         }
 
-        //Now connect the needed edges and vertices for the 2nd ring of hexagons, with dir + 3 providing the objects
-        hexes[(dir+2)%6].setEdge((dir+4)%6, hexes[(dir + 3)%6].edges[(dir+1)%6]);
-        hexes[(dir+2)%6].setVertex((dir+4)%6, hexes[(dir + 3)%6].vertices[(dir+2)%6]);
+        //Now connect the needed components for the 2nd ring of hexagons, with dir + 3 providing the objects
+        hexes[(dir+2)%6].setAdjHex((dir+4)%6, hexes[(dir + 3)%6].getAdjHex((dir+1)%6));
+        hexes[(dir+2)%6].setEdge((dir+4)%6, hexes[(dir + 3)%6].getEdge((dir+1)%6));
+        hexes[(dir+2)%6].setVertex((dir+4)%6, hexes[(dir + 3)%6].getVertex((dir+2)%6));
 
-        hexes[(dir+4)%6].setEdge((dir+2)%6, hexes[(dir + 3)%6].edges[(dir+5)%6]);
-        hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].vertices[(dir+2)%6]);
+                //TODO: Make sure setAdjHex works correctly
+        hexes[(dir+4)%6].setAdjHex((dir+2)%6, hexes[(dir + 3)%6].getAdjHex((dir+1)%6));
+        hexes[(dir+4)%6].setEdge((dir+2)%6, hexes[(dir + 3)%6].getEdge((dir+5)%6));
+        hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].getVertex((dir+2)%6));
             //Add one to the right-hex vertex index to align the correct vertex
 
     }   //Orientation is what side of the hexagon is the middle
@@ -58,6 +61,7 @@ public class Hexagon {
 
     public Hexagon(Catan.Resource resource) {
         this.resource = resource;
+        adjacentHexes = new Hexagon[6];
         generateAllSides();
     }
 
@@ -75,6 +79,15 @@ public class Hexagon {
 
     public boolean setEdge(int index, Edge newEdge){
         edges[index%6] = newEdge;
+        return true;
+    }
+
+    public Hexagon getAdjHex(int index){
+        return adjacentHexes[index%6];  //Modulo 6 to guarantee the index is within the 6 possible
+    }
+
+    public boolean setAdjHex(int index, Hexagon newHex){
+        adjacentHexes[index%6] = newHex;
         return true;
     }
 
