@@ -13,8 +13,7 @@ public class BoardManager {
     //For keeping track of vertices, edges, and hexagons
         //Perfectly fine to index here with negative values...
 
-    Hexagon[][] hMap;
-
+    NullHexagon nullHex;
     ArrayList<ArrayList<Hexagon>> numberToTile;
 
     public BoardManager() {
@@ -31,7 +30,7 @@ public class BoardManager {
         Random rng = new Random();
         ArrayList<Catan.Resource> resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
         ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11));
-        hMap = new Hexagon[5][7];
+        Hexagon hMap[][] = new Hexagon[5][7];
 
         Catan.Resource resource;
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
@@ -40,6 +39,7 @@ public class BoardManager {
                 hMap[j][i] = new Hexagon(resource);
             }
         }
+
         //loops through the middle circle of hexes
         ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(2,1,3,2,3,3,2,3,1,2,1,1));
         for (int temp1 = 0; temp1<12; temp1+=2) {
@@ -53,8 +53,7 @@ public class BoardManager {
 
         }
 
-        //TODO: Ports (DO AS BELOW, MOST LIKELY)
-
+        //Map all the individual ports manually
         hMap[0][0].edges[5].setPort(new Port(DESERT));
         hMap[0][1].edges[0].setPort(new Port(GRAIN));
         hMap[1][3].edges[0].setPort(new Port(ORE));
@@ -65,6 +64,7 @@ public class BoardManager {
         hMap[3][1].edges[4].setPort(new Port(CLAY));
         hMap[1][0].edges[4].setPort(new Port(GRAIN));
 
+        //Finally, number the hexes
         Hexagon nextHex = hMap[0][0];
         int dir = 1;
         while(!numberList.isEmpty()) {
