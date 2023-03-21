@@ -1,5 +1,6 @@
-package BoardData;
+package Universal;
 
+import BoardData.BoardManager;
 import GUI.BoardView;
 import GUI.CatanGUI;
 

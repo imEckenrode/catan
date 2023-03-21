@@ -52,68 +52,32 @@ public class CatanGUI {
         return TablePanel;
     }
 
-    public void setTablePanel(JPanel tablePanel) {
-        TablePanel = tablePanel;
-    }
-
     public JPanel getCurrentHandPanel() {
         return CurrentHandPanel;
-    }
-
-    public void setCurrentHandPanel(JPanel currentHandPanel) {
-        CurrentHandPanel = currentHandPanel;
     }
 
     public JPanel getBuildingCardPanel() {
         return BuildingCardPanel;
     }
 
-    public void setBuildingCardPanel(JPanel buildingCardPanel) {
-        BuildingCardPanel = buildingCardPanel;
-    }
-
     public JPanel getPortsPanel() {
         return PortsPanel;
-    }
-
-    public void setPortsPanel(JPanel portsPanel) {
-        PortsPanel = portsPanel;
     }
 
     public JPanel getActionsPanel() {
         return ActionsPanel;
     }
 
-    public void setActionsPanel(JPanel actionsPanel) {
-        ActionsPanel = actionsPanel;
-    }
-
-    public void setCatanPanel(JPanel catanPanel) {
-        CatanPanel = catanPanel;
-    }
-
     public JPanel getFourForOne() {
         return FourForOne;
-    }
-
-    public void setFourForOne(JPanel fourForOne) {
-        FourForOne = fourForOne;
     }
 
     public JPanel getToDoAdd6() {
         return ToDoAdd6;
     }
 
-    public void setToDoAdd6(JPanel toDoAdd6) {
-        ToDoAdd6 = toDoAdd6;
-    }
-
     public JPanel getBoardPanel() {
         return BoardPanel;
-    }
-
-    public void setBoardPanel(JPanel boardPanel) {
-        BoardPanel = boardPanel;
     }
 
     public JPanel getGridPanel() {

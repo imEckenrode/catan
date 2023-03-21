@@ -1,16 +1,10 @@
 package Universal;
 
-import BoardData.BoardController;
 import BoardData.BoardManager;
 import GUI.BoardView;
-import GUI.CatanGUI;
 import Player.Player;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 
 public class Catan {
