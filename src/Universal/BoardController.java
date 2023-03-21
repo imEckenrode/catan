@@ -4,8 +4,12 @@ import BoardData.BoardManager;
 import GUI.BoardView;
 import GUI.CatanGUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class BoardController {
 
@@ -17,7 +21,15 @@ public class BoardController {
         this.view = view;
 
         CatanGUI gui = view.getForm();
-        // DO STUFF HERE
+
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("https://github.com/imEckenrode/catan/blob/main/CatanPNGs/FullBackGround.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        JLabel label = new JLabel(new ImageIcon(image));
+        gui.getBoardPanel().add(label);
 
 
         GridBagConstraints gbc = new GridBagConstraints();
