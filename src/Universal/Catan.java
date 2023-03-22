@@ -6,13 +6,23 @@ import Player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Catan {
 
     ArrayList<Player> players;
-    public enum Resource{DESERT,WOOD,ORE,GRAIN,WOOL,CLAY} //Could call it NONE instead
     BoardController controller;
+    public enum Resource{
+        DESERT (-1),
+        WOOD(0),
+        ORE(1),
+        GRAIN(2),
+        WOOL(3),
+        CLAY(4);
+
+        private final int index;
+        Resource(int index) {this.index = index;}
+        public int toIndex(){return index;}
+    }
 
     public Catan() {
         BoardView view = new BoardView();

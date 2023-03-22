@@ -5,7 +5,7 @@ import Universal.Catan;
 
 public class VertexItem {
 
-    Player owner;
+    protected Player owner;
 
     public VertexItem() {
         this.owner = null;
@@ -15,8 +15,14 @@ public class VertexItem {
     }
 
     public void collectResource(Catan.Resource resource) {
-        if(owner != null){
-            owner.getHand();    //TODO: This will give a new resource card
-        }
+        return;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 }
