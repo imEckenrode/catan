@@ -56,7 +56,7 @@ public class BoardController {
         view.pack();
 
 
-        view.setSize(1000,720);
+        view.setSize(1008,720);
 
         //All the hexagons
         JPanel firstHex = new JPanel();
