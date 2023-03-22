@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.CatanGUI">
   <grid id="27dc6" binding="CatanPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="713" height="540"/>
+      <xy x="20" y="20" width="940" height="700"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -12,7 +12,11 @@
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
-        <properties/>
+        <properties>
+          <maximumSize width="840" height="90"/>
+          <minimumSize width="840" height="90"/>
+          <preferredSize width="840" height="90"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="189d9" binding="Hand1Panel" layout-manager="GridBagLayout">
@@ -59,7 +63,11 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="3.0" weighty="3.5"/>
             </constraints>
-            <properties/>
+            <properties>
+              <maximumSize width="315" height="525"/>
+              <minimumSize width="315" height="525"/>
+              <preferredSize width="315" height="525"/>
+            </properties>
             <border type="none"/>
             <children>
               <grid id="4ae77" layout-manager="GridBagLayout">
