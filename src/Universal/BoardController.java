@@ -3,6 +3,7 @@ package Universal;
 import BoardData.BoardManager;
 import GUI.BoardView;
 import GUI.CatanGUI;
+import Player.Player;
 
 import java.awt.Color;
 import javax.imageio.ImageIO;
@@ -11,11 +12,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BoardController {
 
     private BoardManager model;
     private BoardView view;
+    private Player currentPlayer;
 
     public BoardController(BoardManager model, BoardView view){
         this.model = model;
@@ -31,19 +34,19 @@ public class BoardController {
         }
         JLabel label = new JLabel(new ImageIcon(image));
 
-        gui.getBoardPanel().add(label);
+        //gui.getBoardPanel().add(label);
 
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridwidth=14;
-        gbc.gridheight = 1;
+        gbc.gridwidth=21;
+        gbc.gridheight = 25;
         gbc.gridx = 0;
         gbc.gridy = 0;
         //gbc.weightx = 1;
-        JLabel test1 = new JLabel("Hello, World!");
-        gui.getBoardPanel().add(test1, gbc);
+        gui.getBoardPanel().add(label, gbc);
 
+        /*
         gbc.fill = GridBagConstraints.VERTICAL;
         gbc.gridwidth=1;
         gbc.gridheight = 14; // Actually 15
@@ -52,15 +55,25 @@ public class BoardController {
        //gbc.weightx = 1;
         JLabel test2 = new JLabel("A");
         gui.getBoardPanel().add(test2, gbc);
+        */
 
         view.pack();
-
 
         view.setSize(840,715);
 
         //All the hexagons
         JPanel firstHex = new JPanel();
 
+
+    }
+
+    //Return True if the person won?
+    public void takeTurn(Player currentPlayer, ArrayList<Player> otherPlayers) {
+        setCurrentPlayer(currentPlayer);
+        //DO STUFF AND RETURN ONCE DONE
+            }
+
+    private void setCurrentPlayer(Player currentPlayer) {
 
     }
 }

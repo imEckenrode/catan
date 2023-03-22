@@ -10,9 +10,8 @@ import java.util.ArrayList;
 public class Catan {
 
     ArrayList<Player> players;
-    Dice dice;
-    BoardManager boardManager;
     public enum Resource{DESERT,WOOD,ORE,GRAIN,WOOL,CLAY} //Could call it NONE instead
+    BoardController controller;
 
     public Catan() {
         BoardView view = new BoardView();
@@ -28,18 +27,44 @@ public class Catan {
         players.add(new Player(Color.BLUE));
         players.add(new Player(Color.GREEN));
 
-        dice = new Dice();
-        boardManager = new BoardManager();
-
-
+        Dice dice = new Dice();      //This will get added to Controller most likely
 
         //Snake to start
-
         //Now play the game!
     }
 
     public static void main(String[] args) {
         Catan game = new Catan();
+        int vpToWin = 10;
+        game.playGame(vpToWin);
     }
 
+    private Player playGame(int vpToWin) {
+        //TODO: Create a loop and use takeTurn to return true if that person won?
+        while(whoWon(vpToWin) == null){
+            //Also includes rolling and distributing
+            controller.takeTurn(getCurrentPlayer(),(ArrayList<Player>) players.subList(1,players.size()));
+            //This returns when done with turn
+            nextTurn();
+        }
+        return whoWon(vpToWin);
+    }
+
+    private Player whoWon(int vpToWin) {
+        for(Player p: players){
+            if(p.getVictoryPoints()>vpToWin-1) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Player getCurrentPlayer(){
+        return players.get(0);
+    }
+
+    private void nextTurn(){
+        //Add the current player to the back of the list
+        players.add(players.remove(0));
+    }
 }

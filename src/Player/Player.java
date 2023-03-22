@@ -21,30 +21,81 @@ public class Player {
     }
 
 
-    int settlements = 5;    //number of settlements the player has left
-    int cities = 4;         //number of cities left
-    int roads = 15;         // number of roads left
+    int settlementCount = 5;    //number of settlements the player has left
+    int cityCount = 4;         //number of cities left
+    int roadCount = 15;         // number of roads left
     public boolean SettlementsLeft(){   //function to check if the player has a settlement left to build
-        settlements-=1;
-        if (settlements <= 0) {
+        settlementCount -=1;
+        if (settlementCount <= 0) {
             return false;
         }
         return true;
     }
     public boolean CitiesLeft(){    //check for cities left
-        cities-=1;
-        if (cities <= 0) {
+        cityCount -=1;
+        if (cityCount <= 0) {
             return false;
         }
-        settlements+=1; //add a settlement back because cities replace settlements
+        settlementCount +=1; //add a settlement back because cities replace settlements
         return true;
     }
     public boolean RoadsLeft(){ //check for roads left
-        roads-=1;
-        if (roads <= 0) {
+        roadCount -=1;
+        if (roadCount <= 0) {
             return false;
         }
         return true;
+    }
+
+    public Hand getHand() {
+        return hand;
+    }
+
+    public int getVictoryPoints() {
+        return victoryPoints;
+    }
+
+    public void setVictoryPoints(int victoryPoints) {
+        this.victoryPoints = victoryPoints;
+    }
+
+    public void addVictoryPoint(){
+        this.victoryPoints++;
+    }
+    public void removeVictoryPoint(){
+        this.victoryPoints--;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) { //May also need to update settlements
+        this.color = color;
+    }
+
+    public int getSettlementCount() {
+        return settlementCount;
+    }
+
+    public void setSettlementCount(int settlements) {
+        this.settlementCount = settlements;
+    }
+
+    public int getCityCount() {
+        return cityCount;
+    }
+
+    public void setCityCount(int cities) {
+        this.cityCount = cities;
+    }
+
+    public int getRoadCount() {
+        return roadCount;
+    }
+
+    public void setRoadCount(int roads) {
+        this.roadCount = roads;
     }
 }
 
