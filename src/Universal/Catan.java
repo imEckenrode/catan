@@ -27,9 +27,6 @@ public class Catan {
         players.add(new Player(Color.BLUE));
         players.add(new Player(Color.GREEN));
 
-        Dice dice = new Dice();      //This will get added to Controller most likely
-
-        //Snake to start
         //Now play the game!
     }
 

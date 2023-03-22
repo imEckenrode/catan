@@ -1,6 +1,7 @@
 package Universal;
 
 import BoardData.BoardManager;
+import BoardData.Hexagon;
 import GUI.BoardView;
 import GUI.CatanGUI;
 import Player.Player;
@@ -19,6 +20,7 @@ public class BoardController {
     private BoardManager model;
     private BoardView view;
     private Player currentPlayer;
+    private ArrayList<Player> otherPlayers;
 
     public BoardController(BoardManager model, BoardView view){
         this.model = model;
@@ -70,10 +72,25 @@ public class BoardController {
     //Return True if the person won?
     public void takeTurn(Player currentPlayer, ArrayList<Player> otherPlayers) {
         setCurrentPlayer(currentPlayer);
+        rollDiceAndResource();
         //DO STUFF AND RETURN ONCE DONE
+        }
+
+    private void rollDiceAndResource() {
+        int number = model.dice.rollDice();
+        //update view and say what number is rolled
+        if(number == 7){
+            //robber();   //TODO: IMPLEMENT
+        }else{
+            for(Hexagon hex: model.numberToTile.get(number)){
+                hex.distributeResources();
             }
+        }
+    }
 
     private void setCurrentPlayer(Player currentPlayer) {
-
+        this.currentPlayer = currentPlayer;
     }
+
+
 }

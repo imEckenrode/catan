@@ -1,6 +1,8 @@
 package BoardData;
 
-import Universal.Catan;
+import Universal.Catan; //for the resource stuff (maybe extract this)
+import Universal.Dice;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +15,9 @@ public class BoardManager {
     //For keeping track of vertices, edges, and hexagons
         //Perfectly fine to index here with negative values...
 
-    NullHexagon nullHex;
-    ArrayList<ArrayList<Hexagon>> numberToTile;
+    public ArrayList<ArrayList<Hexagon>> numberToTile;
+    public Dice dice;
+
 
     public BoardManager() {
         //Initialize the 2d ArrayList
@@ -23,6 +26,8 @@ public class BoardManager {
             numberToTile.add(new ArrayList<>());
         }
 
+        dice = new Dice();
+
         buildCatanBoard();
     }
 
@@ -30,7 +35,7 @@ public class BoardManager {
         Random rng = new Random();
         ArrayList<Catan.Resource> resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
         ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11));
-        Hexagon hMap[][] = new Hexagon[5][7];
+        Hexagon[][] hMap = new Hexagon[5][7];
 
         Catan.Resource resource;
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
@@ -73,6 +78,7 @@ public class BoardManager {
                 nextHex.setTokenNum(num);
                 numberToTile.get(num).add(nextHex);
             }
+
             try {
                 nextHex = nextHex.getNextTokenlessHex(dir);
             } catch (IndexOutOfBoundsException e) {   //Once there are no more to number, we are done
@@ -80,4 +86,7 @@ public class BoardManager {
             }
         }
     }
+
+
+
 }

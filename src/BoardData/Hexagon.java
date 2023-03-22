@@ -15,6 +15,27 @@ public class Hexagon {
     int tokenNum;
     boolean hasRobber;
 
+    public Hexagon() {
+        adjacentHexes = new Hexagon[6];
+        generateAllSides();
+    }
+
+    public Hexagon(Catan.Resource resource) {
+        this.resource = resource;
+        adjacentHexes = new Hexagon[6];
+        generateAllSides();
+    }
+
+    public boolean distributeResources() {
+        if(hasRobber() || resource == Catan.Resource.DESERT){
+            return false;   //Distribute no resources if the robber is here
+        }
+
+        for(Vertex v: vertices){
+            v.item.collectResource(resource);
+        }
+        return true;
+    }
 
     public void generateAllSides(){
         edges = new Edge[6];
@@ -55,17 +76,6 @@ public class Hexagon {
 
     }   //Orientation is what side of the hexagon is the middle
 
-    public Hexagon() {
-        adjacentHexes = new Hexagon[6];
-        generateAllSides();
-    }
-
-    public Hexagon(Catan.Resource resource) {
-        this.resource = resource;
-        adjacentHexes = new Hexagon[6];
-        generateAllSides();
-    }
-
     // Spin around clockwise until you find a hex without a token
     public Hexagon getNextTokenlessHex(int dir) throws IndexOutOfBoundsException {
         for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
@@ -80,7 +90,6 @@ public class Hexagon {
         }
         throw new IndexOutOfBoundsException("No hexes found");
     }
-
 
     public Catan.Resource getResourceType() {
         return resource;
