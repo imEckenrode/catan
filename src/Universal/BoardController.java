@@ -4,6 +4,7 @@ import BoardData.BoardManager;
 import GUI.BoardView;
 import GUI.CatanGUI;
 
+import java.awt.Color;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -24,11 +25,12 @@ public class BoardController {
 
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("https://github.com/imEckenrode/catan/blob/main/CatanPNGs/FullBackGround.png"));
+            image = ImageIO.read(new File("./CatanPNGs/PlainBoard.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         JLabel label = new JLabel(new ImageIcon(image));
+
         gui.getBoardPanel().add(label);
 
 
@@ -38,7 +40,7 @@ public class BoardController {
         gbc.gridheight = 1;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        //.weightx = 1;
+        //gbc.weightx = 1;
         JLabel test1 = new JLabel("Hello, World!");
         gui.getBoardPanel().add(test1, gbc);
 
@@ -50,5 +52,15 @@ public class BoardController {
        //gbc.weightx = 1;
         JLabel test2 = new JLabel("A");
         gui.getBoardPanel().add(test2, gbc);
+
+        view.pack();
+
+
+        view.setSize(1000,720);
+
+        //All the hexagons
+        JPanel firstHex = new JPanel();
+
+
     }
 }

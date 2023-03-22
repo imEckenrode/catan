@@ -55,7 +55,7 @@
           <grid id="3991b" binding="TablePanel" layout-manager="GridBagLayout">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.25" weighty="7.0"/>
+              <gridbag weightx="5.0" weighty="7.0"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -65,7 +65,9 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="1.0"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-15357984"/>
+                </properties>
                 <border type="none" title=""/>
                 <children/>
               </grid>
@@ -128,37 +130,6 @@
                             </constraints>
                           </vspacer>
                           <vspacer id="9f3fd">
-                            <constraints>
-                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                              <gridbag weightx="1.0" weighty="1.0"/>
-                            </constraints>
-                          </vspacer>
-                        </children>
-                      </grid>
-                      <grid id="ded88" binding="ToDoAdd6" layout-manager="GridBagLayout">
-                        <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="1.0"/>
-                        </constraints>
-                        <properties/>
-                        <border type="none"/>
-                        <children>
-                          <grid id="f5e34" layout-manager="GridBagLayout">
-                            <constraints>
-                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                              <gridbag weightx="1.0" weighty="1.0"/>
-                            </constraints>
-                            <properties/>
-                            <border type="none"/>
-                            <children/>
-                          </grid>
-                          <vspacer id="32516">
-                            <constraints>
-                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                              <gridbag weightx="1.0" weighty="1.0"/>
-                            </constraints>
-                          </vspacer>
-                          <vspacer id="a0a50">
                             <constraints>
                               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                               <gridbag weightx="1.0" weighty="1.0"/>
