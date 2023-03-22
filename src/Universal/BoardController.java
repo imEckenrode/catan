@@ -80,11 +80,12 @@ public class BoardController {
         int number = model.dice.rollDice();
         //update view and say what number is rolled
         if(number == 7){
-            //robber();   //TODO: IMPLEMENT
+            //robberEvent();   //TODO: IMPLEMENT
         }else{
             for(Hexagon hex: model.numberToTile.get(number)){
                 hex.distributeResources();
             }
+            //TODO: Update hand with a refresh of some sort
         }
     }
 

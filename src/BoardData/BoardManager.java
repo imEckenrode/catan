@@ -18,6 +18,8 @@ public class BoardManager {
     public ArrayList<ArrayList<Hexagon>> numberToTile;
     public Dice dice;
 
+    //TODO: Retrieve hex from here on click?
+
 
     public BoardManager() {
         //Initialize the 2d ArrayList
