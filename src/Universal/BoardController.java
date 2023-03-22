@@ -6,7 +6,6 @@ import GUI.BoardView;
 import GUI.CatanGUI;
 import Player.Player;
 
-import java.awt.Color;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +39,6 @@ public class BoardController {
 
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth=21;
         gbc.gridheight = 25;
         gbc.gridx = 0;
@@ -72,6 +70,7 @@ public class BoardController {
     //Return True if the person won?
     public void takeTurn(Player currentPlayer, ArrayList<Player> otherPlayers) {
         setCurrentPlayer(currentPlayer);
+        this.otherPlayers = otherPlayers;
         rollDiceAndResource();
         //DO STUFF AND RETURN ONCE DONE
         }

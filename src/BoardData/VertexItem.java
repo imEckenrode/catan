@@ -1,12 +1,22 @@
 package BoardData;
 
+import Player.Player;
 import Universal.Catan;
 
 public class VertexItem {
 
-    Player.Player owner;
+    Player owner;
+
+    public VertexItem() {
+        this.owner = null;
+    }
+    public VertexItem(Player owner) {
+        this.owner = owner;
+    }
 
     public void collectResource(Catan.Resource resource) {
-        //owner.getHand().;;;;
+        if(owner != null){
+            owner.getHand();    //TODO: This will give a new resource card
+        }
     }
 }

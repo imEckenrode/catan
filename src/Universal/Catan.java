@@ -6,6 +6,7 @@ import Player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Catan {
 
@@ -40,7 +41,7 @@ public class Catan {
         //TODO: Create a loop and use takeTurn to return true if that person won?
         while(whoWon(vpToWin) == null){
             //Also includes rolling and distributing
-            controller.takeTurn(getCurrentPlayer(),(ArrayList<Player>) players.subList(1,players.size()));
+            controller.takeTurn(getCurrentPlayer(), new ArrayList<>(players.subList(1,players.size())));
             //This returns when done with turn
             nextTurn();
         }
