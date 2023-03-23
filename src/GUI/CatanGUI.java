@@ -21,6 +21,7 @@ public class CatanGUI {
     private JPanel FourForOne;
     private JPanel ToDoAdd6;
     private JPanel BoardPanel;
+    private JLabel TempLabel;
     private JPanel gridPanel;
 
 

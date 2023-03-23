@@ -27,15 +27,22 @@ public class BoardController {
 
         CatanGUI gui = view.getForm();
 
-        BufferedImage image = null;
+        //Taking the files from CatanPNGs and turning them into Buffered Images
+        BufferedImage BuildingCardImage = null;
+        BufferedImage BoardImage = null;
         try {
-            image = ImageIO.read(new File("./CatanPNGs/PlainBoard.png"));
+            BoardImage = ImageIO.read(new File("./CatanPNGs/PlainBoard.png"));
+            BuildingCardImage = ImageIO.read((new File("./CatanPNGs/BuildingCard.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        JLabel label = new JLabel(new ImageIcon(image));
 
-        //gui.getBoardPanel().add(label);
+        //Turning the buffered images into JLabels
+        JLabel BoardImageLabel = new JLabel(new ImageIcon(BoardImage));
+        JLabel BuildingCardLabel = new JLabel(new ImageIcon(BuildingCardImage));
+
+        gui.getBuildingCardPanel().add(BuildingCardLabel);
+        //gui.getBoardPanel().add(BoardImageLabel);
 
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -44,7 +51,7 @@ public class BoardController {
         gbc.gridx = 0;
         gbc.gridy = 0;
         //gbc.weightx = 1;
-        gui.getBoardPanel().add(label, gbc);
+        gui.getBoardPanel().add(BoardImageLabel, gbc);
 
         /*
         gbc.fill = GridBagConstraints.VERTICAL;
