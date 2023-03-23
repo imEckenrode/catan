@@ -1,5 +1,6 @@
 package BoardData;
 
+import Player.Player;
 import Universal.Catan; //for the resource stuff (maybe extract this)
 import Universal.Dice;
 
@@ -15,6 +16,8 @@ public class BoardManager {
     //For keeping track of vertices, edges, and hexagons
         //Perfectly fine to index here with negative values...
 
+    public ArrayList<Player> players;
+
     public ArrayList<ArrayList<Hexagon>> numberToTile;
     public Dice dice;
 
@@ -22,6 +25,7 @@ public class BoardManager {
 
 
     public BoardManager() {
+
         //Initialize the 2d ArrayList
         numberToTile = new ArrayList<>();
         for(int i = 0; i<13;i++){
@@ -90,5 +94,8 @@ public class BoardManager {
     }
 
 
+    public Player getCurrentPlayer(){
+        return players.get(0);
+    }
 
 }

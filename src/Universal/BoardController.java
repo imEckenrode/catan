@@ -20,10 +20,12 @@ public class BoardController {
     private BoardView view;
     private Player currentPlayer;
     private ArrayList<Player> otherPlayers;
+    int vpToWin;
 
-    public BoardController(BoardManager model, BoardView view){
+    public BoardController(BoardManager model, BoardView view, int vpToWin){
         this.model = model;
         this.view = view;
+        this.vpToWin = vpToWin;
 
         CatanGUI gui = view.getForm();
 
@@ -73,7 +75,9 @@ public class BoardController {
         //All the hexagons
         JPanel firstHex = new JPanel();
 
-
+        gui.getEndTurnButton().addActionListener(e->{
+            nextTurn();
+        });
     }
 
     //Return True if the person won?
@@ -81,8 +85,7 @@ public class BoardController {
         setCurrentPlayer(currentPlayer);
         this.otherPlayers = otherPlayers;
         rollDiceAndResource();
-        //DO STUFF AND RETURN ONCE DONE
-        }
+    }
 
     private void rollDiceAndResource() {
         int number = model.dice.rollDice();
@@ -98,9 +101,31 @@ public class BoardController {
         }
     }
 
+    private void nextTurn(){
+        if (whoWon(vpToWin) != null) {
+            //TODO: DEFINE WIN SCREEN
+            view.getForm().getEndTurnButton().setText("You have won Catan!");
+            view.getForm().getEndTurnButton().setEnabled(false);
+            System.out.println("You are the settler of Catan!");
+        }
+        //Add the current player to the back of the list
+        model.players.add(model.players.remove(0));
+        //and take turns
+        takeTurn(model.getCurrentPlayer(), new ArrayList<>(model.players.subList(1,model.players.size())));
+
+    }
+
     private void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
+    private Player whoWon(int vpToWin) {
+        for(Player p: model.players){
+            if(p.getVictoryPoints()>vpToWin-1) {
+                return p;
+            }
+        }
+        return null;
+    }
 
 }

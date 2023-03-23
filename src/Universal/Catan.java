@@ -9,73 +9,51 @@ import java.util.ArrayList;
 
 public class Catan {
 
-    ArrayList<Player> players;
     BoardController controller;
     public int vpToWin;
     public enum Resource{
-        DESERT (-1),
-        WOOD(0),
-        ORE(1),
-        GRAIN(2),
-        WOOL(3),
-        CLAY(4);
+        DESERT (-1,null,null),
+        WOOD(0,"./CatanPNG/WoodHex.png","./CatanPNGs/wood.png"),
+        ORE(1,"./CatanPNG/Rock.png","./CatanPNGs/ore.png"),
+        GRAIN(2,"./CatanPNG/GrainHex.png","./CatanPNGs/grain.png"),
+        WOOL(3,"./CatanPNG/SheepHex.png","./CatanPNGs/sheep.png"),
+        CLAY(4,"./CatanPNG/BrickHex.png","./CatanPNGs/brick.png");
 
         private final int index;
-        Resource(int index) {this.index = index;}
+        private final String hexagonFile;
+        private final String cardFile;
+        Resource(int index, String hexagonFile, String cardFile) {this.index = index; this.hexagonFile = hexagonFile; this.cardFile = cardFile;}
         public int toIndex(){return index;}
+        public String getHexFilePath(){return hexagonFile;}
+        public String getCardFilePath(){return cardFile;}
     }
 
-    public Catan() {
+    public Catan(int vpToWin) {
         BoardView view = new BoardView();
         BoardManager model = new BoardManager();
-        controller = new BoardController(model,view);
+        controller = new BoardController(model,view,vpToWin);
 
         view.setVisible(true);
 
-        players = new ArrayList<>();    //Choose your colors then add
+        //TODO: Move this into BoardController
+
+        model.players = new ArrayList<>();    //Choose your colors then add
         //Abstract these 4 into an actual function call
-        players.add(new Player(Color.RED));
-        players.add(new Player(Color.YELLOW));
-        players.add(new Player(Color.BLUE));
-        players.add(new Player(Color.GREEN));
+        model.players.add(new Player(Color.RED));
+        model.players.add(new Player(Color.YELLOW));
+        model.players.add(new Player(Color.BLUE));
+        model.players.add(new Player(Color.GREEN));
 
         //Now play the game!
     }
 
     public static void main(String[] args) {
         int vpToWin = 10;
-        Catan game = new Catan();
+        Catan game = new Catan(vpToWin);
         //game.playGame(vpToWin);
     }
 
     /*
-    private Player playGame(int vpToWin) {
-        //TODO: This should be done at the BoardController level
-        while(whoWon(vpToWin) == null){
-            //Also includes rolling and distributing
-            controller.takeTurn(getCurrentPlayer(), new ArrayList<>(players.subList(1,players.size())));
-            //This returns when done with turn
-            nextTurn();
-        }
-        return whoWon(vpToWin);
-    }
 
-    private Player whoWon(int vpToWin) {
-        for(Player p: players){
-            if(p.getVictoryPoints()>vpToWin-1) {
-                return p;
-            }
-        }
-        return null;
-    }
-
-    public Player getCurrentPlayer(){
-        return players.get(0);
-    }
-
-    private void nextTurn(){
-        //Add the current player to the back of the list
-        players.add(players.remove(0));
-    }
      */
 }

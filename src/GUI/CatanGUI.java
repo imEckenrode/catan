@@ -1,11 +1,6 @@
 package GUI;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class CatanGUI {
     private JPanel OtherHandsPanel;
@@ -21,6 +16,7 @@ public class CatanGUI {
     private JPanel FourForOne;
     private JPanel ToDoAdd6;
     private JPanel BoardPanel;
+    private JButton endTurnButton;
     private JLabel TempLabel;
     private JPanel gridPanel;
 
@@ -83,5 +79,9 @@ public class CatanGUI {
 
     public JPanel getGridPanel() {
         return gridPanel;
+    }
+
+    public JButton getEndTurnButton() {
+        return endTurnButton;
     }
 }
