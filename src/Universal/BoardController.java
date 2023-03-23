@@ -37,8 +37,10 @@ public class BoardController {
             throw new RuntimeException(e);
         }
 
+
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(BoardImage).getImage().getScaledInstance(525, 625, Image.SCALE_DEFAULT));
         //Turning the buffered images into JLabels
-        JLabel BoardImageLabel = new JLabel(new ImageIcon(BoardImage));
+        JLabel BoardImageLabel = new JLabel(imageIcon);
         JLabel BuildingCardLabel = new JLabel(new ImageIcon(BuildingCardImage));
 
         gui.getBuildingCardPanel().add(BuildingCardLabel);
