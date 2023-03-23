@@ -11,6 +11,7 @@ public class Catan {
 
     ArrayList<Player> players;
     BoardController controller;
+    public int vpToWin;
     public enum Resource{
         DESERT (-1),
         WOOD(0),
@@ -27,7 +28,7 @@ public class Catan {
     public Catan() {
         BoardView view = new BoardView();
         BoardManager model = new BoardManager();
-        BoardController controller = new BoardController(model,view);
+        controller = new BoardController(model,view);
 
         view.setVisible(true);
 
@@ -42,13 +43,14 @@ public class Catan {
     }
 
     public static void main(String[] args) {
-        Catan game = new Catan();
         int vpToWin = 10;
-        game.playGame(vpToWin);
+        Catan game = new Catan();
+        //game.playGame(vpToWin);
     }
 
+    /*
     private Player playGame(int vpToWin) {
-        //TODO: Create a loop and use takeTurn to return true if that person won?
+        //TODO: This should be done at the BoardController level
         while(whoWon(vpToWin) == null){
             //Also includes rolling and distributing
             controller.takeTurn(getCurrentPlayer(), new ArrayList<>(players.subList(1,players.size())));
@@ -75,4 +77,5 @@ public class Catan {
         //Add the current player to the back of the list
         players.add(players.remove(0));
     }
+     */
 }

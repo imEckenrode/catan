@@ -1,25 +1,30 @@
 package Player;
 
+import BoardData.Port;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player {
     Hand hand; //By abstracting this to a hand, we can have displayHand and loseHalf functions inside
     int victoryPoints;  //This could be an array!
     Color color;
 
+    ArrayList<Port> portsOwned;
 
     public Player(Color color) {
-        this.hand = new Hand();
-        this.victoryPoints = 0;
         this.color = color;
+        hand = new Hand();
+        victoryPoints = 0;
+        portsOwned = new ArrayList<>();
     }
 
     public Player(Hand hand, int victoryPoints, Color color) {
+        this.color = color;
         this.hand = hand;
         this.victoryPoints = victoryPoints;
-        this.color = color;
+        portsOwned = new ArrayList<>();
     }
-
 
     int settlementCount = 5;    //number of settlements the player has left
     int cityCount = 4;         //number of cities left

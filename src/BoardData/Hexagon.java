@@ -32,7 +32,9 @@ public class Hexagon {
         }
 
         for(Vertex v: vertices){
-            v.item.collectResource(resource);
+            if(v.item != null){
+                v.item.collectResource(resource);
+            }
         }
         return true;
     }

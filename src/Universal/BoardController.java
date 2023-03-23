@@ -77,6 +77,7 @@ public class BoardController {
 
     private void rollDiceAndResource() {
         int number = model.dice.rollDice();
+        System.out.print(number);
         //update view and say what number is rolled
         if(number == 7){
             //robberEvent();   //TODO: IMPLEMENT
