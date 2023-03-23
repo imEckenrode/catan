@@ -29,35 +29,88 @@ public class BoardController {
 
         CatanGUI gui = view.getForm();
 
+
+
+
+
+
         //Taking the files from CatanPNGs and turning them into Buffered Images
         BufferedImage BuildingCardImage = null;
         BufferedImage BoardImage = null;
+        BufferedImage BrickHexImage = null;
+
         try {
             BoardImage = ImageIO.read(new File("./CatanPNGs/PlainBoard.png"));
             BuildingCardImage = ImageIO.read((new File("./CatanPNGs/BuildingCard.png")));
+            BrickHexImage = ImageIO.read((new File("./CatanPNGs/BrickHex.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
 
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(BoardImage).getImage().getScaledInstance(525, 625, Image.SCALE_DEFAULT));
-        //Turning the buffered images into JLabels
-        JLabel BoardImageLabel = new JLabel(imageIcon);
+        // resizing
+
         JLabel BuildingCardLabel = new JLabel(new ImageIcon(BuildingCardImage));
+
 
         gui.getBuildingCardPanel().add(BuildingCardLabel);
         //gui.getBoardPanel().add(BoardImageLabel);
 
+        JLabel BackgroundLabel = makeImage("./CatanPNGs/PlainBoard.png",625,525);
+        gui.getBoardPanel().add(BackgroundLabel);
+        BackgroundLabel.setBounds(0,0,525,625);
+        for( Hexagon[] temp : model.hMap){
+            for (Hexagon i : temp){
 
+            }
+
+        }
+
+
+        gui.getBoardPanel().setLayout(null);
+        JLabel BrickHexLabel = new JLabel(BrickHexIcon);
+        gui.getBoardPanel().add(BrickHexLabel);
+        BrickHexLabel.setBounds(200,200,100,100);
+
+        BrickHexLabel = new JLabel(BrickHexIcon);
+        gui.getBoardPanel().add(BrickHexLabel);
+        BrickHexLabel.setBounds(300,200,100,100);
+        BrickHexLabel = new JLabel(BrickHexIcon);
+        gui.getBoardPanel().add(BrickHexLabel);
+        BrickHexLabel.setBounds(400,200,100,100);
+
+       // gui.getBoardPanel().add(BoardImageLabel);
+       // BoardImageLabel.setBounds(0,0,525,625);
+
+
+
+            /*
         GridBagConstraints gbc = new GridBagConstraints();
+       // gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.gridwidth=21;
         gbc.gridheight = 25;
         gbc.gridx = 0;
         gbc.gridy = 0;
         //gbc.weightx = 1;
-        gui.getBoardPanel().add(BoardImageLabel, gbc);
+        JPanel aaa = new JPanel();
+        aaa.add(BoardImageLabel);
+        gui.getBoardPanel().add(aaa, gbc);
+        //gui.getBoardPanel().add(BoardImageLabel, gbc);
 
-        /*
+
+        //gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridwidth=4;
+        gbc.gridheight = 4;
+        gbc.gridx = 25;
+        gbc.gridy = 25;
+        //gbc.weightx = 1;
+        JPanel zeroZero = new JPanel();
+        zeroZero.add(BrickHexLabel);
+        gui.getBoardPanel().add(zeroZero, gbc);
+
+
         gbc.fill = GridBagConstraints.VERTICAL;
         gbc.gridwidth=1;
         gbc.gridheight = 14; // Actually 15
@@ -66,8 +119,8 @@ public class BoardController {
        //gbc.weightx = 1;
         JLabel test2 = new JLabel("A");
         gui.getBoardPanel().add(test2, gbc);
-        */
 
+            */
         view.pack();
 
         view.setSize(840,715);
@@ -80,13 +133,14 @@ public class BoardController {
         });
     }
 
+
     //Return True if the person won?
     public void takeTurn(Player currentPlayer, ArrayList<Player> otherPlayers) {
         setCurrentPlayer(currentPlayer);
         this.otherPlayers = otherPlayers;
         rollDiceAndResource();
     }
-
+    //public void lavel
     private void rollDiceAndResource() {
         int number = model.dice.rollDice();
         System.out.print(number);
@@ -113,6 +167,16 @@ public class BoardController {
         //and take turns
         takeTurn(model.getCurrentPlayer(), new ArrayList<>(model.players.subList(1,model.players.size())));
 
+    }
+    public JLabel makeImage(String file,int height, int width ){
+        BufferedImage tempImage = null;
+        try {
+            tempImage = ImageIO.read(new File(file));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return (new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT))));
     }
 
     private void setCurrentPlayer(Player currentPlayer) {

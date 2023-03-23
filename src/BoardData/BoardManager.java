@@ -20,7 +20,7 @@ public class BoardManager {
 
     public ArrayList<ArrayList<Hexagon>> numberToTile;
     public Dice dice;
-
+    public  Hexagon[][] hMap;
     //TODO: Retrieve hex from here on click?
 
 
@@ -41,7 +41,7 @@ public class BoardManager {
         Random rng = new Random();
         ArrayList<Catan.Resource> resources = new ArrayList<>(Arrays.asList(DESERT,WOOD,WOOD,WOOD,WOOD,GRAIN,GRAIN,GRAIN,GRAIN,WOOL,WOOL,WOOL,WOOL,CLAY,CLAY,CLAY,ORE,ORE,ORE));
         ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11));
-        Hexagon[][] hMap = new Hexagon[5][7];
+        hMap = new Hexagon[5][7];
 
         Catan.Resource resource;
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
