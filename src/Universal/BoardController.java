@@ -33,39 +33,31 @@ public class BoardController {
 
 
 
-
-
-
-        //Taking the files from CatanPNGs and turning them into Buffered Images
         BufferedImage BuildingCardImage = null;
-        BufferedImage BoardImage = null;
-        BufferedImage BrickHexImage = null;
+
 
         try {
-            BoardImage = ImageIO.read(new File("./CatanPNGs/PlainBoard.png"));
             BuildingCardImage = ImageIO.read((new File("./CatanPNGs/BuildingCard.png")));
-            BrickHexImage = ImageIO.read((new File("./CatanPNGs/BrickHex.png")));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
-        // resizing
-
-        JLabel BuildingCardLabel = new JLabel(new ImageIcon(BuildingCardImage));
+        PlacePNG(gui.getBuildingCardPanel(),"./CatanPNGs/BuildingCard.png",100,100,0,0);
 
 
-        gui.getBuildingCardPanel().add(BuildingCardLabel);
-        //gui.getBoardPanel().add(BoardImageLabel);
+        //JLabel BuildingCardLabel = new JLabel(new ImageIcon(BuildingCardImage));
+        //gui.getBuildingCardPanel().add(BuildingCardLabel);
 
-        JLabel BackgroundLabel = makeImage("./CatanPNGs/PlainBoard.png",625,525);
-        gui.getBoardPanel().add(BackgroundLabel);
-        BackgroundLabel.setBounds(0,0,525,625);
+        gui.getBoardPanel().setLayout(null);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainHex.png",100,100,200,200);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
+        int i = 0;
         for( Hexagon[] temp : model.hMap){
-            for (Hexagon i : temp){
-
+            for (Hexagon hex : temp){
+                PlacePNG(gui.getBoardPanel(),hex.getResourceType().getHexFilePath(),100,100,i,i);
+                i+=20;
             }
-
         }
 
 /*
@@ -172,7 +164,7 @@ public class BoardController {
         takeTurn(model.getCurrentPlayer(), new ArrayList<>(model.players.subList(1,model.players.size())));
 
     }
-    public JLabel makeImage(String file,int height, int width ){
+    public JLabel makeImage(String file,int height, int width){
         BufferedImage tempImage = null;
         try {
             tempImage = ImageIO.read(new File(file));
@@ -182,7 +174,17 @@ public class BoardController {
 
         return (new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT))));
     }
-
+    public void PlacePNG(JPanel panel, String file, int height, int width, int gridx, int gridy){
+        BufferedImage tempImage = null;
+        try {
+            tempImage = ImageIO.read(new File(file));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
+        panel.add(label);
+        label.setBounds(gridx,gridy,width,height);
+    }
     private void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
