@@ -126,6 +126,11 @@ public class BoardController {
             nextTurn();
         });
 
+        //Could code this dynamically, but it is nice to see in Form Builder
+        gui.getHand1Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(0)));
+        gui.getHand2Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(1)));
+        gui.getHand3Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(2)));
+
         //gui.getHand1Panel().getHand
     }
 
@@ -199,8 +204,12 @@ public class BoardController {
     }
 
     private Catan.Resource promptResourcePicker(Player player, int numberSelecting){
-        ResourcePicker picker = new ResourcePicker();
+        ResourcePicker picker = new ResourcePicker(player, numberSelecting);
         return picker.showDialog();
     }
 
+    private void tradeWithPlayer(Player player) {
+        promptResourcePicker(currentPlayer, 1);
+        promptResourcePicker(player, 1);
+    }
 }

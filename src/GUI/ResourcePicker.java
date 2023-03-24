@@ -1,6 +1,8 @@
 package GUI;
 
 import Universal.Catan;
+import Player.Player;
+import Player.Hand;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +10,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 public class ResourcePicker extends JDialog {
@@ -17,8 +20,13 @@ public class ResourcePicker extends JDialog {
     private JPanel mainPanel;
     private ButtonGroup resourceButtonGroup;
     private Catan.Resource pickedResource;
+    ArrayList<Integer> currentResourceCount;
 
-    public ResourcePicker() {
+    public ResourcePicker(Player player, int resourcesRequired){
+        if(player!=null) {
+            currentResourceCount = player.getHand().getAllResourceCounts();
+        }
+
         pickedResource = null;
 
         //TODO: Size up to also show brick'
@@ -28,25 +36,25 @@ public class ResourcePicker extends JDialog {
 
         resourceButtonGroup = new ButtonGroup();
 
-        for(Catan.Resource r: Catan.Resource.values()){
-
-            if(r==Catan.Resource.DESERT){continue;}//TODO: Would prefer string underneath?
-            JRadioButtonMenuItem full = new JRadioButtonMenuItem(r.getName(), makeCardIcon(r.getCardFilePath()));
-            mainPanel.add(full);
-            resourceButtonGroup.add(full);
+        if(currentResourceCount==null){
+            for(Catan.Resource r: Catan.Resource.values()){
+                if(r==Catan.Resource.DESERT){continue;}//TODO: Would prefer string underneath?
+                JRadioButtonMenuItem full = new JRadioButtonMenuItem(makeCardIcon(r.getCardFilePath()));
+                mainPanel.add(full);
+                resourceButtonGroup.add(full);
+            }
+        }else{
+            for(Catan.Resource r: Catan.Resource.values()){
+                if(r==Catan.Resource.DESERT){continue;}//TODO: Would prefer string underneath?
+                JRadioButtonMenuItem full = new JRadioButtonMenuItem(r.getName()+": "+currentResourceCount.get(r.toIndex()),makeCardIcon(r.getCardFilePath()));
+                mainPanel.add(full);
+                resourceButtonGroup.add(full);
+            }
         }
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
+        buttonOK.addActionListener(e -> onOK());
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+        buttonCancel.addActionListener(e -> onCancel());
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -86,7 +94,7 @@ public class ResourcePicker extends JDialog {
     }
 
     public static void main(String[] args) {
-        ResourcePicker dialog = new ResourcePicker();
+        ResourcePicker dialog = new ResourcePicker(null, 0);
         dialog.pack();
         System.out.println(dialog.showDialog());
         System.exit(0);
