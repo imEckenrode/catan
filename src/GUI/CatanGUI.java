@@ -17,6 +17,9 @@ public class CatanGUI {
     private JPanel ToDoAdd6;
     private JPanel BoardPanel;
     private JButton endTurnButton;
+    private JButton hand1Button;
+    private JButton hand2button;
+    private JButton hand3button;
     private JLabel TempLabel;
     private JPanel gridPanel;
 

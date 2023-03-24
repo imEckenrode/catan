@@ -9,6 +9,7 @@ import Player.Player;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class BoardController {
 
         }
 
-
+/*
         gui.getBoardPanel().setLayout(null);
         JLabel BrickHexLabel = new JLabel(BrickHexIcon);
         gui.getBoardPanel().add(BrickHexLabel);
@@ -131,6 +132,8 @@ public class BoardController {
         gui.getEndTurnButton().addActionListener(e->{
             nextTurn();
         });
+
+        //gui.getHand1Panel().getHand
     }
 
 

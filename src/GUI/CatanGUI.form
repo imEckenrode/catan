@@ -26,7 +26,22 @@
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="1b32f" class="javax.swing.JButton" binding="hand1Button">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <borderPainted value="false"/>
+                  <contentAreaFilled value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <maximumSize width="125" height="30"/>
+                  <text value="Trade with Player"/>
+                </properties>
+              </component>
+            </children>
           </grid>
           <grid id="d88a7" binding="Hand2Panel" layout-manager="GridBagLayout">
             <constraints>
@@ -37,7 +52,22 @@
               <background color="-5438964"/>
             </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="c62e1" class="javax.swing.JButton" binding="hand2button">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <borderPainted value="false"/>
+                  <contentAreaFilled value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <maximumSize width="125" height="30"/>
+                  <text value="Trade with Player"/>
+                </properties>
+              </component>
+            </children>
           </grid>
           <grid id="53d9d" binding="Hand3Panel" layout-manager="GridBagLayout">
             <constraints>
@@ -46,7 +76,22 @@
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="23fbe" class="javax.swing.JButton" binding="hand3button">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <borderPainted value="false"/>
+                  <contentAreaFilled value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="false"/>
+                  <maximumSize width="125" height="30"/>
+                  <text value="Trade with Player"/>
+                </properties>
+              </component>
+            </children>
           </grid>
         </children>
       </grid>

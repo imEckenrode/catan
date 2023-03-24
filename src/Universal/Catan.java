@@ -12,12 +12,12 @@ public class Catan {
     BoardController controller;
     public int vpToWin;
     public enum Resource{
-        DESERT (-1,null,null),
         WOOD(0,"./CatanPNG/WoodHex.png","./CatanPNGs/wood.png"),
         ORE(1,"./CatanPNG/Rock.png","./CatanPNGs/ore.png"),
         GRAIN(2,"./CatanPNG/GrainHex.png","./CatanPNGs/grain.png"),
         WOOL(3,"./CatanPNG/SheepHex.png","./CatanPNGs/sheep.png"),
-        CLAY(4,"./CatanPNG/BrickHex.png","./CatanPNGs/brick.png");
+        CLAY(4,"./CatanPNG/BrickHex.png","./CatanPNGs/brick.png"),
+        DESERT (-1,null,null);
 
         private final int index;
         private final String hexagonFile;
