@@ -4,6 +4,7 @@ import BoardData.BoardManager;
 import BoardData.Hexagon;
 import GUI.BoardView;
 import GUI.CatanGUI;
+import GUI.ResourcePicker;
 import Player.Player;
 
 import javax.imageio.ImageIO;
@@ -193,6 +194,11 @@ public class BoardController {
             }
         }
         return null;
+    }
+
+    private Catan.Resource promptResourcePicker(Player player, int numberSelecting){
+        ResourcePicker picker = new ResourcePicker();
+        return picker.showDialog();
     }
 
 }

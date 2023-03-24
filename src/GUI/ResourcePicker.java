@@ -16,8 +16,11 @@ public class ResourcePicker extends JDialog {
     private JButton buttonCancel;
     private JPanel mainPanel;
     private ButtonGroup resourceButtonGroup;
+    private Catan.Resource pickedResource;
 
     public ResourcePicker() {
+        pickedResource = null;
+
         //TODO: Size up to also show brick'
         setContentPane(contentPane);
         setModal(true);
@@ -26,9 +29,9 @@ public class ResourcePicker extends JDialog {
         resourceButtonGroup = new ButtonGroup();
 
         for(Catan.Resource r: Catan.Resource.values()){
-            System.out.println(r);
+
             if(r==Catan.Resource.DESERT){continue;}//TODO: Would prefer string underneath?
-            JRadioButtonMenuItem full = new JRadioButtonMenuItem(r.toString(), makeCardIcon(r.getCardFilePath()));
+            JRadioButtonMenuItem full = new JRadioButtonMenuItem(r.getName(), makeCardIcon(r.getCardFilePath()));
             mainPanel.add(full);
             resourceButtonGroup.add(full);
         }
@@ -61,20 +64,21 @@ public class ResourcePicker extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private Catan.Resource onOK() {
+    private void onOK() {
         int i = 0;
         for (Enumeration<AbstractButton> buttons = resourceButtonGroup.getElements(); buttons.hasMoreElements(); ) {
             AbstractButton button = buttons.nextElement();
 
             if (button.isSelected()) {
-                System.out.println(button.getText());
+                //System.out.println(button.getText());
+                pickedResource = Catan.Resource.values()[i];
                 dispose();
-                return(Catan.Resource.values()[i]);
             }   //TODO: return the selected option
+
+            i++;    //NOTE: THIS IS DEPENDENT ON THE ORDER OF THE RESOURCES
             //Catan.Resource selected = resourceButtonGroup.isSelected();
         }
         dispose();
-        return(null);
     }
     private void onCancel() {
         // add your code here if necessary
@@ -84,7 +88,7 @@ public class ResourcePicker extends JDialog {
     public static void main(String[] args) {
         ResourcePicker dialog = new ResourcePicker();
         dialog.pack();
-        dialog.setVisible(true);
+        System.out.println(dialog.showDialog());
         System.exit(0);
     }
 
@@ -97,5 +101,10 @@ public class ResourcePicker extends JDialog {
         }
 
         return new ImageIcon(tempImage);//new ImageIcon(tempImage).getImage().getScaledInstance(w, h, Image.SCALE_DEFAULT))));
+    }
+
+    public Catan.Resource showDialog() {
+        setVisible(true);
+        return pickedResource;
     }
 }
