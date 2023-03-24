@@ -12,12 +12,12 @@ public class Catan {
     BoardController controller;
     public int vpToWin;
     public enum Resource{
-        WOOD(0,"Wood","./CatanPNG/WoodHex.png","./CatanPNGs/wood.png"),
-        ORE(1,"Ore", "./CatanPNG/Rock.png","./CatanPNGs/ore.png"),
-        GRAIN(2,"Grain","./CatanPNG/GrainHex.png","./CatanPNGs/grain.png"),
-        WOOL(3,"Sheep","./CatanPNG/SheepHex.png","./CatanPNGs/sheep.png"),
-        CLAY(4,"Brick","./CatanPNG/BrickHex.png","./CatanPNGs/brick.png"),
-        DESERT (-1,"Desert","./CatanPNG/FullBoard.jpg",null);
+        WOOD(0,"Wood","./CatanPNGs/WoodHex.png","./CatanPNGs/wood.png"),
+        ORE(1,"Ore", "./CatanPNGs/Rock.png","./CatanPNGs/ore.png"),
+        GRAIN(2,"Grain","./CatanPNGs/GrainHex.png","./CatanPNGs/grain.png"),
+        WOOL(3,"Sheep","./CatanPNGs/SheepHex.png","./CatanPNGs/sheep.png"),
+        CLAY(4,"Brick","./CatanPNGs/BrickHex.png","./CatanPNGs/brick.png"),
+        DESERT (-1,"Desert","./CatanPNGs/BrickHex.png",null);
 
         private final int index;
         private final String name;

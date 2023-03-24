@@ -49,16 +49,27 @@ public class BoardController {
         //gui.getBuildingCardPanel().add(BuildingCardLabel);
 
         gui.getBoardPanel().setLayout(null);
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainHex.png",100,100,200,200);
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
+
         int i = 0;
+        int j = 0;
         for( Hexagon[] temp : model.hMap){
             for (Hexagon hex : temp){
-                PlacePNG(gui.getBoardPanel(),hex.getResourceType().getHexFilePath(),100,100,i,i);
-                i+=20;
+                if (hex == null){
+                    continue;
+                }
+                PlacePNG(gui.getBoardPanel(),hex.getResourceType().getHexFilePath(),100,100,i*100,j*100);
+                System.out.println(hex.getResourceType().getHexFilePath());
+                i++;
             }
+            if (i == 5){
+                i=0;
+            }
+            else{
+                i = 5;
+            }
+            j++;
         }
-
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
 /*
         gui.getBoardPanel().setLayout(null);
         JLabel BrickHexLabel = new JLabel(BrickHexIcon);
