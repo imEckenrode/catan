@@ -23,4 +23,8 @@ public class Hand {
     public int getResourceCount(Catan.Resource resource){
         return resourceCards.get(resource.toIndex());
     }
+
+    public ArrayList<Integer> getAllResourceCounts() {
+        return resourceCards;
+    }
 }

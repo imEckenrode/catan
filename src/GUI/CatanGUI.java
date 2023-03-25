@@ -18,8 +18,8 @@ public class CatanGUI {
     private JPanel BoardPanel;
     private JButton endTurnButton;
     private JButton hand1Button;
-    private JButton hand2button;
-    private JButton hand3button;
+    private JButton hand2Button;
+    private JButton hand3Button;
     private JLabel TempLabel;
     private JPanel gridPanel;
 
@@ -86,5 +86,17 @@ public class CatanGUI {
 
     public JButton getEndTurnButton() {
         return endTurnButton;
+    }
+
+    public JButton getHand1Button() {
+        return hand1Button;
+    }
+
+    public JButton getHand2Button() {
+        return hand2Button;
+    }
+
+    public JButton getHand3Button() {
+        return hand3Button;
     }
 }
