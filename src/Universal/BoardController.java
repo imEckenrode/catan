@@ -31,26 +31,15 @@ public class BoardController {
 
         CatanGUI gui = view.getForm();
 
-
-
-        BufferedImage BuildingCardImage = null;
-
-
-        try {
-            BuildingCardImage = ImageIO.read((new File("./CatanPNGs/BuildingCard.png")));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        //placing Building Card in correct Spot
+        //TODO resize this building card
         PlacePNG(gui.getBuildingCardPanel(),"./CatanPNGs/BuildingCard.png",100,100,0,0);
 
 
-        //JLabel BuildingCardLabel = new JLabel(new ImageIcon(BuildingCardImage));
-        //gui.getBuildingCardPanel().add(BuildingCardLabel);
-
         gui.getBoardPanel().setLayout(null);
 
+        //Loops Though hMap and places all the hexes in the correct spaces
+        //TODO Verify the i and j values for this loop
         double i = 1.15;
         double j = 1;
         for( Hexagon[] temp : model.hMap) {
@@ -60,70 +49,16 @@ public class BoardController {
                     continue;
                 }
                 PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
-                System.out.println(hex.getResourceType().getHexFilePath());
                 i++;
             }
             i-=7.5;
-            j+=.80;
+            j+=.85;
         }
+
+        // placing in the background last because null layout
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
-/*
-        gui.getBoardPanel().setLayout(null);
-        JLabel BrickHexLabel = new JLabel(BrickHexIcon);
-        gui.getBoardPanel().add(BrickHexLabel);
-        BrickHexLabel.setBounds(200,200,100,100);
 
-        BrickHexLabel = new JLabel(BrickHexIcon);
-        gui.getBoardPanel().add(BrickHexLabel);
-        BrickHexLabel.setBounds(300,200,100,100);
-        BrickHexLabel = new JLabel(BrickHexIcon);
-        gui.getBoardPanel().add(BrickHexLabel);
-        BrickHexLabel.setBounds(400,200,100,100);
-
-       // gui.getBoardPanel().add(BoardImageLabel);
-       // BoardImageLabel.setBounds(0,0,525,625);
-
-
-
-            /*
-        GridBagConstraints gbc = new GridBagConstraints();
-       // gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridwidth=21;
-        gbc.gridheight = 25;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        //gbc.weightx = 1;
-        JPanel aaa = new JPanel();
-        aaa.add(BoardImageLabel);
-        gui.getBoardPanel().add(aaa, gbc);
-        //gui.getBoardPanel().add(BoardImageLabel, gbc);
-
-
-        //gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridwidth=4;
-        gbc.gridheight = 4;
-        gbc.gridx = 25;
-        gbc.gridy = 25;
-        //gbc.weightx = 1;
-        JPanel zeroZero = new JPanel();
-        zeroZero.add(BrickHexLabel);
-        gui.getBoardPanel().add(zeroZero, gbc);
-
-
-        gbc.fill = GridBagConstraints.VERTICAL;
-        gbc.gridwidth=1;
-        gbc.gridheight = 14; // Actually 15
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-       //gbc.weightx = 1;
-        JLabel test2 = new JLabel("A");
-        gui.getBoardPanel().add(test2, gbc);
-
-            */
         view.pack();
-
         view.setSize(840,715);
 
         //All the hexagons
@@ -148,7 +83,9 @@ public class BoardController {
         this.otherPlayers = otherPlayers;
         rollDiceAndResource();
     }
+
     //public void lavel
+
     private void rollDiceAndResource() {
         int number = model.dice.rollDice();
         System.out.print(number);
@@ -176,16 +113,10 @@ public class BoardController {
         takeTurn(model.getCurrentPlayer(), new ArrayList<>(model.players.subList(1,model.players.size())));
 
     }
-    public JLabel makeImage(String file,int height, int width){
-        BufferedImage tempImage = null;
-        try {
-            tempImage = ImageIO.read(new File(file));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        return (new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT))));
-    }
+    //PlacePNG take a .png file, turns it into a Buffered Image, then turns the Buffered image into a ImageIcon,
+    // then resizes the ImageIcon, then turns the resized ImageIcon into a JLabel, Then adds the JLabel to the desired Panel,
+    //THEN it sets the bounds on said Label. All in like 8 lines. Thank you, Good night.
     public void PlacePNG(JPanel panel, String file, int height, int width, int gridx, int gridy){
         BufferedImage tempImage = null;
         try {
