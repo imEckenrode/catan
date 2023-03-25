@@ -51,24 +51,20 @@ public class BoardController {
 
         gui.getBoardPanel().setLayout(null);
 
-        int i = 0;
-        int j = 0;
-        for( Hexagon[] temp : model.hMap){
-            for (Hexagon hex : temp){
-                if (hex == null){
+        double i = 1.15;
+        double j = 1;
+        for( Hexagon[] temp : model.hMap) {
+            for (Hexagon hex : temp) {
+                if (hex == null) {
+                    i++;
                     continue;
                 }
-                PlacePNG(gui.getBoardPanel(),hex.getResourceType().getHexFilePath(),100,100,i*100,j*100);
+                PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
                 System.out.println(hex.getResourceType().getHexFilePath());
                 i++;
             }
-            if (i == 5){
-                i=0;
-            }
-            else{
-                i = 5;
-            }
-            j++;
+            i-=7.5;
+            j+=.80;
         }
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
 /*
