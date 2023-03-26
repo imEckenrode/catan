@@ -13,6 +13,9 @@ public class Player {
     ArrayList<Port> portsOwned;
 
     public Player(Color color) {
+        if(color==null){
+            color = Color.WHITE;
+        }
         this.color = color;
         hand = new Hand();
         victoryPoints = 0;

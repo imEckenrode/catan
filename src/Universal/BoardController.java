@@ -4,6 +4,7 @@ import BoardData.BoardManager;
 import BoardData.Hexagon;
 import GUI.BoardView;
 import GUI.CatanGUI;
+import GUI.PlayerColorPicker;
 import GUI.ResourcePicker;
 import Player.Player;
 
@@ -15,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BoardController {
 
@@ -81,11 +83,14 @@ public class BoardController {
 
         model.players = new ArrayList<>();
         //Abstract these 4 into an actual function call
-        model.players.add(new Player(Color.RED));
-        model.players.add(new Player(Color.YELLOW));
-        model.players.add(new Player(Color.BLUE));
-        model.players.add(new Player(Color.GREEN));
-
+        ArrayList<Color> standardColors = new ArrayList<>(Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW));
+        for(int i = 0; i<4; i++){
+            Color chosenColor = promptColorPicker();
+            if(chosenColor == null){
+                chosenColor = standardColors.get(i);
+            }
+            model.players.add(new Player(chosenColor));
+        }
 
         //Roll dice for who goes first (a visual would be nice. If so, remove model.dice.randomInt)
 
@@ -186,6 +191,9 @@ public class BoardController {
         return picker.showDialog();
     }
 
+    private Color promptColorPicker(){
+        return new PlayerColorPicker().showDialog();
+    }
     private void tradeWithPlayer(Player player) {
         Catan.Resource have = promptResourcePicker(currentPlayer, 1);
         if(have==null){
