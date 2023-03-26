@@ -61,14 +61,14 @@ public class BoardController {
         view.pack();
         view.setSize(840,715);
 
-        //All the hexagons
-        JPanel firstHex = new JPanel();
+        //Now for the clicking functionality
+
 
         gui.getEndTurnButton().addActionListener(e->{
             nextTurn();
         });
 
-        //Could code this dynamically, but it is nice to see in Form Builder
+        //Could code button population dynamically, but it is nice to see the buttons in Form Builder
         gui.getHand1Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(0)));
         gui.getHand2Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(1)));
         gui.getHand3Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(2)));
@@ -145,9 +145,24 @@ public class BoardController {
         ResourcePicker picker = new ResourcePicker(player, numberSelecting);
         return picker.showDialog();
     }
+    private Catan.Resource promptResourcePicker(){
+        ResourcePicker picker = new ResourcePicker();
+        return picker.showDialog();
+    }
 
     private void tradeWithPlayer(Player player) {
-        promptResourcePicker(currentPlayer, 1);
-        promptResourcePicker(player, 1);
+        Catan.Resource have = promptResourcePicker(currentPlayer, 1);
+        if(have==null){
+            return;
+        }
+        Catan.Resource want = promptResourcePicker();
+        if(want==null){
+            return;
+        }
+        //Could add Accept or Decline Trade before completing trade (optional to code in)
+        currentPlayer.getHand().removeResource(have);
+        player.getHand().addResource(have);
+        player.getHand().removeResource(want);
+        currentPlayer.getHand().addResource(want);
     }
 }

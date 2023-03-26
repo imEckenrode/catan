@@ -2,6 +2,7 @@ package Player;
 
 import Universal.Catan;
 
+import java.nio.BufferUnderflowException;
 import java.util.*;
 
 public class Hand {
@@ -13,6 +14,14 @@ public class Hand {
     public void addResource(Catan.Resource resource) {
         int index = resource.toIndex();
         resourceCards.set(index, resourceCards.get(index)+1);
+    }
+    public void removeResource(Catan.Resource resource) {
+        int index = resource.toIndex();
+        if(resourceCards.get(index)>0) {
+            resourceCards.set(index, resourceCards.get(index) - 1);
+        }else{
+            throw new RuntimeException();
+        }
     }
 
     public void setResourceCount(Catan.Resource resource, int number) {

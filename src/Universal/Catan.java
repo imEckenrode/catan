@@ -46,6 +46,9 @@ public class Catan {
         model.players.add(new Player(Color.BLUE));
         model.players.add(new Player(Color.GREEN));
 
+        //controller.snakeInitialSettlements
+
+
         //Now play the game!
     }
 
