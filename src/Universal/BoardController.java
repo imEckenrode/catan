@@ -100,7 +100,7 @@ public class BoardController {
 
         //Do all road/settlement placements
 
-
+        updateHandColors();
     }
 
 
@@ -108,7 +108,15 @@ public class BoardController {
     public void takeTurn(Player currentPlayer, ArrayList<Player> otherPlayers) {
         setCurrentPlayer(currentPlayer);
         this.otherPlayers = otherPlayers;
+        updateHandColors();
         rollDiceAndResource();
+    }
+
+    private void updateHandColors() {
+        view.getForm().getCurrentHandPanel().setBorder(BorderFactory.createLineBorder(currentPlayer.getColor(), 5));
+        view.getForm().getHand1Button().setBorder(BorderFactory.createLineBorder( otherPlayers.get(0).getColor(), 5));
+        view.getForm().getHand2Button().setBorder(BorderFactory.createLineBorder( otherPlayers.get(1).getColor(), 5));
+        view.getForm().getHand3Button().setBorder(BorderFactory.createLineBorder( otherPlayers.get(2).getColor(), 5));
     }
 
     //public void lavel
