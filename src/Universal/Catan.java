@@ -36,20 +36,7 @@ public class Catan {
         controller = new BoardController(model,view,vpToWin);
 
         view.setVisible(true);
-
-        //TODO: Move this into BoardController
-
-        model.players = new ArrayList<>();    //Choose your colors then add
-        //Abstract these 4 into an actual function call
-        model.players.add(new Player(Color.RED));
-        model.players.add(new Player(Color.YELLOW));
-        model.players.add(new Player(Color.BLUE));
-        model.players.add(new Player(Color.GREEN));
-
-        //controller.snakeInitialSettlements
-
-
-        //Now play the game!
+        controller.beginGame();
     }
 
     public static void main(String[] args) {

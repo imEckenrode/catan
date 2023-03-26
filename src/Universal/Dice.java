@@ -15,4 +15,8 @@ public class Dice {
         return rng.nextInt(6)+rng.nextInt(6)+2; //nextInt returns a number between 0 and bound-1, so add 1 to each die roll
     }
 
+    public int randomInt(int range){
+        return rng.nextInt(range);
+    }
+
 }

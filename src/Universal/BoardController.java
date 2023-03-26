@@ -61,19 +61,46 @@ public class BoardController {
         view.pack();
         view.setSize(840,715);
 
-        //Now for the clicking functionality
-
+        //Now for the buttons
 
         gui.getEndTurnButton().addActionListener(e->{
             nextTurn();
         });
 
-        //Could code button population dynamically, but it is nice to see the buttons in Form Builder
+        //TODO: Code in buttons dynamically to allow for any number of players
         gui.getHand1Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(0)));
         gui.getHand2Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(1)));
         gui.getHand3Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(2)));
 
         //gui.getHand1Panel().getHand
+    }
+
+    public void beginGame() {
+        //Create new color picker dialog
+            //If closed, then we are done inputting people (or just have a Select Number of Players pane first)
+
+        model.players = new ArrayList<>();
+        //Abstract these 4 into an actual function call
+        model.players.add(new Player(Color.RED));
+        model.players.add(new Player(Color.YELLOW));
+        model.players.add(new Player(Color.BLUE));
+        model.players.add(new Player(Color.GREEN));
+
+
+        //Roll dice for who goes first (a visual would be nice. If so, remove model.dice.randomInt)
+
+        //cycle until the winner of the dice toss is selected
+        for(int i=0; i<model.dice.randomInt(4); i++){
+            model.players.add(model.players.remove(0));
+        }
+
+        //TODO: Replace local variables with function calls
+        currentPlayer = model.getCurrentPlayer();
+        otherPlayers = model.getOtherPlayers();
+
+        //Do all road/settlement placements
+
+
     }
 
 
@@ -110,7 +137,8 @@ public class BoardController {
         //Add the current player to the back of the list
         model.players.add(model.players.remove(0));
         //and take turns
-        takeTurn(model.getCurrentPlayer(), new ArrayList<>(model.players.subList(1,model.players.size())));
+        takeTurn(model.getCurrentPlayer(), model.getOtherPlayers());
+        //TODO: Refactor and always use getCurrentPlayer and getOtherPlayers
 
     }
 

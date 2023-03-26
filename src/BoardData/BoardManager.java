@@ -15,9 +15,7 @@ import static java.lang.Math.*;
 public class BoardManager {
     //For keeping track of vertices, edges, and hexagons
         //Perfectly fine to index here with negative values...
-
     public ArrayList<Player> players;
-
     public ArrayList<ArrayList<Hexagon>> numberToTile;
     public Dice dice;
     public  Hexagon[][] hMap;
@@ -98,4 +96,7 @@ public class BoardManager {
         return players.get(0);
     }
 
+    public ArrayList<Player> getOtherPlayers() {
+        return new ArrayList<>(players.subList(1,players.size()));
+    }
 }
