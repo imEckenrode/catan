@@ -81,6 +81,7 @@ public class ResourcePicker extends JDialog {
         for(Catan.Resource r: Catan.Resource.values()){
             if(r==Catan.Resource.DESERT){continue;}
             JRadioButtonMenuItem full = new JRadioButtonMenuItem("Have: "+ resourceCounts.get(r.toIndex()),makeCardIcon(r.getCardFilePath()));
+            full.setEnabled(hasEnoughResources());
             mainPanel.add(full);
             resourceButtonGroup.add(full);
         }
@@ -115,6 +116,14 @@ public class ResourcePicker extends JDialog {
         }
         //Check if the player has enough resources
         return resourceCounts.get(pickedResource.toIndex()) >= resourcesRequired;
+    }
+
+    private boolean hasEnoughResources(Catan.Resource r) {
+        if(r == null || r == Catan.Resource.DESERT){
+            return false;
+        }
+        //Check if the player has enough resources
+        return resourceCounts.get(r.toIndex()) >= resourcesRequired;
     }
 
     private void onOK() {
