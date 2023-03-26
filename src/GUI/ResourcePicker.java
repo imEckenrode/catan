@@ -54,11 +54,7 @@ public class ResourcePicker extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
 
@@ -81,7 +77,7 @@ public class ResourcePicker extends JDialog {
         for(Catan.Resource r: Catan.Resource.values()){
             if(r==Catan.Resource.DESERT){continue;}
             JRadioButtonMenuItem full = new JRadioButtonMenuItem("Have: "+ resourceCounts.get(r.toIndex()),makeCardIcon(r.getCardFilePath()));
-            full.setEnabled(hasEnoughResources());
+            full.setEnabled(hasEnoughResources(r));
             mainPanel.add(full);
             resourceButtonGroup.add(full);
         }
