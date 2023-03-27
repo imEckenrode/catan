@@ -49,7 +49,8 @@
               <gridbag weightx="1.0" weighty="1.0"/>
             </constraints>
             <properties>
-              <background color="-5438964"/>
+              <background color="-12829119"/>
+              <enabled value="true"/>
             </properties>
             <border type="none"/>
             <children>
