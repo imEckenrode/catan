@@ -1,6 +1,7 @@
 package Player;
 
 import BoardData.Port;
+import Universal.Catan;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,6 +54,14 @@ public class Player {
             return false;
         }
         return true;
+    }
+
+    public boolean hasEnoughResources(Catan.Resource r, int resourcesRequired) {
+        if(r == null || r == Catan.Resource.DESERT){
+            return false;
+        }
+        //Check if the player has enough resources
+        return getHand().getResourceCount(r) >= resourcesRequired;
     }
 
     public Hand getHand() {

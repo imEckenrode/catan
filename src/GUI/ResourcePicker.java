@@ -2,9 +2,11 @@ package GUI;
 
 import Universal.Catan;
 import Player.Player;
+import Player.Hand;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,7 +22,6 @@ public class ResourcePicker extends JDialog {
     private JPanel mainPanel;
     private ButtonGroup resourceButtonGroup;
     private Catan.Resource pickedResource;
-    ArrayList<Integer> resourceCounts;
     int resourcesRequired;
 
     public ResourcePicker(){
@@ -59,14 +60,11 @@ public class ResourcePicker extends JDialog {
     }
 
     public ResourcePicker(Player player, int resourcesRequired){
-        this.resourcesRequired = resourcesRequired;
-        if(player!=null) {
-            resourceCounts = player.getHand().getAllResourceCounts();
-        }else{
-            resourceCounts = new ArrayList<>(Arrays.asList(0,0,0,0,0));
-        }
-
         pickedResource = null;
+        this.resourcesRequired = resourcesRequired;
+        if(player==null){
+            new Player(new Hand(), 0, Color.BLACK);
+        }
 
         setContentPane(contentPane);
         setModal(true);
@@ -76,15 +74,15 @@ public class ResourcePicker extends JDialog {
 
         for(Catan.Resource r: Catan.Resource.values()){
             if(r==Catan.Resource.DESERT){continue;}
-            JRadioButtonMenuItem full = new JRadioButtonMenuItem("Have: "+ resourceCounts.get(r.toIndex()),makeCardIcon(r.getCardFilePath()));
-            full.setEnabled(hasEnoughResources(r));
+            JRadioButtonMenuItem full = new JRadioButtonMenuItem("Have: "+ player.getHand().getResourceCount(r),makeCardIcon(r.getCardFilePath()));
+            full.setEnabled(player.hasEnoughResources(r, resourcesRequired));
             mainPanel.add(full);
             resourceButtonGroup.add(full);
         }
 
         buttonOK.addActionListener(e -> {
             onOK();
-            if(hasEnoughResources()){
+            if(player.hasEnoughResources(pickedResource, resourcesRequired)){
                 dispose();
             }
             pickedResource = null;
@@ -104,22 +102,6 @@ public class ResourcePicker extends JDialog {
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }
-
-    private boolean hasEnoughResources() {
-        if(pickedResource==null){
-            return false;
-        }
-        //Check if the player has enough resources
-        return resourceCounts.get(pickedResource.toIndex()) >= resourcesRequired;
-    }
-
-    private boolean hasEnoughResources(Catan.Resource r) {
-        if(r == null || r == Catan.Resource.DESERT){
-            return false;
-        }
-        //Check if the player has enough resources
-        return resourceCounts.get(r.toIndex()) >= resourcesRequired;
     }
 
     private void onOK() {
