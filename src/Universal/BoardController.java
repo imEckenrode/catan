@@ -42,6 +42,7 @@ public class BoardController {
 
         //Loops Though hMap and places all the hexes in the correct spaces
         //TODO Verify the i and j values for this loop
+        //TODO Make desertHex look right
         double i = 1.15;
         double j = 1;
         for( Hexagon[] temp : model.hMap) {
