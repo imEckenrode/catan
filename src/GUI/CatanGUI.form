@@ -123,7 +123,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <grid id="4b58a" binding="BuildingCardPanel" layout-manager="GridBagLayout">
+                  <grid id="4b58a" binding="BuildingCardPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="4.0" weighty="4.0"/>
@@ -134,10 +134,7 @@
                     <border type="none"/>
                     <children>
                       <component id="67a4b" class="javax.swing.JButton" binding="endTurnButton" default-binding="true">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="0.0" weighty="0.0"/>
-                        </constraints>
+                        <constraints border-constraint="South"/>
                         <properties>
                           <background color="-5816016"/>
                           <foreground color="-4496802"/>

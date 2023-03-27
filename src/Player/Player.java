@@ -33,22 +33,22 @@ public class Player {
     int settlementCount = 5;    //number of settlements the player has left
     int cityCount = 4;         //number of cities left
     int roadCount = 15;         // number of roads left
-    public boolean SettlementsLeft(){   //function to check if the player has a settlement left to build
+    public boolean SettlementLeftWithBuild(){   //function to check if the player has a settlement left to build
         settlementCount -=1;
         if (settlementCount <= 0) {
             return false;
         }
         return true;
     }
-    public boolean CitiesLeft(){    //check for cities left
+    public boolean CitiesLeftWithBuild(){    //check for cities left
         cityCount -=1;
+        settlementCount +=1; //add a settlement back because cities replace settlements
         if (cityCount <= 0) {
             return false;
         }
-        settlementCount +=1; //add a settlement back because cities replace settlements
         return true;
     }
-    public boolean RoadsLeft(){ //check for roads left
+    public boolean RoadsLeftWithBuild(){ //check for roads left
         roadCount -=1;
         if (roadCount <= 0) {
             return false;
