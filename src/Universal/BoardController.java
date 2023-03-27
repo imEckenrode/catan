@@ -75,6 +75,19 @@ public class BoardController {
         gui.getHand2Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(1)));
         gui.getHand3Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(2)));
 
+        gui.getCurrentHandPanel().setLayout(null);
+
+        for(Catan.Resource r: Catan.Resource.values()){
+            int index = r.toIndex();
+            if(r==Catan.Resource.DESERT){continue;}
+            view.resourceLabels[index] = new JLabel(String.valueOf(r.toIndex()));
+            gui.getCurrentHandPanel().add(view.resourceLabels[index]);
+            //gui.getCatanPanel().add(view.resourceLabels[index]);
+            view.resourceLabels[index].setBounds(r.toIndex()*52+25,6,500,12);
+
+            PlacePNG(gui.getCurrentHandPanel(),r.getCardFilePath(),90,63,r.toIndex()*52,18);
+        }
+
         //gui.getHand1Panel().getHand
     }
 
@@ -101,7 +114,7 @@ public class BoardController {
         }
 
         //TODO: Replace local variables with function calls
-        currentPlayer = model.getCurrentPlayer();
+        setCurrentPlayer(model.getCurrentPlayer());
         otherPlayers = model.getOtherPlayers();
 
         //Do all road/settlement placements
@@ -172,6 +185,7 @@ public class BoardController {
     }
     private void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+        view.newResourceValues(currentPlayer.getHand().getAllResourceCounts());
     }
 
     private Player whoWon(int vpToWin) {
