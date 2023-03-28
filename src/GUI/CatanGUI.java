@@ -1,5 +1,7 @@
 package GUI;
 
+import Universal.Catan;
+
 import javax.swing.*;
 
 public class CatanGUI {
@@ -20,12 +22,34 @@ public class CatanGUI {
     private JButton hand1Button;
     private JButton hand2Button;
     private JButton hand3Button;
+    private JButton four2oneTradeButton;
+    private JButton three2oneTradeButton;
+    private JButton tradeButton0;
+    private JButton tradeButton1;
+    private JButton tradeButton2;
+    private JButton tradeButton3;
+    private JButton tradeButton4;
     private JLabel TempLabel;
     private JPanel gridPanel;
 
-
-    private void createUIComponents() {
-
+    public JButton getTradeButton(Catan.Resource r){
+        //Could do this better by including all in a separate JButton[], but that's likely as much hardcoding
+        switch (r.toIndex()){
+            case -1:
+                return three2oneTradeButton;
+            case 0:
+                return tradeButton0;
+            case 1:
+                return tradeButton1;
+            case 2:
+                return tradeButton2;
+            case 3:
+                return tradeButton3;
+            case 4:
+                return tradeButton4;
+            default:
+                return four2oneTradeButton;
+        }//return portTradeButtons[r.toIndex()+1];
     }
 
     public JPanel getCatanPanel() {

@@ -1,5 +1,7 @@
 package GUI;
 
+import Universal.Catan;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -20,11 +22,23 @@ public class BoardView extends JFrame {
 
     public CatanGUI getForm(){return form;}
 
-    public void newResourceValues(ArrayList<Integer> allResourceCounts) {
+    public void updatePlayerDisplay(Player.Player currentPlayer){
+        updateResourceValues(currentPlayer.getHand().getAllResourceCounts());
+        updatePlayerPorts(currentPlayer);
+    }
+
+    public void updateResourceValues(ArrayList<Integer> allResourceCounts) {
         int i = 0;
         for(JLabel l: resourceLabels){
             l.setText(String.valueOf(allResourceCounts.get(i)));
             i++;
         }
+    }
+
+    public void updatePlayerPorts(Player.Player currentPlayer){
+        for(Catan.Resource r: Catan.Resource.values()){
+            form.getTradeButton(r).setVisible(currentPlayer.hasResourcePort(r));
+        }
+        form.getPortsPanel().revalidate();
     }
 }

@@ -72,6 +72,15 @@ public class Player {
         return victoryPoints;
     }
 
+    public boolean hasResourcePort(Catan.Resource resource){
+        for(Port p: portsOwned){
+            if(p.getResource() == resource){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setVictoryPoints(int victoryPoints) {
         this.victoryPoints = victoryPoints;
     }
