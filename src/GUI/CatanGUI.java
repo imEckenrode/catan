@@ -123,4 +123,8 @@ public class CatanGUI {
     public JButton getHand3Button() {
         return hand3Button;
     }
+
+    public JButton getFour2oneTradeButton() {return four2oneTradeButton;}
 }
+
+

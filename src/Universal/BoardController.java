@@ -63,7 +63,7 @@ public class BoardController {
         }
 
         // placing in the background last because null layout
-       // PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
+       PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
 
         view.pack();
         view.setSize(840,715);
@@ -72,6 +72,11 @@ public class BoardController {
 
         gui.getEndTurnButton().addActionListener(e->{
             nextTurn();
+        });
+
+        gui.getFour2oneTradeButton().addActionListener(e ->{
+            Catan.Resource pickedResource = promptResourcePicker(currentPlayer,4);
+            currentPlayer.getHand().removeResource(pickedResource,4);
         });
 
         //TODO: Code in buttons dynamically to allow for any number of players
@@ -223,9 +228,9 @@ public class BoardController {
             return;
         }
         //Could add Accept or Decline Trade before completing trade (optional to code in)
-        currentPlayer.getHand().removeResource(have);
+        //currentPlayer.getHand().removeResource(have);
         player.getHand().addResource(have);
-        player.getHand().removeResource(want);
+       // player.getHand().removeResource(want);
         currentPlayer.getHand().addResource(want);
     }
 }

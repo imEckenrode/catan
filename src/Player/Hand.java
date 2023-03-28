@@ -16,15 +16,16 @@ public class Hand {
         int index = resource.toIndex();
         resourceCards.set(index, resourceCards.get(index)+1);
     }
-    public void removeResource(Catan.Resource resource) {
+    public void removeResource(Catan.Resource resource, int number) {
         int index = resource.toIndex();
-        if(resourceCards.get(index)>0) {
-            resourceCards.set(index, resourceCards.get(index) - 1);
-        }else{
-            throw new RuntimeException();
+        for (int i = 0; i > number; i++) {
+            if (resourceCards.get(index) > 0) {
+                resourceCards.set(index, resourceCards.get(index) - 1);
+            } else {
+                throw new RuntimeException();
+            }
         }
     }
-
     public void setResourceCount(Catan.Resource resource, int number) {
         int index = resource.toIndex();
         resourceCards.set(index, number);
