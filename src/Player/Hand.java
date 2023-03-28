@@ -18,7 +18,7 @@ public class Hand {
     }
     public void removeResource(Catan.Resource resource, int number) {
         int index = resource.toIndex();
-        for (int i = 0; i > number; i++) {
+        for (int i = 0; i < number; i++) {
             if (resourceCards.get(index) > 0) {
                 resourceCards.set(index, resourceCards.get(index) - 1);
             } else {
@@ -26,6 +26,7 @@ public class Hand {
             }
         }
     }
+
     public void setResourceCount(Catan.Resource resource, int number) {
         int index = resource.toIndex();
         resourceCards.set(index, number);

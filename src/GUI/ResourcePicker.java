@@ -86,9 +86,10 @@ public class ResourcePicker extends JDialog {
             onOK();
             if(player.hasEnoughResources(pickedResource, resourcesRequired)){
                 dispose();
+            }else {
+                pickedResource = null;
+                System.out.println("Insufficient Resources");
             }
-            pickedResource = null;
-            System.out.println("Insufficient Resources");
         });
 
         buttonCancel.addActionListener(e -> onCancel());
@@ -111,8 +112,7 @@ public class ResourcePicker extends JDialog {
             AbstractButton button = buttons.nextElement();
 
             if (button.isSelected()) {
-                //System.out.println(button.getText());
-                pickedResource = Catan.Resource.values()[i];
+                setPickedResource(Catan.Resource.values()[i]);
             }
             i++;    //NOTE: THIS IS DEPENDENT ON THE ORDER OF THE RESOURCES
             //Catan.Resource selected = resourceButtonGroup.isSelected();
@@ -143,10 +143,18 @@ public class ResourcePicker extends JDialog {
     }
 
     public static void main(String[] args) {
-        ResourcePicker dialog = new ResourcePicker();
+        ResourcePicker dialog = new ResourcePicker(new Player(Color.black), 1);
         dialog.pack();
         //dialog.s
         System.out.println(dialog.showDialog());
         System.exit(0);
+    }
+
+    public Catan.Resource getPickedResource() {
+        return pickedResource;
+    }
+
+    public void setPickedResource(Catan.Resource pickedResource) {
+        this.pickedResource = pickedResource;
     }
 }
