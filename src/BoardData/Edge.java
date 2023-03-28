@@ -3,6 +3,7 @@ import Player.Player;
 import java.awt.*;
 
 public class Edge {
+    private static final int X_SHIFT = 5;   //This constant makes sure the edges are displayed correctly
     private static final int[] EDGE_CENTERS_X = new int[]{25,50,25,-25,-50,-25};
     private static final int[] EDGE_CENTERS_Y = new int[]{-37,0,37,37,0,-37};
     Port port;
@@ -20,7 +21,7 @@ public class Edge {
     public Edge(int dir){
         port = null;
         item = null;
-        centerX = EDGE_CENTERS_X[dir];
+        centerX = EDGE_CENTERS_X[dir] - X_SHIFT;
         centerY = EDGE_CENTERS_Y[dir];
     }
 
