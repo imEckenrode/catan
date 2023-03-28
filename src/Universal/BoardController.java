@@ -43,13 +43,16 @@ public class BoardController {
         //TODO Verify the i and j values for this loop
         //TODO Make desertHex look right
         double i = 1.15;
-        double j = 1;
+        double j = 0.5;
         for( Hexagon[] temp : model.hMap) {
             for (Hexagon hex : temp) {
                 if (hex == null) {
                     i++;
                     continue;
                 }
+                hex.centerY = (int)(i*100+32);
+                hex.centerX = (int)(j*100);
+                JLabel test = new JLabel("O");
                 PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
                 i++;
             }
@@ -58,7 +61,7 @@ public class BoardController {
         }
 
         // placing in the background last because null layout
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
+       // PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,0,0);
 
         view.pack();
         view.setSize(840,715);

@@ -11,16 +11,18 @@ public class Hexagon {
     public Vertex[] vertices;
 
     public Hexagon[] adjacentHexes;
-
     int tokenNum;
     boolean hasRobber;
-
+    public int centerX;
+    public int centerY;
     public Hexagon() {
         adjacentHexes = new Hexagon[6];
         generateAllSides();
     }
 
-    public Hexagon(Catan.Resource resource) {
+    public Hexagon(Catan.Resource resource, int CenterX, int CenterY ) {
+        this.centerX = centerX;
+        this.centerY = CenterY;
         this.resource = resource;
         adjacentHexes = new Hexagon[6];
         generateAllSides();
