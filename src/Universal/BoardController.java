@@ -77,6 +77,7 @@ public class BoardController {
         gui.getFour2oneTradeButton().addActionListener(e ->{
             Catan.Resource pickedResource = promptResourcePicker(currentPlayer,4);
             currentPlayer.getHand().removeResource(pickedResource,4);
+            updateResourceDisplays();
         });
 
         //TODO: Code in buttons dynamically to allow for any number of players
@@ -98,6 +99,11 @@ public class BoardController {
         }
 
         //gui.getHand1Panel().getHand
+    }
+
+    private void updateResourceDisplays() {
+        //This refreshes everything after trading
+        view.updateResourceValues(currentPlayer.getHand().getAllResourceCounts());
     }
 
     public void beginGame() {
@@ -137,6 +143,7 @@ public class BoardController {
         setCurrentPlayer(currentPlayer);
         this.otherPlayers = otherPlayers;
         updateHandColors();
+        view.updatePlayerDisplay(currentPlayer);
         rollDiceAndResource();
     }
 
@@ -159,7 +166,6 @@ public class BoardController {
             for(Hexagon hex: model.numberToTile.get(number)){
                 hex.distributeResources();
             }
-            //TODO: Update hand with a refresh of some sort
         }
     }
 
@@ -208,11 +214,15 @@ public class BoardController {
 
     private Catan.Resource promptResourcePicker(Player player, int numberSelecting){
         ResourcePicker picker = new ResourcePicker(player, numberSelecting);
-        return picker.showDialog();
+        Catan.Resource picked = picker.showDialog();
+        updateResourceDisplays();
+        return picked;
     }
     private Catan.Resource promptResourcePicker(){
         ResourcePicker picker = new ResourcePicker();
-        return picker.showDialog();
+        Catan.Resource picked = picker.showDialog();
+        updateResourceDisplays();
+        return picked;
     }
 
     private Color promptColorPicker(){
@@ -228,9 +238,10 @@ public class BoardController {
             return;
         }
         //Could add Accept or Decline Trade before completing trade (optional to code in)
-        //currentPlayer.getHand().removeResource(have);
+        currentPlayer.getHand().removeResource(have,1);
         player.getHand().addResource(have);
-       // player.getHand().removeResource(want);
+        player.getHand().removeResource(want,1);
         currentPlayer.getHand().addResource(want);
+        updateResourceDisplays();
     }
 }

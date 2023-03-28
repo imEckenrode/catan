@@ -35,7 +35,7 @@ public class BoardView extends JFrame {
         }
     }
 
-    public void updatePlayerPorts(Player.Player currentPlayer){
+    private void updatePlayerPorts(Player.Player currentPlayer){
         for(Catan.Resource r: Catan.Resource.values()){
             form.getTradeButton(r).setVisible(currentPlayer.hasResourcePort(r));
         }
