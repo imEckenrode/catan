@@ -20,8 +20,12 @@ public class Hexagon {
         generateAllSides();
     }
 
+    public Hexagon(Catan.Resource resource) {
+        new Hexagon(resource,0,0);
+    }
+
     public Hexagon(Catan.Resource resource, int CenterX, int CenterY ) {
-        this.centerX = centerX;
+        this.centerX = CenterX;
         this.centerY = CenterY;
         this.resource = resource;
         adjacentHexes = new Hexagon[6];

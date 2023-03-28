@@ -35,7 +35,7 @@ public class ResourcePicker extends JDialog {
         resourceButtonGroup = new ButtonGroup();
 
         for(Catan.Resource r: Catan.Resource.values()){
-            if(r==Catan.Resource.DESERT){continue;}//TODO: Would prefer string underneath?
+            if(r==Catan.Resource.DESERT){continue;}
             JRadioButtonMenuItem full = new JRadioButtonMenuItem(makeCardIcon(r.getCardFilePath()));
             mainPanel.add(full);
             resourceButtonGroup.add(full);
@@ -87,7 +87,6 @@ public class ResourcePicker extends JDialog {
             }
             pickedResource = null;
             System.out.println("Insufficient Resources");
-            //TODO: Print this as an error message
         });
 
         buttonCancel.addActionListener(e -> onCancel());
@@ -136,7 +135,7 @@ public class ResourcePicker extends JDialog {
     public Catan.Resource showDialog() {
         //setSize(875,315);
         setSize(1150,300);
-        //TODO: Create an actual label instead of using radio button's built-in label, then go back to previous size
+        //TODO: Could create an actual label instead of using radio button's built-in label, then go back to previous size
         setVisible(true);
         return pickedResource;
     }

@@ -45,7 +45,7 @@ public class BoardManager {
         for(int j=0; j<5; j++){   //Column (maxIndex is made by j+2)
             for(int i=max(j-2,0); i<=min(j+2,4); i++){
                 resource = resources.remove(rng.nextInt(resources.size()));
-                hMap[j][i] = new Hexagon(resource,0,0);
+                hMap[j][i] = new Hexagon(resource);
             }
         }
 
