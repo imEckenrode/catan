@@ -42,7 +42,9 @@ public class ResourcePicker extends JDialog {
         }
 
         buttonOK.addActionListener(e -> {
-            onOK();dispose();});
+            onOK();
+            dispose();
+        });
 
         buttonCancel.addActionListener(e -> onCancel());
 

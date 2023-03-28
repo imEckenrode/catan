@@ -11,6 +11,8 @@ import Player.Player;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +41,7 @@ public class BoardController {
 
         gui.getBoardPanel().setLayout(null);
 
-        //Loops Though hMap and places all the hexes in the correct spaces
+        //Loops Though hMap and places all the hexes in the correct spaces visually
         //TODO Verify the i and j values for this loop
         //TODO Make desertHex look right
         double i = 1.15;
@@ -50,8 +52,8 @@ public class BoardController {
                     i++;
                     continue;
                 }
-                hex.centerY = (int)(i*100+32);
-                hex.centerX = (int)(j*100);
+                hex.setCenterX((int)(i*100+32));
+                hex.setCenterY((int)(j*100));
                 JLabel test = new JLabel("O");
                 PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
                 i++;

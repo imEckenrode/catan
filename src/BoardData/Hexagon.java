@@ -13,20 +13,16 @@ public class Hexagon {
     public Hexagon[] adjacentHexes;
     int tokenNum;
     boolean hasRobber;
-    public int centerX;
-    public int centerY;
+    int centerX;
+    int centerY;
     public Hexagon() {
         adjacentHexes = new Hexagon[6];
         generateAllSides();
     }
 
     public Hexagon(Catan.Resource resource) {
-        new Hexagon(resource,0,0);
-    }
-
-    public Hexagon(Catan.Resource resource, int CenterX, int CenterY ) {
-        this.centerX = CenterX;
-        this.centerY = CenterY;
+        this.centerX = 0;
+        this.centerY = 0;
         this.resource = resource;
         adjacentHexes = new Hexagon[6];
         generateAllSides();
@@ -49,8 +45,8 @@ public class Hexagon {
         edges = new Edge[6];
         vertices = new Vertex[6];
         for(int i = 0; i<6;i++){
-            edges[i] = new Edge();
-            vertices[i] = new Vertex();
+            edges[i] = new Edge(i);
+            vertices[i] = new Vertex(i);
         }
     }
 
@@ -156,4 +152,34 @@ public class Hexagon {
     public void removeRobber() {
         this.hasRobber = false;
     }
+
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public int getCenterY() {
+        return centerY;
+    }
+    public void setCenterX(int centerX) {
+        int changeInX = centerX - this.centerX;
+        this.centerX = centerX;
+        for(Vertex v : vertices){
+            v.adjustCenterX(changeInX);
+        }
+        for(Edge e: edges){
+            e.adjustCenterX(changeInX);
+        }
+    }
+
+    public void setCenterY(int centerY) {
+        int changeInY = centerY - this.centerY;
+        this.centerY = centerY;
+        for(Vertex v : vertices){
+            v.adjustCenterY(changeInY);
+        }
+        for(Edge e: edges){
+            e.adjustCenterY(changeInY);
+        }
+    }
+
 }
