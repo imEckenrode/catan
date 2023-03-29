@@ -83,7 +83,7 @@ public class BoardController {
             currentPlayer.getHand().addResource(wantResource);
             updateResourceDisplays();
         });
-//
+
 
         //TODO: Code in buttons dynamically to allow for any number of players
         gui.getHand1Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(0)));

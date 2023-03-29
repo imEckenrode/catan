@@ -2,18 +2,18 @@ package Player;
 import GUI.PlaceableItem;
 import Universal.Catan;
 
-public class Settlement{
+public class Settlement extends Item{
     //Could just implement isCity as a boolean in here and change the display and resources given based on that
     boolean isCity;
-    Player owner;
+
 
     public Settlement(Player owner) {
-        this.owner = owner;
+        super(owner);
         this.isCity = false;
     }
 
     public Settlement(Player owner, boolean isCity) {
-        this.owner = owner;
+        super(owner);
         this.isCity = isCity;
     }
 

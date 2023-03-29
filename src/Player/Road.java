@@ -1,7 +1,8 @@
 package Player;
 
-public class Road{
+public class Road extends Item{
 
-    public Road() {
+    public Road(Player owner) {
+        super(owner);
     }
 }

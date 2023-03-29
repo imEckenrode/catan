@@ -1,6 +1,8 @@
 package BoardData;
 
+import GUI.PlaceableItem;
 import Player.Player;
+import Player.Item;
 import Universal.Catan; //for the resource stuff (maybe extract this)
 import Universal.Dice;
 
@@ -8,6 +10,7 @@ import Universal.Dice;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Queue;
 
 import static Universal.Catan.Resource.*;
 import static java.lang.Math.*;
@@ -20,6 +23,8 @@ public class BoardManager {
     public Dice dice;
     public  Hexagon[][] hMap;
     //TODO: Retrieve hex from here on click?
+
+    public Queue<Item> itemsToPlaceOnClick;
 
 
     public BoardManager() {
@@ -98,5 +103,18 @@ public class BoardManager {
 
     public ArrayList<Player> getOtherPlayers() {
         return new ArrayList<>(players.subList(1,players.size()));
+    }
+
+
+    public void addToQueue(Item item){
+        itemsToPlaceOnClick.add(item);
+    }
+
+    public Item popOffQueue(){
+       return itemsToPlaceOnClick.poll();
+    }
+
+    public void clearQueue(){
+        itemsToPlaceOnClick.clear();
     }
 }
