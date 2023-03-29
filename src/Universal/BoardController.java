@@ -44,8 +44,8 @@ public class BoardController {
         //Loops Though hMap and places all the hexes in the correct spaces visually
         //TODO Verify the i and j values for this loop
         //TODO Make desertHex look right
-        //PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
-        //PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
+        PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
+        PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
         double i = 1.15;
         double j = 0.5;
         for( Hexagon[] temp : model.hMap) {
