@@ -1,11 +1,12 @@
 package BoardData;
 
 
+import GUI.PlaceableItem;
 import Universal.Catan;
 
 //import static BoardData.Dir6.rot60;
 
-public class Hexagon {
+public class Hexagon extends PlaceableItem {
     Catan.Resource resource;
     public Edge[] edges;
     public Vertex[] vertices;

@@ -1,8 +1,9 @@
 package BoardData;
+import GUI.PlaceableItem;
 import Player.Player;
 import java.awt.*;
 
-public class Edge {
+public class Edge extends PlaceableItem {
     private static final int X_SHIFT = 5;   //This constant makes sure the edges are displayed correctly
     private static final int[] EDGE_CENTERS_X = new int[]{25,50,25,-25,-50,-25};
     private static final int[] EDGE_CENTERS_Y = new int[]{-37,0,37,37,0,-37};

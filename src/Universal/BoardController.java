@@ -44,6 +44,8 @@ public class BoardController {
         //Loops Though hMap and places all the hexes in the correct spaces visually
         //TODO Verify the i and j values for this loop
         //TODO Make desertHex look right
+        PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
+        PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
         double i = 1.15;
         double j = 0.5;
         for( Hexagon[] temp : model.hMap) {
@@ -61,9 +63,9 @@ public class BoardController {
             i-=7.5;
             j+=.85;
         }
-
         // placing in the background last because null layout
-       PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
+
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
 
         view.pack();
         view.setSize(840,715);
@@ -75,10 +77,13 @@ public class BoardController {
         });
 
         gui.getFour2oneTradeButton().addActionListener(e ->{
-            Catan.Resource pickedResource = promptResourcePicker(currentPlayer,4);
-            currentPlayer.getHand().removeResource(pickedResource,4);
+            Catan.Resource haveResource = promptResourcePicker(currentPlayer,4);
+            currentPlayer.getHand().removeResource(haveResource,4);
+            Catan.Resource wantResource = promptResourcePicker();
+            currentPlayer.getHand().addResource(wantResource);
             updateResourceDisplays();
         });
+//
 
         //TODO: Code in buttons dynamically to allow for any number of players
         gui.getHand1Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(0)));
@@ -187,6 +192,7 @@ public class BoardController {
     //PlacePNG take a .png file, turns it into a Buffered Image, then turns the Buffered image into a ImageIcon,
     // then resizes the ImageIcon, then turns the resized ImageIcon into a JLabel, Then adds the JLabel to the desired Panel,
     //THEN it sets the bounds on said Label. All in like 8 lines. Thank you, Good night.
+
     public void PlacePNG(JPanel panel, String file, int height, int width, int gridx, int gridy){
         BufferedImage tempImage = null;
         try {

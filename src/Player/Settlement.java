@@ -1,10 +1,9 @@
 package Player;
 
 import BoardData.VertexItem;
-import GUI.GamePieceGUI;
 import Universal.Catan;
 
-public class Settlement extends VertexItem implements GamePieceGUI {
+public class Settlement extends VertexItem{
     //Could just implement isCity as a boolean in here and change the display and resources given based on that
     boolean isCity;
 
