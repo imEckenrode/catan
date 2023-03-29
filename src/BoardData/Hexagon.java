@@ -100,6 +100,7 @@ public class Hexagon extends PlaceableItem {
 
     public void setResourceType(Catan.Resource resource) {
         this.resource = resource;
+        this.setImageFile(resource.getHexFilePath());
     }
 
     public Edge getEdge(int index){
