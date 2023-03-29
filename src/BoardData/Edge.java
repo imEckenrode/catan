@@ -2,41 +2,40 @@ package BoardData;
 import GUI.PlaceableItem;
 import Player.Player;
 import java.awt.*;
+import Player.Road;
 
 public class Edge extends PlaceableItem {
     private static final int X_SHIFT = 5;   //This constant makes sure the edges are displayed correctly
     private static final int[] EDGE_CENTERS_X = new int[]{25,50,25,-25,-50,-25};
     private static final int[] EDGE_CENTERS_Y = new int[]{-37,0,37,37,0,-37};
     Port port;
-    EdgeItem item;
-    int centerX;
-    int centerY;
+    Road road;
+
+    int tilt; //   0 = \, 1 = |, 2 = /
 
     public Edge(){
+        super(null,0,0,0,0);
         port = null;
-        item = null;
-        centerX = 0;
-        centerY = 0;
+        road = null;
     }
 
     public Edge(int dir){
+        super(null,EDGE_CENTERS_X[dir], EDGE_CENTERS_Y[dir],0,0);
         port = null;
-        item = null;
-        centerX = EDGE_CENTERS_X[dir] - X_SHIFT;
-        centerY = EDGE_CENTERS_Y[dir];
+        road = null;
     }
 
-    public Edge(Port port, EdgeItem item) {
+    public Edge(Port port, Road road) {
         this.port = port;
-        this.item = item;
+        this.road = road;
     }
 
-    public EdgeItem getItem() {
-        return item;
+    public Road getRoad() {
+        return road;
     }
 
-    public void setItem(EdgeItem item) {
-        this.item = item;
+    public void setRoad(Road road) {
+        this.road = road;
     }
 
 
@@ -51,10 +50,10 @@ public class Edge extends PlaceableItem {
     }
 
     public void adjustCenterX(int changeInX) {
-        centerX += changeInX;
+        super.setCenterX(getCenterX() + changeInX);
     }
     public void adjustCenterY(int changeInY) {
-        centerY += changeInY;
+        super.setCenterY(getCenterY() + changeInY);
     }
 
 }

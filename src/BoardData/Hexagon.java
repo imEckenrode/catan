@@ -14,16 +14,14 @@ public class Hexagon extends PlaceableItem {
     public Hexagon[] adjacentHexes;
     int tokenNum;
     boolean hasRobber;
-    int centerX;
-    int centerY;
+
     public Hexagon() {
         adjacentHexes = new Hexagon[6];
         generateAllSides();
     }
 
     public Hexagon(Catan.Resource resource) {
-        this.centerX = 0;
-        this.centerY = 0;
+        super(resource.getHexFilePath(),0,0,100,100);
         this.resource = resource;
         adjacentHexes = new Hexagon[6];
         generateAllSides();
@@ -35,8 +33,8 @@ public class Hexagon extends PlaceableItem {
         }
 
         for(Vertex v: vertices){
-            if(v.item != null){
-                v.item.collectResource(resource);
+            if(v.settlement != null){
+                v.settlement.collectResource(resource);
             }
         }
         return true;
@@ -154,16 +152,10 @@ public class Hexagon extends PlaceableItem {
         this.hasRobber = false;
     }
 
-    public int getCenterX() {
-        return centerX;
-    }
-
-    public int getCenterY() {
-        return centerY;
-    }
+    @Override
     public void setCenterX(int centerX) {
-        int changeInX = centerX - this.centerX;
-        this.centerX = centerX;
+        int changeInX = centerX - this.getCenterX();
+        super.setCenterX(centerX);
         for(Vertex v : vertices){
             v.adjustCenterX(changeInX);
         }
@@ -172,9 +164,10 @@ public class Hexagon extends PlaceableItem {
         }
     }
 
+    @Override
     public void setCenterY(int centerY) {
-        int changeInY = centerY - this.centerY;
-        this.centerY = centerY;
+        int changeInY = centerY - this.getCenterY();
+        super.setCenterY(centerY);
         for(Vertex v : vertices){
             v.adjustCenterY(changeInY);
         }

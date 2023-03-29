@@ -1,8 +1,6 @@
 package Player;
 
-import BoardData.EdgeItem;
-
-public class Road extends EdgeItem{
+public class Road{
 
     public Road() {
     }
