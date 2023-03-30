@@ -42,14 +42,12 @@ public class BoardController {
         //TODO resize this building card
         PlacePNG(gui.getBuildingCardPanel(),"./CatanPNGs/BuildingCard.png",100,100,0,0);
 
-
         gui.getBoardPanel().setLayout(null);
 
         //Loops Though hMap and places all the hexes in the correct spaces visually
         //TODO Verify the i and j values for this loop
         //TODO Make desertHex look right
-        PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
-        PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
+
         int i = 160;
         int j = 50;
         for( Hexagon[] temp : model.hMap) {
@@ -73,6 +71,10 @@ public class BoardController {
         // placing in the background last because null layout
 
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
+        gui.getItemsPanel().setLayout(null);
+        gui.getItemsPanel().setOpaque(false);
+        PlacePNG(gui.getItemsPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
+        PlacePNG(gui.getItemsPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
 
         view.pack();
         view.setSize(840,715);

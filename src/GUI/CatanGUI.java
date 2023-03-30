@@ -29,6 +29,7 @@ public class CatanGUI {
     private JButton tradeButton2;
     private JButton tradeButton3;
     private JButton tradeButton4;
+    private JPanel ItemsPanel;
     private JLabel TempLabel;
     private JPanel gridPanel;
 
@@ -125,6 +126,10 @@ public class CatanGUI {
     }
 
     public JButton getFour2oneTradeButton() {return four2oneTradeButton;}
+
+    public JPanel getItemsPanel() {
+        return ItemsPanel;
+    }
 }
 
 
