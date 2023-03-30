@@ -170,7 +170,7 @@ public class BoardController {
 
         model.hMap[yHex][xHex].getVertex(0).setSettlement((Settlement) item);
         //Will include this within setSettlement eventually
-        model.hMap[yHex][xHex].getVertex(0).DrawImage(view.form.getBoardPanel());
+        model.hMap[yHex][xHex].getVertex(0).drawImage(view.form.getBoardPanel());
     }
 
     private void updateResourceDisplays() {
