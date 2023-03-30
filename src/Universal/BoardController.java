@@ -50,22 +50,25 @@ public class BoardController {
         //TODO Make desertHex look right
         PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
         PlacePNG(gui.getBoardPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
-        double i = 1.15;
-        double j = 0.5;
+        int i = 160;
+        int j = 50;
         for( Hexagon[] temp : model.hMap) {
             for (Hexagon hex : temp) {
                 if (hex == null) {
-                    i++;
+                    i+=100;
                     continue;
                 }
-                hex.setCenterX((int)(i*100+32));
-                hex.setCenterY((int)(j*100));
+                hex.setCenterX((int)(i));
+                hex.setCenterY((int)(j));
                 JLabel test = new JLabel("O");
-                PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
-                i++;
+                hex.drawImage(gui.getBoardPanel());
+                //hex.getVertex(1).drawImage(gui.getBoardPanel());
+
+                //PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
+                i+=100;
             }
-            i-=7.5;
-            j+=.85;
+            i-=750;
+            j+=85;
         }
         // placing in the background last because null layout
 
