@@ -14,13 +14,13 @@ public class Vertex extends PlaceableItem{
 
 
     public Vertex() {
-        super(null,0,0,0,0);
+        super(null,0,0,25,25);
         settlement = null;
 
     }
 
     public Vertex(int dir) {
-        super(null,VERTEX_CENTERS_X[dir],VERTEX_CENTERS_Y[dir],0,0);
+        super(null,VERTEX_CENTERS_X[dir],VERTEX_CENTERS_Y[dir],25,25);
         settlement = null;
     }
 
@@ -37,6 +37,13 @@ public class Vertex extends PlaceableItem{
     }
 
     public void setSettlement(Settlement settlement) {
+        //There is no case where a settlement will be removed from the board.
+        //This makes sure we do not honor the attempt
+        if(settlement == null){
+            System.out.println("Bad settlement added");
+            return;
+        }
         this.settlement = settlement;
+        setImageFile(settlement.getFilePath());
     }
 }

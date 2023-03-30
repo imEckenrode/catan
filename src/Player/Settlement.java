@@ -1,5 +1,4 @@
 package Player;
-import GUI.PlaceableItem;
 import Universal.Catan;
 
 public class Settlement extends Item{
@@ -9,11 +8,15 @@ public class Settlement extends Item{
 
     public Settlement(Player owner) {
         super(owner);
+        addFilePath("./CatanPNGs/Settlement.png");
+        addFilePath("./CatanPNGs/brick.png");     //TODO: Make this City
         this.isCity = false;
     }
 
     public Settlement(Player owner, boolean isCity) {
         super(owner);
+        addFilePath("./CatanPNGs/Settlement.png");
+        addFilePath("./CatanPNGs/brick.png");     //TODO: Make this City
         this.isCity = isCity;
     }
 
@@ -24,5 +27,13 @@ public class Settlement extends Item{
                 owner.getHand().addResource(resource);
             }
         }
+    }
+
+    public String getFilePath() {
+        return super.getFilePath(this.isACity()? 1 : 0);
+    }
+
+    public boolean isACity() {
+        return isCity;
     }
 }

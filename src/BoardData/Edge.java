@@ -1,7 +1,5 @@
 package BoardData;
 import GUI.PlaceableItem;
-import Player.Player;
-import java.awt.*;
 import Player.Road;
 
 public class Edge extends PlaceableItem {
@@ -14,13 +12,13 @@ public class Edge extends PlaceableItem {
     int tilt; //   0 = \, 1 = |, 2 = /
 
     public Edge(){
-        super(null,0,0,0,0);
+        super(null,0,0,25,25);
         port = null;
         road = null;
     }
 
     public Edge(int dir){
-        super(null,EDGE_CENTERS_X[dir], EDGE_CENTERS_Y[dir],0,0);
+        super(null,EDGE_CENTERS_X[dir], EDGE_CENTERS_Y[dir],25,25);
         port = null;
         road = null;
     }
@@ -36,7 +34,14 @@ public class Edge extends PlaceableItem {
 
     public void setRoad(Road road) {
         this.road = road;
+        setImageFile(road.getFilePath(0));
     }
+
+    /*
+    public void setRoad(Road road, int imagePick) {
+        this.road = road;
+        setImageFile(road.getFilePath(dir));
+    }   */
 
 
     public Port getPort(){

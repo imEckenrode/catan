@@ -66,6 +66,8 @@ public class PlaceableItem {
         this.imageFile = null;
         this.centerX = 0;
         this.centerY = 0;
+        height = 25;
+        width = 25;
     }
     public void DrawImage(JPanel panel){
             BufferedImage tempImage = null;
@@ -77,7 +79,6 @@ public class PlaceableItem {
             JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
             panel.add(label);
             label.setBounds(centerX,centerY,width,height);
-
     }
 
 }

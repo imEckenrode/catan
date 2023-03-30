@@ -3,6 +3,7 @@ package Universal;
 import BoardData.BoardManager;
 import Player.Recipe;
 import Player.Settlement;
+import Player.Road;
 import Player.Player;
 
 import java.util.ArrayList;
@@ -15,7 +16,14 @@ public class BuildingCard {
         switch(i){
             case 0:
                 //Buy a settlement
-                model.addToQueue(new Settlement(player));
+                model.addToPlacementQueue(new Settlement(player));
+                break;
+            case 1:
+                model.addToPlacementQueue(new Road(player));
+                break;
+            case 2:
+                //TODO: Find a way to upgrade from settlement to city
+                break;
         }
     }
 }

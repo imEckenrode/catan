@@ -7,12 +7,16 @@ import GUI.CatanGUI;
 import GUI.PlayerColorPicker;
 import GUI.ResourcePicker;
 import Player.Player;
+import Player.Item;
+import Player.Settlement;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -103,7 +107,34 @@ public class BoardController {
             PlacePNG(gui.getCurrentHandPanel(),r.getCardFilePath(),90,63,r.toIndex()*52,18);
         }
 
-        //gui.getHand1Panel().getHand
+        gui.getBoardPanel().addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                model.addToPlacementQueue(new Settlement(currentPlayer));
+                placeItemIfAvailable(gui.getBoardPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
+            }
+        });
+    }
+
+    private void placeItemIfAvailable(JPanel boardPanel, Item item, int clickX, int clickY) {
+        if(item == null){
+            return;
+        }
+        final int FULL_CENTER_X = 262;
+        final int FULL_CENTER_Y = 266;
+        //The center of the center hex is adjusted to be 0,0, so the box of 25 pixels south and right is box 0,0
+        int x = Math.floorDiv((clickX - FULL_CENTER_X),25);
+        int y = Math.floorDiv((clickY - FULL_CENTER_Y),25);
+        //System.out.println("Clicked at "+e.getX()+","+e.getY());
+        //System.out.println("Coordinate Box: "+x+","+y);
+
+
+        System.out.println("Gonna place a "+item.getFilePath(0));
+
+
+        model.hMap[0][0].getVertex(0).setSettlement((Settlement) item);
+        //Will include within setSettlement eventually
+        model.hMap[0][0].getVertex(0).DrawImage(view.form.getBoardPanel());
     }
 
     private void updateResourceDisplays() {
@@ -183,6 +214,8 @@ public class BoardController {
         }
         //Add the current player to the back of the list
         model.players.add(model.players.remove(0));
+        //Clear the queue of items to place (just in case)
+        model.clearPlacementQueue();
         //and take turns
         takeTurn(model.getCurrentPlayer(), model.getOtherPlayers());
         //TODO: Refactor and always use getCurrentPlayer and getOtherPlayers
