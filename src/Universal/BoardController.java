@@ -128,13 +128,34 @@ public class BoardController {
         //System.out.println("Clicked at "+e.getX()+","+e.getY());
         //System.out.println("Coordinate Box: "+x+","+y);
 
+        int yHex = (int) Math.signum(y)*(Math.abs(y)<2 ? 0 : Math.abs(y)<5 ? 1 : 2);
+        int xHex;
+        switch(Math.abs(yHex)){
+            case 0:     //For five hexagons in the row
+                xHex = (int) Math.signum(x)*(Math.abs(x)<2 ? 0 : Math.abs(x)<6 ? 1 : 2);
+                break;
+            case 1:     //For four hexagons in the row
+                xHex = (int) Math.signum(x)*(Math.abs(x) < 4? 0 : 1) + (Math.signum(x)< 0 ? -1 : 0);
+                break;
+            case 2:     //For three hexagons in the row
+                xHex = (int) Math.signum(x)*(Math.abs(x)<2 ? 0 : 1);
+                break;
+            default:
+                xHex = 0;
+        }
+
+        yHex += 2; //Now yHex is in our standard coordinate system
+        xHex += Math.floorDiv((yHex - 1), 2) + 2; //Now xHex is in our standard coordinate system
+        System.out.println(yHex+","+xHex);
+
+        //double degrees = model.hMap[yHex][xHex].getAngle()
+
 
         System.out.println("Gonna place a "+item.getFilePath(0));
 
-
-        model.hMap[0][0].getVertex(0).setSettlement((Settlement) item);
+        model.hMap[yHex][xHex].getVertex(0).setSettlement((Settlement) item);
         //Will include within setSettlement eventually
-        model.hMap[0][0].getVertex(0).DrawImage(view.form.getBoardPanel());
+        model.hMap[yHex][xHex].getVertex(0).DrawImage(view.form.getBoardPanel());
     }
 
     private void updateResourceDisplays() {
