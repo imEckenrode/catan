@@ -128,6 +128,8 @@
                     </constraints>
                     <properties>
                       <background color="-5798073"/>
+                      <minimumSize width="195" height="50"/>
+                      <preferredSize width="195" height="50"/>
                     </properties>
                     <border type="none"/>
                     <children>
@@ -148,9 +150,13 @@
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="1.0"/>
+                      <gridbag weightx="3.0" weighty="3.0"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <maximumSize width="82" height="50"/>
+                      <minimumSize width="82" height="50"/>
+                      <preferredSize width="82" height="50"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="9bb67" class="javax.swing.JButton" binding="four2oneTradeButton">
@@ -234,6 +240,8 @@
                 </constraints>
                 <properties>
                   <background color="-11432164"/>
+                  <minimumSize width="150" height="90"/>
+                  <preferredSize width="150" height="90"/>
                 </properties>
                 <border type="none"/>
                 <children/>

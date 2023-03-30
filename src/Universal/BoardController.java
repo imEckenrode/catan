@@ -40,7 +40,9 @@ public class BoardController {
 
         //placing Building Card in correct Spot
         //TODO resize this building card
-        PlacePNG(gui.getBuildingCardPanel(),"./CatanPNGs/BuildingCard.png",100,100,0,0);
+        BuildingCard buildingCard = new BuildingCard("./CatanPNGs/BuildingCard.png",0,0,200,200);
+        buildingCard.drawImage(gui.getBuildingCardPanel());
+        //PlacePNG(gui.getBuildingCardPanel(),"./CatanPNGs/BuildingCard.png",100,100,0,0);
 
         gui.getBoardPanel().setLayout(null);
 
