@@ -2,6 +2,7 @@ package BoardData;
 
 import Player.Player;
 import Player.Item;
+import Universal.BoardController;
 import Universal.Catan; //for the resource stuff (maybe extract this)
 import Universal.Dice;
 

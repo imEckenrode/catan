@@ -1,5 +1,6 @@
 package Universal;
 
+import BoardData.Board;
 import BoardData.BoardManager;
 import BoardData.Hexagon;
 import GUI.BoardView;
@@ -22,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static java.awt.Color.white;
 
 public class BoardController {
 
@@ -71,12 +74,11 @@ public class BoardController {
             j+=85;
         }
         // placing in the background last because null layout
+        Board board = new Board("./CatanPNGs/PlainBoard.png",262,-50,625,525);
+        board.drawImage(gui.getBoardPanel());
 
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
         gui.getItemsPanel().setLayout(null);
         gui.getItemsPanel().setOpaque(false);
-        PlacePNG(gui.getItemsPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
-        PlacePNG(gui.getItemsPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
 
         view.pack();
         view.setSize(840,715);
@@ -86,10 +88,28 @@ public class BoardController {
         gui.getEndTurnButton().addActionListener(e->{
             nextTurn();
         });
+        //Placing port Images
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",70,70,95,-10);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainPort.png",70,70,260,-15);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/RockPort.png",70,70,415,85);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",70,70,500,230);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/SheepPort.png",70,70,415,390);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",80,80,255,465);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",80,80,90,465);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/BrickPort.png",80,80,-5,315);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainPort.png",80,80,-5,135);
 
         gui.getFour2oneTradeButton().addActionListener(e ->{
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,4);
             currentPlayer.getHand().removeResource(haveResource,4);
+            Catan.Resource wantResource = promptResourcePicker();
+            currentPlayer.getHand().addResource(wantResource);
+            updateResourceDisplays();
+        });
+
+        gui.getTradeButton(Catan.Resource.DESERT).addActionListener(e -> {
+            Catan.Resource haveResource = promptResourcePicker(currentPlayer,3);
+            currentPlayer.getHand().removeResource(haveResource,3);
             Catan.Resource wantResource = promptResourcePicker();
             currentPlayer.getHand().addResource(wantResource);
             updateResourceDisplays();
@@ -193,11 +213,12 @@ public class BoardController {
         //Abstract these 4 into an actual function call
         ArrayList<Color> standardColors = new ArrayList<>(Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW));
         for(int i = 0; i<4; i++){
-            Color chosenColor = promptColorPicker();
-            if(chosenColor == null){
-                chosenColor = standardColors.get(i);
-            }
-            model.players.add(new Player(chosenColor));
+            //TODO Uncomment
+            Color chosenColor = Color.WHITE; //promptColorPicker();
+            //if(chosenColor == null){
+            //    chosenColor = standardColors.get(i);
+            //}
+            //model.players.add(new Player(chosenColor));
         }
 
         //Roll dice for who goes first (a visual would be nice. If so, remove model.dice.randomInt)
