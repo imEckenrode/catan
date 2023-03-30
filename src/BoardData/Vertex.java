@@ -7,7 +7,6 @@ import Player.Settlement;
 import javax.swing.*;
 
 public class Vertex extends PlaceableItem{
-    private static final int X_SHIFT = 15;   //This constant makes sure the vertices are displayed correctly
     private static final int[] VERTEX_CENTERS_X = new int[]{0,50,50,0,-50,-50};
     private static final int[] VERTEX_CENTERS_Y = new int[]{-50,-25,25,50,25,-25};
     Settlement settlement;

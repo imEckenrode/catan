@@ -70,7 +70,7 @@ public class BoardController {
             i-=750;
             j+=85;
         }
-        // placing in the background last because null layout
+        // placing in the background last because null layout prints the last label on bottom
 
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
         gui.getItemsPanel().setLayout(null);
@@ -117,6 +117,10 @@ public class BoardController {
         gui.getBoardPanel().addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
+                //TODO: REMOVE TESTS
+                gui.getItemsPanel().removeAll();
+                gui.getItemsPanel().revalidate();
+                gui.getItemsPanel().repaint();
                 //TODO: Move first line to BuildCard
                 model.addToPlacementQueue(new Settlement(currentPlayer));
                 placeItemIfAvailable(gui.getItemsPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
@@ -134,8 +138,6 @@ public class BoardController {
         // Integer division rounds the values towards 0; all four boxes in the center are 0,0 to create symmetry
         int x = (clickX - FULL_CENTER_X)/25;
         int y = (clickY - FULL_CENTER_Y)/25;
-        //System.out.println("Clicked at "+e.getX()+","+e.getY());
-        //System.out.println("Coordinate Box: "+x+","+y);
 
         int yHex = (int) Math.signum(y)*(Math.abs(y)<2 ? 0 : Math.abs(y)<5 ? 1 : 2);
         int xHex;
@@ -165,13 +167,12 @@ public class BoardController {
         int vcy = model.hMap[yHex][xHex].getVertex(0).getCenterY();
         int hcy = model.hMap[yHex][xHex].getCenterY();
 
+        //TODO: REMOVE TESTS
         // REMOVABLE TESTS
-        System.out.println("Gonna place a "+item.getFilePath(0));
-        System.out.println("For top vertex, "+clickX+" = "+vcx+", "+
-                            clickY+" = "+vcy);
-        System.out.println("For hex, "+clickX+" = "+hcx+", "+clickY+" = "+hcy);
-        //TODO: Fix vertex positioning system, since the CenterX is way off
-        System.out.println("Vertex is "+ (vcx-hcx) + "," + ((vcy-hcy)+50)+" off from correct");
+        //System.out.println("Gonna place a "+item.getFilePath(0));
+        //System.out.println("For top vertex, "+clickX+" = "+vcx+", "+
+        //                    clickY+" = "+vcy);
+        //System.out.println("For hex, "+clickX+" = "+hcx+", "+clickY+" = "+hcy);
 
         for(int i = 0; i<6;i++){
             model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel);
