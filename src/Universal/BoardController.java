@@ -122,9 +122,10 @@ public class BoardController {
         }
         final int FULL_CENTER_X = 262;
         final int FULL_CENTER_Y = 266;
-        //The center of the center hex is adjusted to be 0,0, so the box of 25 pixels south and right is box 0,0
-        int x = Math.floorDiv((clickX - FULL_CENTER_X),25);
-        int y = Math.floorDiv((clickY - FULL_CENTER_Y),25);
+        //The center of the center hex is adjusted to be 0,0
+        // Integer division rounds the values towards 0; all four boxes in the center are 0,0 to create symmetry
+        int x = (clickX - FULL_CENTER_X)/25;
+        int y = (clickY - FULL_CENTER_Y)/25;
         //System.out.println("Clicked at "+e.getX()+","+e.getY());
         //System.out.println("Coordinate Box: "+x+","+y);
 
@@ -148,13 +149,24 @@ public class BoardController {
         xHex += Math.floorDiv((yHex - 1), 2) + 2; //Now xHex is in our standard coordinate system
         System.out.println(yHex+","+xHex);
 
-        //double degrees = model.hMap[yHex][xHex].getAngle()
+        //double degrees = model.hMap[yHex][xHex].getAngle(clickX, clickY)
 
 
+        int vcx = model.hMap[yHex][xHex].getVertex(0).getCenterX();
+        int hcx = model.hMap[yHex][xHex].getCenterX();
+        int vcy = model.hMap[yHex][xHex].getVertex(0).getCenterY();
+        int hcy = model.hMap[yHex][xHex].getCenterY();
+
+        // REMOVABLE TESTS
         System.out.println("Gonna place a "+item.getFilePath(0));
+        System.out.println("For top vertex, "+clickX+" = "+vcx+", "+
+                            clickY+" = "+vcy);
+        System.out.println("For hex, "+clickX+" = "+hcx+", "+clickY+" = "+hcy);
+        //TODO: Fix vertex positioning system, since the CenterX is way off
+        System.out.println("Vertex is "+ (vcx-hcx) + "," + ((vcy-hcy)+50)+" off from correct");
 
         model.hMap[yHex][xHex].getVertex(0).setSettlement((Settlement) item);
-        //Will include within setSettlement eventually
+        //Will include this within setSettlement eventually
         model.hMap[yHex][xHex].getVertex(0).DrawImage(view.form.getBoardPanel());
     }
 
