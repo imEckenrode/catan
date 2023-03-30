@@ -155,25 +155,31 @@ public class Hexagon extends PlaceableItem {
 
     @Override
     public void setCenterX(int centerX) {
-        int changeInX = centerX - this.getCenterX();
         super.setCenterX(centerX);
+        int i = 0;
         for(Vertex v : vertices){
-            v.adjustCenterX(changeInX);
+            v.setCenterX(centerX, i);
+            i++;
         }
+        i=0;
         for(Edge e: edges){
-            e.adjustCenterX(changeInX);
+            e.setCenterX(centerX, i);
+            i++;
         }
     }
 
     @Override
     public void setCenterY(int centerY) {
-        int changeInY = centerY - this.getCenterY();
         super.setCenterY(centerY);
+        int i = 0;
         for(Vertex v : vertices){
-            v.adjustCenterY(changeInY);
+            v.setCenterY(centerY, i);
+            i++;
         }
+        i = 0;
         for(Edge e: edges){
-            e.adjustCenterY(changeInY);
+            e.setCenterY(centerY, i);
+            i++;
         }
     }
 

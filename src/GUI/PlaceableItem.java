@@ -69,6 +69,7 @@ public class PlaceableItem {
         height = 25;
         width = 25;
     }
+
     public void drawImage(JPanel panel){
             BufferedImage tempImage = null;
             try {

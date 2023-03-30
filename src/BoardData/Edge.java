@@ -43,6 +43,13 @@ public class Edge extends PlaceableItem {
         setImageFile(road.getFilePath(dir));
     }   */
 
+    public void setCenterX(int centerX, int dir) {
+        super.setCenterX(centerX + EDGE_CENTERS_X[dir]);
+    }
+
+    public void setCenterY(int centerY, int dir) {
+        super.setCenterY(centerY + EDGE_CENTERS_Y[dir]);
+    }
 
     public Port getPort(){
         return port;
@@ -53,12 +60,4 @@ public class Edge extends PlaceableItem {
     public void removePort(){
         port = null;
     }
-
-    public void adjustCenterX(int changeInX) {
-        super.setCenterX(getCenterX() + changeInX);
-    }
-    public void adjustCenterY(int changeInY) {
-        super.setCenterY(getCenterY() + changeInY);
-    }
-
 }

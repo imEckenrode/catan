@@ -56,8 +56,8 @@ public class BoardController {
                     i+=100;
                     continue;
                 }
-                hex.setCenterX((int)(i));
-                hex.setCenterY((int)(j));
+                hex.setCenterX(i);
+                hex.setCenterY(j);
                 JLabel test = new JLabel("O");
                 hex.drawImage(gui.getBoardPanel());
                 //hex.getVertex(1).drawImage(gui.getBoardPanel());
@@ -115,13 +115,14 @@ public class BoardController {
         gui.getBoardPanel().addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
+                //TODO: Move first line to BuildCard
                 model.addToPlacementQueue(new Settlement(currentPlayer));
-                placeItemIfAvailable(gui.getBoardPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
+                placeItemIfAvailable(gui.getItemsPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
             }
         });
     }
 
-    private void placeItemIfAvailable(JPanel boardPanel, Item item, int clickX, int clickY) {
+    private void placeItemIfAvailable(JPanel itemsPanel, Item item, int clickX, int clickY) {
         if(item == null){
             return;
         }
@@ -170,9 +171,11 @@ public class BoardController {
         //TODO: Fix vertex positioning system, since the CenterX is way off
         System.out.println("Vertex is "+ (vcx-hcx) + "," + ((vcy-hcy)+50)+" off from correct");
 
-        model.hMap[yHex][xHex].getVertex(0).setSettlement((Settlement) item);
+        for(int i = 0; i<6;i++){
+            model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel);
+        }
         //Will include this within setSettlement eventually
-        model.hMap[yHex][xHex].getVertex(0).drawImage(view.form.getBoardPanel());
+        //model.hMap[yHex][xHex].getVertex(0).drawImage(itemsPanel);
     }
 
     private void updateResourceDisplays() {

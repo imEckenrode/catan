@@ -2,9 +2,9 @@ package BoardData;
 
 import GUI.PlaceableItem;
 
-import Player.Player;
-import Universal.Catan;
 import Player.Settlement;
+
+import javax.swing.*;
 
 public class Vertex extends PlaceableItem{
     private static final int X_SHIFT = 15;   //This constant makes sure the vertices are displayed correctly
@@ -24,19 +24,19 @@ public class Vertex extends PlaceableItem{
         settlement = null;
     }
 
-    public void adjustCenterX(int changeInX) {
-        super.setCenterX(getCenterX()+changeInX);
+    public void setCenterX(int centerX, int dir) {
+        super.setCenterX(centerX + VERTEX_CENTERS_X[dir]);
     }
 
-    public void adjustCenterY(int changeInY) {
-        super.setCenterY(getCenterY()+changeInY);
+    public void setCenterY(int centerY, int dir) {
+        super.setCenterY(centerY + VERTEX_CENTERS_Y[dir]);
     }
 
     public Settlement getSettlement() {
         return settlement;
     }
 
-    public void setSettlement(Settlement settlement) {
+    public void setSettlement(Settlement settlement, JPanel itemsPanel) {
         //There is no case where a settlement will be removed from the board.
         //This makes sure we do not honor the attempt
         if(settlement == null){
@@ -45,5 +45,6 @@ public class Vertex extends PlaceableItem{
         }
         this.settlement = settlement;
         setImageFile(settlement.getFilePath());
+        drawImage(itemsPanel);
     }
 }
