@@ -3,6 +3,7 @@ package Universal;
 import BoardData.Board;
 import BoardData.BoardManager;
 import BoardData.Hexagon;
+import BoardData.Vertex;
 import GUI.BoardView;
 import GUI.CatanGUI;
 import GUI.PlayerColorPicker;
@@ -28,6 +29,8 @@ import static java.awt.Color.white;
 
 public class BoardController {
 
+    public static final int FULL_CENTER_X = 262;
+    public static final int FULL_CENTER_Y = 266;
     private BoardManager model;
     private BoardView view;
     private Player currentPlayer;
@@ -155,8 +158,6 @@ public class BoardController {
         if(item == null){
             return;
         }
-        final int FULL_CENTER_X = 262;
-        final int FULL_CENTER_Y = 266;
         //The center of the center hex is adjusted to be 0,0
         // Integer division rounds the values towards 0; all four boxes in the center are 0,0 to create symmetry
         int x = (clickX - FULL_CENTER_X)/25;
@@ -185,10 +186,10 @@ public class BoardController {
         //double degrees = model.hMap[yHex][xHex].getAngle(clickX, clickY)
 
 
-        int vcx = model.hMap[yHex][xHex].getVertex(0).getCenterX();
-        int hcx = model.hMap[yHex][xHex].getCenterX();
-        int vcy = model.hMap[yHex][xHex].getVertex(0).getCenterY();
-        int hcy = model.hMap[yHex][xHex].getCenterY();
+        //int vcx = model.hMap[yHex][xHex].getVertex(0).getCenterX();
+        //int hcx = model.hMap[yHex][xHex].getCenterX();
+        //int vcy = model.hMap[yHex][xHex].getVertex(0).getCenterY();
+        //int hcy = model.hMap[yHex][xHex].getCenterY();
 
         //TODO: REMOVE TESTS
         // REMOVABLE TESTS
@@ -198,7 +199,14 @@ public class BoardController {
         //System.out.println("For hex, "+clickX+" = "+hcx+", "+clickY+" = "+hcy);
 
         for(int i = 0; i<6;i++){
-            model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel);
+            Vertex v = model.hMap[yHex][xHex].getVertex(i);
+            System.out.print(v+", ");
+            if(v.getSettlement() == null){
+                model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel, i);
+            }else{
+                model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel, i);
+                System.out.print(v.getSettlement());
+            }
         }
         //Will include this within setSettlement eventually
         //model.hMap[yHex][xHex].getVertex(0).drawImage(itemsPanel);
