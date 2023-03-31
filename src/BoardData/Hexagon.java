@@ -62,7 +62,7 @@ public class Hexagon extends PlaceableItem {
             hexes[cDir].setEdge((cDir+3)%6, edges[cDir]);
         }
 
-        for(int cDir = (dir+1)%6; cDir != (dir+4)%6; cDir=(cDir+1)%6){
+        for(int cDir = (dir+1)%6; cDir != (dir+5)%6; cDir=(cDir+1)%6){
             hexes[cDir].setVertex((cDir+4)%6, vertices[cDir]);
             hexes[(cDir+5)%6].setVertex((cDir+2)%6, vertices[cDir]);
         }
@@ -75,7 +75,7 @@ public class Hexagon extends PlaceableItem {
                 //TODO: Make sure setAdjHex works correctly
         hexes[(dir+4)%6].setAdjHex((dir+3)%6, hexes[(dir + 3)%6].getAdjHex((dir+2)%6));
         hexes[(dir+4)%6].setEdge((dir+2)%6, hexes[(dir + 3)%6].getEdge((dir+5)%6));
-        hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].getVertex((dir+2)%6));
+        hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].getVertex((dir+5)%6));
             //Add one to the right-hex vertex index to align the correct vertex
 
     }   //Orientation is what side of the hexagon is the middle

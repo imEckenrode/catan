@@ -203,11 +203,11 @@ public class BoardController {
 
         for(int i = 0; i<6;i++){
             Vertex v = model.hMap[yHex][xHex].getVertex(i);
-            System.out.print(v+", ");
+            //System.out.print(v+", ");
             if(v.getSettlement() == null){
-                model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel, i);
+                v.setSettlement((Settlement) item, itemsPanel, i);
             }else{
-                model.hMap[yHex][xHex].getVertex(i).setSettlement((Settlement) item, itemsPanel, i);
+                v.setSettlement((Settlement) item, itemsPanel);
                 System.out.print(v.getSettlement());
             }
         }

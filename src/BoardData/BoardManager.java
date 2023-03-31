@@ -55,8 +55,8 @@ public class BoardManager {
         }
 
         //loops through the middle circle of hexes
-        ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(2,1,3,2,3,3,2,3,1,2,1,1));
-        //ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(1,1,1,2,2,3,3,3,3,2,2,1));
+        //ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(2,1,3,2,3,3,2,3,1,2,1,1));
+        ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(3,2,2,1,1,1,1,2,2,3,3,3));
         for (int temp1 = 0; temp1<12; temp1+=2) {
             int j = indices.get(temp1);
             int i = indices.get(temp1 + 1);
