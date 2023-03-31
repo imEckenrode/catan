@@ -2,7 +2,12 @@ package GUI;
 
 import Universal.Catan;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CatanGUI {
     private JPanel OtherHandsPanel;
@@ -130,6 +135,18 @@ public class CatanGUI {
     public JPanel getItemsPanel() {
         return ItemsPanel;
     }
+    public JLabel portImage(String file){
+            BufferedImage tempImage = null;
+            try {
+                tempImage = ImageIO.read(new File(file));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+            return label;
+    }
+
 }
 
 

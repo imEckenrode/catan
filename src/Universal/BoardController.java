@@ -48,7 +48,6 @@ public class BoardController {
         //TODO resize this building card
         BuildingCard buildingCard = new BuildingCard("./CatanPNGs/BuildingCard.png",0,0,200,200);
         buildingCard.drawImage(gui.getBuildingCardPanel());
-        //PlacePNG(gui.getBuildingCardPanel(),"./CatanPNGs/BuildingCard.png",100,100,0,0);
 
         gui.getBoardPanel().setLayout(null);
 
@@ -83,8 +82,6 @@ public class BoardController {
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
         gui.getItemsPanel().setLayout(null);
         gui.getItemsPanel().setOpaque(false);
-        PlacePNG(gui.getItemsPanel(), "./CatanPNGs/Settlement.png",30,30,95,105);
-        PlacePNG(gui.getItemsPanel(), "./CatanPNGs/Settlement.png",30,30,300,225);
 
         view.pack();
         view.setSize(840,715);
@@ -105,6 +102,7 @@ public class BoardController {
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/BrickPort.png",80,80,-5,315);
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainPort.png",80,80,-5,135);
 
+        //Port Trading Buttons
         gui.getFour2oneTradeButton().addActionListener(e ->{
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,4);
             currentPlayer.getHand().removeResource(haveResource,4);
@@ -112,7 +110,6 @@ public class BoardController {
             currentPlayer.getHand().addResource(wantResource);
             updateResourceDisplays();
         });
-
         gui.getTradeButton(Catan.Resource.DESERT).addActionListener(e -> {
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,3);
             currentPlayer.getHand().removeResource(haveResource,3);
@@ -120,6 +117,12 @@ public class BoardController {
             currentPlayer.getHand().addResource(wantResource);
             updateResourceDisplays();
         });
+
+        gui.getTradeButton(Catan.Resource.WOOD).add(gui.portImage("./CatanPNGs/WoodPort.png"));
+        gui.getTradeButton(Catan.Resource.GRAIN).add(gui.portImage("./CatanPNGs/GrainPort.png"));
+        gui.getTradeButton(Catan.Resource.WOOL).add(gui.portImage("./CatanPNGs/SheepPort.png"));
+        gui.getTradeButton(Catan.Resource.CLAY).add(gui.portImage("./CatanPNGs/BrickPort.png"));
+        gui.getTradeButton(Catan.Resource.ORE).add(gui.portImage("./CatanPNGs/RockPort.png"));
 
 
         //TODO: Code in buttons dynamically to allow for any number of players
@@ -230,7 +233,7 @@ public class BoardController {
             //if(chosenColor == null){
             //    chosenColor = standardColors.get(i);
             //}
-            //model.players.add(new Player(chosenColor));
+            model.players.add(new Player(chosenColor));
         }
 
         //Roll dice for who goes first (a visual would be nice. If so, remove model.dice.randomInt)
