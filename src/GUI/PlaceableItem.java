@@ -134,4 +134,7 @@ public class PlaceableItem {
         label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
     }
 
+    public double getAngle(int clickX, int clickY) {
+        return Math.toDegrees(Math.atan2(clickY-centerY,clickX-centerX));
+    }
 }

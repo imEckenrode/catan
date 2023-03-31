@@ -1,6 +1,9 @@
 package BoardData;
 import GUI.PlaceableItem;
 import Player.Road;
+import Player.Settlement;
+
+import javax.swing.*;
 
 public class Edge extends PlaceableItem {
     private static final int X_SHIFT = 5;   //This constant makes sure the edges are displayed correctly
@@ -51,6 +54,18 @@ public class Edge extends PlaceableItem {
         super.setCenterY(centerY + EDGE_CENTERS_Y[dir]);
     }
 
+
+    public void setRoad(Road road, JPanel itemsPanel, int dir) {
+        //There is no case where a settlement will be removed from the board.
+        //This makes sure we do not honor the attempt
+        if(road == null){
+            System.out.println("Bad settlement added");
+            return;
+        }
+        this.road = road;
+        setImageFile(road.getFilePath(dir%3));
+        drawImage(itemsPanel, dir);
+    }
     public Port getPort(){
         return port;
     }

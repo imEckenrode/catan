@@ -1,9 +1,6 @@
 package Universal;
 
-import BoardData.Board;
-import BoardData.BoardManager;
-import BoardData.Hexagon;
-import BoardData.Vertex;
+import BoardData.*;
 import GUI.BoardView;
 import GUI.CatanGUI;
 import GUI.PlayerColorPicker;
@@ -11,6 +8,7 @@ import GUI.ResourcePicker;
 import Player.Player;
 import Player.Item;
 import Player.Settlement;
+import Player.Road;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -186,29 +184,17 @@ public class BoardController {
         xHex += Math.floorDiv((yHex - 1), 2) + 2; //Now xHex is in our standard coordinate system
         System.out.println(yHex+","+xHex);
 
-        //double degrees = model.hMap[yHex][xHex].getAngle(clickX, clickY)
-
-
-        //int vcx = model.hMap[yHex][xHex].getVertex(0).getCenterX();
-        //int hcx = model.hMap[yHex][xHex].getCenterX();
-        //int vcy = model.hMap[yHex][xHex].getVertex(0).getCenterY();
-        //int hcy = model.hMap[yHex][xHex].getCenterY();
-
-        //TODO: REMOVE TESTS
-        // REMOVABLE TESTS
-        //System.out.println("Gonna place a "+item.getFilePath(0));
-        //System.out.println("For top vertex, "+clickX+" = "+vcx+", "+
-        //                    clickY+" = "+vcy);
-        //System.out.println("For hex, "+clickX+" = "+hcx+", "+clickY+" = "+hcy);
+        double degrees = model.hMap[yHex][xHex].getAngle(clickX, clickY);
+        System.out.println(degrees);
 
         for(int i = 0; i<6;i++){
-            Vertex v = model.hMap[yHex][xHex].getVertex(i);
+            Edge e = model.hMap[yHex][xHex].getEdge(i);
             //System.out.print(v+", ");
-            if(v.getSettlement() == null){
-                v.setSettlement((Settlement) item, itemsPanel, i);
+            if(e.getRoad() == null){
+                e.setRoad((Road) item, itemsPanel, i);
             }else{
-                v.setSettlement((Settlement) item, itemsPanel);
-                System.out.print(v.getSettlement());
+                e.setRoad((Road) item, itemsPanel, i);
+                System.out.print(e.getRoad());
             }
         }
         //Will include this within setSettlement eventually
