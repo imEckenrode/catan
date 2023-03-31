@@ -15,13 +15,13 @@ public class Edge extends PlaceableItem {
     int tilt; //   0 = \, 1 = |, 2 = /
 
     public Edge(){
-        super(null,0,0,25,25);
+        super(null,0,0,40,40);
         port = null;
         road = null;
     }
 
     public Edge(int dir){
-        super(null,EDGE_CENTERS_X[dir], EDGE_CENTERS_Y[dir],25,25);
+        super(null,EDGE_CENTERS_X[dir], EDGE_CENTERS_Y[dir],40,40);
         port = null;
         road = null;
     }
