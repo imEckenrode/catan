@@ -50,7 +50,7 @@ public class Hexagon extends PlaceableItem {
     }
 
     public void radius1Attachment(int dir, Hexagon[] hexes){
-        if(dir>6 || dir<1){
+        if(dir>5 || dir<1){
             dir = 0;    //Keep orientation within the range, don't even accept outside
         }
 
@@ -61,6 +61,7 @@ public class Hexagon extends PlaceableItem {
         for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
             hexes[cDir].setEdge((cDir+3)%6, edges[cDir]);
         }
+
         for(int cDir = (dir+1)%6; cDir != (dir+4)%6; cDir=(cDir+1)%6){
             hexes[cDir].setVertex((cDir+4)%6, vertices[cDir]);
             hexes[(cDir+5)%6].setVertex((cDir+2)%6, vertices[cDir]);

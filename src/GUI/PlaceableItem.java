@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class PlaceableItem {
     String imageFile;
@@ -77,11 +78,60 @@ public class PlaceableItem {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
             JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
             panel.add(label);
             label.setBounds(centerX,centerY,width,height);
             label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
+    }
 
+    public void drawImage(JPanel panel, Color playerColor){
+        BufferedImage tempImage = null;
+        try {
+            tempImage = ImageIO.read(new File(imageFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int y = 0; y < tempImage.getHeight(); y++){
+            for(int x = 0; x<tempImage.getWidth();x++){
+                int pixel = tempImage.getRGB(x,y);
+                Color color = new Color(pixel, true);
+                if(color.getRed()<5){
+                    tempImage.setRGB(x,y,playerColor.getRGB());
+                }
+            }
+        }
+
+        JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
+        panel.add(label);
+        label.setBounds(centerX,centerY,width,height);
+        label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
+    }
+
+    public void drawImage(JPanel panel, int dir){
+        BufferedImage tempImage = null;
+        try {
+            tempImage = ImageIO.read(new File(imageFile));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Color[] change = {Color.red,Color.orange,Color.yellow,Color.green,Color.blue,Color.pink};
+        for(int y = 0; y < tempImage.getHeight(); y++){
+            for(int x = 0; x<tempImage.getWidth();x++){
+                int pixel = tempImage.getRGB(x,y);
+                Color color = new Color(pixel, true);
+                if(color.getRed()<5){
+                    tempImage.setRGB(x,y,change[dir].getRGB());
+                }
+            }
+        }
+
+        JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
+        panel.add(label);
+        label.setBounds(centerX,centerY,width,height);
+        label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
     }
 
 }

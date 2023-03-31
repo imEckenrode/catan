@@ -46,11 +46,16 @@ public class BoardManager {
             for(int i=max(j-2,0); i<=min(j+2,4); i++){
                 resource = resources.remove(rng.nextInt(resources.size()));
                 hMap[j][i] = new Hexagon(resource);
+
+                //TODO: REMOVE
+                hMap[j][i].setCenterX(i);
+                hMap[j][i].setCenterY(j);
             }
         }
 
         //loops through the middle circle of hexes
         ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(2,1,3,2,3,3,2,3,1,2,1,1));
+        //ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(1,1,1,2,2,3,3,3,3,2,2,1));
         for (int temp1 = 0; temp1<12; temp1+=2) {
             int j = indices.get(temp1);
             int i = indices.get(temp1 + 1);
@@ -59,8 +64,8 @@ public class BoardManager {
             hMap[j][i].radius1Attachment(temp1/2, new Hexagon[]{hMap[j - 1][i], hMap[j][i + 1],
                     hMap[j + 1][i + 1], hMap[j + 1][i],
                     hMap[j][i - 1], hMap[j - 1][i - 1]});
-
         }
+
 
         //Map all the individual ports manually
         hMap[0][0].edges[5].setPort(new Port(DESERT));
