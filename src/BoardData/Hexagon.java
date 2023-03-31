@@ -3,6 +3,9 @@ package BoardData;
 
 import GUI.PlaceableItem;
 import Universal.Catan;
+import Universal.Robber;
+
+import javax.swing.*;
 
 //import static BoardData.Dir6.rot60;
 
@@ -182,6 +185,30 @@ public class Hexagon extends PlaceableItem {
             e.setCenterY(centerY, i);
             i++;
         }
+    }
+
+    public void setNumberToken(JPanel itemsPanel) {
+        //There is no case where a settlement will be removed from the board.
+        //This makes sure we do not honor the attempt
+        hasRobber = true;   //TODO
+        //setImageFile(getFilePath(tokenNum));
+        //drawImage(itemsPanel, dir);
+    }
+
+    public void setRobber(Robber robber, JPanel itemsPanel, int dir) {
+        //There is no case where a settlement will be removed from the board.
+        //This makes sure we do not honor the attempt
+        hasRobber = true;
+        setImageFile(robber.getFilePath(dir%3));
+        drawImage(itemsPanel, dir);
+    }
+
+    public void removeRobber(Robber robber, JPanel itemsPanel, int dir) {
+        //There is no case where a settlement will be removed from the board.
+        //This makes sure we do not honor the attempt
+        hasRobber = true;
+        setImageFile(robber.getFilePath(dir%3));
+        drawImage(itemsPanel, dir);
     }
 
 }

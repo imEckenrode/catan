@@ -262,12 +262,18 @@ public class BoardController {
         System.out.print(number);
         //update view and say what number is rolled
         if(number == 7){
-            //robberEvent();   //TODO: IMPLEMENT
+            robberEvent();   //TODO: IMPLEMENT
         }else{
             for(Hexagon hex: model.numberToTile.get(number)){
                 hex.distributeResources();
             }
         }
+    }
+
+    private void robberEvent() {
+        //view.getForm().getItemsPanel().remove(model.robber);  //TODO: draw number tokens here to get
+        //view.getForm().getItemsPanel().repaint();
+        model.addToPlacementQueue(model.robber);
     }
 
     private void nextTurn(){

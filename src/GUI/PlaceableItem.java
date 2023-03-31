@@ -97,7 +97,7 @@ public class PlaceableItem {
             for(int x = 0; x<tempImage.getWidth();x++){
                 int pixel = tempImage.getRGB(x,y);
                 Color color = new Color(pixel, true);
-                if(color.getRed()<5){
+                if((pixel>>24) != 0x00){    //Check for transparency
                     tempImage.setRGB(x,y,playerColor.getRGB());
                 }
             }
@@ -122,8 +122,7 @@ public class PlaceableItem {
             for(int x = 0; x<tempImage.getWidth();x++){
                 int pixel = tempImage.getRGB(x,y);
                 Color color = new Color(pixel, true);
-                if((pixel>>24) != 0x00){
-                //if(color.getRed()<5){
+                if((pixel>>24) != 0x00){    //Check for transparency
                     tempImage.setRGB(x,y,change[dir].getRGB());
                 }
             }

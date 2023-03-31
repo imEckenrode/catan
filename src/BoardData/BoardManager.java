@@ -5,6 +5,7 @@ import Player.Item;
 import Universal.BoardController;
 import Universal.Catan; //for the resource stuff (maybe extract this)
 import Universal.Dice;
+import Universal.Robber;
 
 
 import java.util.*;
@@ -19,7 +20,7 @@ public class BoardManager {
     public ArrayList<ArrayList<Hexagon>> numberToTile;
     public Dice dice;
     public  Hexagon[][] hMap;
-    //TODO: Retrieve hex from here on click?
+    public Robber robber;
 
     public Queue<Item> placementOnClickQueue;
 
