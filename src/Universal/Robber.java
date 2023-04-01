@@ -9,6 +9,4 @@ public class Robber extends Item {
     public Robber() {
         super(null);
     }
-
-
 }

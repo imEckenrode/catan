@@ -194,20 +194,13 @@ public class BoardController {
         //However, this assignment is due very soon, so MVP it is
         //  Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex
 
-
         //TokenNum should not be included here
         if (item instanceof Robber) {
             foundHex.setRobber((Robber) item, itemsPanel);
+            return;
         }
 
         double degrees = foundHex.getAngle(clickX, clickY);
-
-        /*
-        JLabel test = new JLabel("'");
-        view.getForm().getItemsPanel().add(test);
-        test.setBounds(foundHex.getCenterX(),foundHex.getCenterY(),10,10);
-        */
-
         if(item instanceof Settlement){
             foundHex.getVertexFromDegrees(degrees).setSettlement((Settlement) item, itemsPanel);
         }else if(item instanceof Road){

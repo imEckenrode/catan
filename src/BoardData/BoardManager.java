@@ -34,6 +34,7 @@ public class BoardManager {
 
         dice = new Dice();
         placementOnClickQueue = new ArrayDeque<Item>();
+        robber = new Robber();
         buildCatanBoard();
     }
 

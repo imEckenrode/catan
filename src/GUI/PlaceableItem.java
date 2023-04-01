@@ -93,11 +93,13 @@ public class PlaceableItem {
             throw new RuntimeException(e);
         }
 
-        for(int y = 0; y < tempImage.getHeight(); y++){
-            for(int x = 0; x<tempImage.getWidth();x++){
-                int pixel = tempImage.getRGB(x,y);
-                if((pixel>>24) != 0x00){    //Check for transparency
-                    tempImage.setRGB(x,y,playerColor.getRGB());
+        if(playerColor != null){
+            for(int y = 0; y < tempImage.getHeight(); y++){
+                for(int x = 0; x<tempImage.getWidth();x++){
+                    int pixel = tempImage.getRGB(x,y);
+                    if((pixel>>24) != 0x00){    //Check for transparency
+                        tempImage.setRGB(x,y,playerColor.getRGB());
+                    }
                 }
             }
         }
