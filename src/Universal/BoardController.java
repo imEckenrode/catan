@@ -163,7 +163,7 @@ public class BoardController {
                 gui.getItemsPanel().revalidate();
                 gui.getItemsPanel().repaint();      */
                 //TODO: Move first line to BuildCard
-                model.addToPlacementQueue(robber);
+                model.addToPlacementQueue(new Road(currentPlayer));
 
                 if(attemptToPlaceItem(gui.getItemsPanel(), model.peekPlacementQueue(), e.getX(), e.getY())){
                     model.removeFirstFromQueue();

@@ -217,10 +217,38 @@ public class Hexagon extends PlaceableItem {
     public Edge getEdgeFromDegrees(double degrees) {
         //TODO: Customize this to have the further-out roads
         for(int i = 0; i<6; i++){
-            if(degrees<30*(2*i)){
+            if(degrees<60*(i+1)){
+                if(degrees - 60*i > 55){
+                    System.out.println(degrees);
+                    Edge e = getOutsideEdge(i+1);
+                    return e != null ? e : getEdge(i);
+                }else if(degrees - 60*i < 5) {
+                    Edge e = getOutsideEdge(i);
+                    return e != null ? e : getEdge(i);
+                }
                 return getEdge(i);
             }
         }
         return getEdge(0);
+    }
+
+    public Edge getOutsideEdge(int vDir){
+        vDir = (vDir+6)%6;
+        if(adjacentHexes[vDir]!=null){
+            return adjacentHexes[vDir].getEdge((vDir+4)%6);
+        }else if(adjacentHexes[(vDir+5)%6]!=null){
+            return adjacentHexes[(vDir+5)%6].getEdge((vDir+1)%6);
+        }
+        return null;
+    }
+
+    public Vertex getOutsideVertex(int vDir){
+        vDir = (vDir+6)%6;
+        if(adjacentHexes[vDir]!=null){
+            return adjacentHexes[vDir].getVertex((vDir+5)%6);
+        }else if(adjacentHexes[(vDir+5)%6]!=null){
+            return adjacentHexes[(vDir+5)%6].getVertex((vDir+1)%6);
+        }
+        return null;
     }
 }
