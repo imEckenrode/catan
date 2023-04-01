@@ -259,6 +259,12 @@ public class BoardController {
     }
 
     private void robberEvent() {
+        for(Player p: otherPlayers){
+            if(p.getHand().totalResourceCount()>7){
+                p.getHand().randomLoseHalf(model.dice);
+            }
+        }
+        updateResourceDisplays();
         model.addToPlacementQueue(robber);
         //TODO: perhaps a popup?
     }
@@ -318,6 +324,8 @@ public class BoardController {
                 return false;
             }
             robber.moveTo(foundHex);
+            //TODO: Implement robber plunder with a selected settlement on the hex
+            //robber.selectPlunder(foundHex, currentPlayer);
             return true;
         }
 
