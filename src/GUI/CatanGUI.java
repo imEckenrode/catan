@@ -35,6 +35,10 @@ public class CatanGUI {
     private JButton tradeButton3;
     private JButton tradeButton4;
     private JPanel ItemsPanel;
+    private JPanel BuildButtons;
+    private JButton BuildRoadButton;
+    private JButton BuildSettlentButton;
+    private JButton BuildCityButton;
     private JLabel TempLabel;
     private JPanel gridPanel;
 
@@ -135,7 +139,20 @@ public class CatanGUI {
     public JPanel getItemsPanel() {
         return ItemsPanel;
     }
-    public JLabel portImage(String file){
+
+    public JPanel getBuildButtons() {
+        return BuildButtons;
+    }
+    public JButton getBuildRoadButton() {
+        return BuildRoadButton;
+    }
+    public JButton getBuildSettlentButton() {
+        return BuildSettlentButton;
+    }
+    public JButton getBuildCityButton() {
+        return BuildCityButton;
+    }
+    public JLabel ButtonImage(String file,int width,int height){
             BufferedImage tempImage = null;
             try {
                 tempImage = ImageIO.read(new File(file));
@@ -143,7 +160,7 @@ public class CatanGUI {
                 throw new RuntimeException(e);
             }
 
-            JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+            JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
             return label;
     }
 

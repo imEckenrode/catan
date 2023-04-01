@@ -39,10 +39,23 @@ public class BoardController {
 
         CatanGUI gui = view.getForm();
 
-        //placing Building Card in correct Spot
-        //TODO resize this building card
+        //placing Building Card, and buttons
         BuildingCard buildingCard = new BuildingCard("./CatanPNGs/BuildingCard.png",0,0,200,200);
         buildingCard.drawImage(gui.getBuildingCardPanel());
+        gui.getBuildButtons().setOpaque(false);
+        gui.getBuildRoadButton().add(gui.ButtonImage("./CatanPNGs/BuildRoad.png",160,50));
+        gui.getBuildSettlentButton().add(gui.ButtonImage("./CatanPNGs/BuildSettlement.png",160,50));
+        gui.getBuildCityButton().add(gui.ButtonImage("./CatanPNGs/BuildCity.png",160,50));
+
+        gui.getBuildRoadButton().addActionListener(e -> {
+            //TODO
+        });
+        gui.getBuildSettlentButton().addActionListener(e -> {
+            //TODO
+        });
+        gui.getBuildCityButton().addActionListener(e -> {
+            //TODO
+        });
 
         gui.getBoardPanel().setLayout(null);
 
@@ -84,6 +97,7 @@ public class BoardController {
         PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road0.png",40,40,160,35);
         PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road.png",40,40,190,80);
         PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road2.png",40,40,220,35);
+        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/City.png",40,40,100,100);
 
         view.pack();
         view.setSize(840,715);
@@ -129,11 +143,11 @@ public class BoardController {
             bankTrade(Catan.Resource.CLAY,2);
         });
 
-        gui.getTradeButton(Catan.Resource.WOOD).add(gui.portImage("./CatanPNGs/WoodPort.png"));
-        gui.getTradeButton(Catan.Resource.GRAIN).add(gui.portImage("./CatanPNGs/GrainPort.png"));
-        gui.getTradeButton(Catan.Resource.WOOL).add(gui.portImage("./CatanPNGs/SheepPort.png"));
-        gui.getTradeButton(Catan.Resource.CLAY).add(gui.portImage("./CatanPNGs/BrickPort.png"));
-        gui.getTradeButton(Catan.Resource.ORE).add(gui.portImage("./CatanPNGs/RockPort.png"));
+        gui.getTradeButton(Catan.Resource.WOOD).add(gui.ButtonImage("./CatanPNGs/WoodPort.png",40,40));
+        gui.getTradeButton(Catan.Resource.GRAIN).add(gui.ButtonImage("./CatanPNGs/GrainPort.png",40,40));
+        gui.getTradeButton(Catan.Resource.WOOL).add(gui.ButtonImage("./CatanPNGs/SheepPort.png",40,40));
+        gui.getTradeButton(Catan.Resource.CLAY).add(gui.ButtonImage("./CatanPNGs/BrickPort.png",40,40));
+        gui.getTradeButton(Catan.Resource.ORE).add(gui.ButtonImage("./CatanPNGs/RockPort.png",40,40));
 
 
         //TODO: Code in buttons dynamically to allow for any number of players
