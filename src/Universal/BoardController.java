@@ -33,6 +33,7 @@ public class BoardController {
     private BoardView view;
     private Player currentPlayer;
     private ArrayList<Player> otherPlayers;
+    Robber robber;
     int vpToWin;
 
     public BoardController(BoardManager model, BoardView view, int vpToWin){
@@ -80,6 +81,7 @@ public class BoardController {
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
         gui.getItemsPanel().setLayout(null);
         gui.getItemsPanel().setOpaque(false);
+        robber = new Robber(gui.getItemsPanel());
 
         view.pack();
         view.setSize(840,715);
@@ -145,11 +147,12 @@ public class BoardController {
             @Override
             public void mouseClicked(MouseEvent e){
                 //TODO: REMOVE TESTS
+                /*
                 gui.getItemsPanel().removeAll();
                 gui.getItemsPanel().revalidate();
-                gui.getItemsPanel().repaint();
+                gui.getItemsPanel().repaint();      */
                 //TODO: Move first line to BuildCard
-                model.addToPlacementQueue(new Settlement(currentPlayer));
+                model.addToPlacementQueue(robber);
 
                 placeItemIfAvailable(gui.getItemsPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
             }
@@ -190,13 +193,13 @@ public class BoardController {
         //At this point, we have the hexagon coordinates. If we only wanted the hexagon, execute the hexagon method
         //Otherwise, find further
 
-        //Type sniffing and more is a code smell and should be fixed in the future.
-        //However, this assignment is due very soon, so MVP it is
-        //  Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex
+        /*Type sniffing and more is a code smell and should be fixed in the future.
+        However, this assignment is due very soon, so MVP it is
+          Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex */
 
         //TokenNum should not be included here
         if (item instanceof Robber) {
-            foundHex.setRobber((Robber) item, itemsPanel);
+            robber.moveTo(foundHex);
             return;
         }
 
@@ -294,14 +297,13 @@ public class BoardController {
     }
 
     private void robberEvent() {
-        //view.getForm().getItemsPanel().remove(model.robber);  //TODO: draw number tokens here to get
-        //view.getForm().getItemsPanel().repaint();
-        model.addToPlacementQueue(model.robber);
+        model.addToPlacementQueue(robber);
+        //TODO: perhaps a popup?
     }
 
     private void nextTurn(){
         if (whoWon(vpToWin) != null) {
-            //TODO: DEFINE WIN SCREEN
+            //TODO: DEFINE WIN SCREEN?
             view.getForm().getEndTurnButton().setText("You have won Catan!");
             view.getForm().getEndTurnButton().setEnabled(false);
             System.out.println("You are the settler of Catan!");

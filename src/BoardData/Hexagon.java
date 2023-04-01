@@ -57,7 +57,10 @@ public class Hexagon extends PlaceableItem {
             dir = 0;    //Keep orientation within the range, don't even accept outside
         }
 
-        adjacentHexes = hexes.clone();
+        //adjacentHexes = hexes.clone();
+        for(int i = 0; i<6; i++) {
+            setAdjHexAndBack(i, hexes[i]);
+        }
 
         //Connect (almost) all edges directly attached to hexagon
                 // Have to be careful here, add 5 to the orientation to avoid negatives
@@ -70,13 +73,14 @@ public class Hexagon extends PlaceableItem {
             hexes[(cDir+5)%6].setVertex((cDir+2)%6, vertices[cDir]);
         }
 
+        //TODO: I have to actually assign the adjacent hexes instead of passing around nulls
+
         //Now connect the needed components for the 2nd ring of hexagons, with dir + 3 providing the objects
-        hexes[(dir+2)%6].setAdjHex((dir+4)%6, hexes[(dir + 3)%6].getAdjHex((dir+2)%6));
+        hexes[(dir+2)%6].setAdjHexAndBack((dir+4)%6, hexes[(dir + 3)%6]);
         hexes[(dir+2)%6].setEdge((dir+4)%6, hexes[(dir + 3)%6].getEdge((dir+1)%6));
         hexes[(dir+2)%6].setVertex((dir+4)%6, hexes[(dir + 3)%6].getVertex((dir+2)%6));
 
-                //TODO: Make sure setAdjHex works correctly
-        hexes[(dir+4)%6].setAdjHex((dir+3)%6, hexes[(dir + 3)%6].getAdjHex((dir+2)%6));
+        hexes[(dir+4)%6].setAdjHexAndBack((dir+2)%6, hexes[(dir + 3)%6]);
         hexes[(dir+4)%6].setEdge((dir+2)%6, hexes[(dir + 3)%6].getEdge((dir+5)%6));
         hexes[(dir+4)%6].setVertex((dir+3)%6, hexes[(dir + 3)%6].getVertex((dir+5)%6));
             //Add one to the right-hex vertex index to align the correct vertex
@@ -118,6 +122,12 @@ public class Hexagon extends PlaceableItem {
 
     public Hexagon getAdjHex(int index){
         return adjacentHexes[index%6];  //Modulo 6 to guarantee the index is within the 6 possible
+    }
+
+    public boolean setAdjHexAndBack(int index, Hexagon newHex){
+        adjacentHexes[index%6] = newHex;
+        newHex.setAdjHex((index+3)%6, this);
+        return true;
     }
 
     public boolean setAdjHex(int index, Hexagon newHex){
@@ -193,19 +203,6 @@ public class Hexagon extends PlaceableItem {
         hasRobber = true;   //TODO
         //setImageFile(getFilePath(tokenNum));
         //drawImage(itemsPanel, dir);
-    }
-
-    public void setRobber(Robber robber, JPanel itemsPanel) {
-        hasRobber = true;
-        setImageFile(robber.getFilePath());
-        drawImage(itemsPanel, null);
-    }
-
-    public void removeRobber(Robber robber, JPanel itemsPanel, int dir) {
-        //Place the tokenHex again
-        hasRobber = true;
-        setImageFile(robber.getFilePath(dir%3));
-        drawImage(itemsPanel, null);
     }
 
     public Vertex getVertexFromDegrees(double degrees) {

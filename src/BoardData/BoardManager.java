@@ -20,7 +20,6 @@ public class BoardManager {
     public ArrayList<ArrayList<Hexagon>> numberToTile;
     public Dice dice;
     public  Hexagon[][] hMap;
-    public Robber robber;
 
     public Queue<Item> placementOnClickQueue;
 
@@ -34,7 +33,6 @@ public class BoardManager {
 
         dice = new Dice();
         placementOnClickQueue = new ArrayDeque<Item>();
-        robber = new Robber();
         buildCatanBoard();
     }
 
