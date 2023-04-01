@@ -13,8 +13,6 @@ import Player.Road;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -22,8 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static java.awt.Color.white;
 
 public class BoardController {
 
@@ -160,77 +156,11 @@ public class BoardController {
                 //TODO: Move first line to BuildCard
                 model.addToPlacementQueue(robber);
 
-                placeItemIfAvailable(gui.getItemsPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
+                if(attemptToPlaceItem(gui.getItemsPanel(), model.peekPlacementQueue(), e.getX(), e.getY())){
+                    model.removeFirstFromQueue();
+                };
             }
         });
-    }
-
-    private void placeItemIfAvailable(JPanel itemsPanel, Item item, int clickX, int clickY) {
-        if (item == null) {
-            return;
-        }
-
-        //The center of the center hex is adjusted to be 0,0
-        // Integer division rounds the values towards 0; all four boxes in the center are 0,0 to create symmetry
-        int x = (clickX - FULL_CENTER_X) / 25;
-        int y = (clickY - FULL_CENTER_Y) / 25;
-
-        int yHex = (int) Math.signum(y) * (Math.abs(y) < 2 ? 0 : Math.abs(y) < 5 ? 1 : 2);
-        int xHex;
-        switch (Math.abs(yHex)) {
-            case 0:     //For five hexagons in the row
-                xHex = (int) Math.signum(x) * (Math.abs(x) < 2 ? 0 : Math.abs(x) < 6 ? 1 : 2);
-                break;
-            case 1:     //For four hexagons in the row
-                xHex = (int) Math.signum(x) * (Math.abs(x) < 4 ? 0 : 1) + (Math.signum(x) < 0 ? -1 : 0);
-                break;
-            case 2:     //For three hexagons in the row
-                xHex = (int) Math.signum(x) * (Math.abs(x) < 2 ? 0 : 1);
-                break;
-            default:
-                xHex = 0;
-        }
-
-        yHex += 2; //Now yHex is in our standard coordinate system
-        xHex += Math.floorDiv((yHex - 1), 2) + 2; //Now xHex is in our standard coordinate system
-        System.out.println(yHex + "," + xHex);
-
-        Hexagon foundHex = model.hMap[yHex][xHex];
-        //At this point, we have the hexagon coordinates. If we only wanted the hexagon, execute the hexagon method
-        //Otherwise, find further
-
-        /*Type sniffing and more is a code smell and should be fixed in the future.
-        However, this assignment is due very soon, so MVP it is
-          Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex */
-
-        //TokenNum should not be included here
-        if (item instanceof Robber) {
-            robber.moveTo(foundHex);
-            return;
-        }
-
-        double degrees = foundHex.getAngle(clickX, clickY);
-        if(item instanceof Settlement){
-            foundHex.getVertexFromDegrees(degrees).setSettlement((Settlement) item, itemsPanel);
-        }else if(item instanceof Road){
-            foundHex.getEdgeFromDegrees(degrees).setRoad((Road) item, itemsPanel);
-        }else{
-            System.out.println("How did we get here?");
-            System.exit(1);
-        }
-
-        /*
-        for(int i = 0; i<6;i++){
-            Edge e = model.hMap[yHex][xHex].getEdge(i);
-            //System.out.print(v+", ");
-            if(e.getRoad() == null){
-                e.setRoad((Road) item, itemsPanel, i);
-            }else{
-                e.setRoad((Road) item, itemsPanel, i);
-                System.out.print(e.getRoad());
-            }
-        }
-         */
     }
 
     private void updateResourceDisplays() {
@@ -267,6 +197,8 @@ public class BoardController {
 
         //Do all road/settlement placements
 
+        model.getOtherPlayers().remove(2);
+
         updateHandColors();
     }
 
@@ -294,7 +226,7 @@ public class BoardController {
         System.out.print(number);
         //update view and say what number is rolled
         if(number == 7){
-            robberEvent();   //TODO: IMPLEMENT
+            robberEvent();
         }else{
             for(Hexagon hex: model.numberToTile.get(number)){
                 hex.distributeResources();
@@ -324,10 +256,95 @@ public class BoardController {
 
     }
 
+    private boolean attemptToPlaceItem(JPanel itemsPanel, Item item, int clickX, int clickY) {
+        if (item == null) {
+            return false;
+        }
+
+        //The center of the center hex is adjusted to be 0,0
+        // Integer division rounds the values towards 0; all four boxes in the center are 0,0 to create symmetry
+        int x = (clickX - FULL_CENTER_X) / 25;
+        int y = (clickY - FULL_CENTER_Y) / 25;
+
+        int yHex = (int) Math.signum(y) * (Math.abs(y) < 2 ? 0 : Math.abs(y) < 5 ? 1 : 2);
+        int xHex = switch (Math.abs(yHex)) {
+            case 0 ->     //For five hexagons in the row
+                    (int) Math.signum(x) * (Math.abs(x) < 2 ? 0 : Math.abs(x) < 6 ? 1 : 2);
+            case 1 ->     //For four hexagons in the row
+                    (int) Math.signum(x) * (Math.abs(x) < 4 ? 0 : 1) + (Math.signum(x) < 0 ? -1 : 0);
+            case 2 ->     //For three hexagons in the row
+                    (int) Math.signum(x) * (Math.abs(x) < 2 ? 0 : 1);
+            default -> 0;
+        };
+
+        yHex += 2; //Now yHex is in our standard coordinate system
+        xHex += Math.floorDiv((yHex - 1), 2) + 2; //Now xHex is in our standard coordinate system
+        System.out.println(yHex + "," + xHex);
+
+        Hexagon foundHex = model.hMap[yHex][xHex];
+        //At this point, we have the hexagon coordinates. If we only wanted the hexagon, execute the hexagon method
+        //Otherwise, find further
+
+        /*Type sniffing and more is a code smell and should be fixed in the future.
+        However, this assignment is due very soon, so MVP it is
+          Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex */
+
+        //TokenNum should not be included here
+        if (item instanceof Robber) {
+            if(foundHex.getResourceType() == Catan.Resource.DESERT){
+                return false;
+            }
+            robber.moveTo(foundHex);
+            return true;
+        }
+
+        double degrees = foundHex.getAngle(clickX, clickY);
+        if(item instanceof Settlement){
+            Vertex v = foundHex.getVertexFromDegrees(degrees);
+            if(isLegalPlacement(foundHex, v, currentPlayer)){
+                v.setSettlement((Settlement) item, itemsPanel);
+                return true;
+            }
+
+        }else if(item instanceof Road){
+            Edge e = foundHex.getEdgeFromDegrees(degrees);
+            if(isLegalPlacement(foundHex, e, currentPlayer)){
+                e.setRoad((Road) item, itemsPanel);
+                return true;
+            }
+        }else{
+            System.out.println("How did we get here?");
+            return true;
+            //System.exit(1);
+        }
+
+        return false;
+        /*
+        for(int i = 0; i<6;i++){
+            Edge e = model.hMap[yHex][xHex].getEdge(i);
+            //System.out.print(v+", ");
+            if(e.getRoad() == null){
+                e.setRoad((Road) item, itemsPanel, i);
+            }else{
+                e.setRoad((Road) item, itemsPanel, i);
+                System.out.print(e.getRoad());
+            }
+        }
+         */
+    }
+
+    private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
+        return true;
+    }
+
+    private boolean isLegalPlacement(Hexagon foundHex, Edge v, Player currentPlayer) {
+        return true;
+    }
+
+
     //PlacePNG take a .png file, turns it into a Buffered Image, then turns the Buffered image into a ImageIcon,
     // then resizes the ImageIcon, then turns the resized ImageIcon into a JLabel, Then adds the JLabel to the desired Panel,
     //THEN it sets the bounds on said Label. All in like 8 lines. Thank you, Good night.
-
     public void PlacePNG(JPanel panel, String file, int height, int width, int gridx, int gridy){
         BufferedImage tempImage = null;
         try {

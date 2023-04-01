@@ -2,10 +2,8 @@ package BoardData;
 
 import Player.Player;
 import Player.Item;
-import Universal.BoardController;
 import Universal.Catan; //for the resource stuff (maybe extract this)
 import Universal.Dice;
-import Universal.Robber;
 
 
 import java.util.*;
@@ -111,11 +109,16 @@ public class BoardManager {
         placementOnClickQueue.add(item);
     }
 
-    public Item popOffPlacementQueue(){
-       return placementOnClickQueue.poll();
+    public Item peekPlacementQueue(){
+       return placementOnClickQueue.peek();
+    }
+
+    public Item removeFirstFromQueue(){
+        return placementOnClickQueue.remove();
     }
 
     public void clearPlacementQueue(){
         placementOnClickQueue.clear();
     }
+
 }
