@@ -1,10 +1,7 @@
 package Universal;
 
 import BoardData.*;
-import GUI.BoardView;
-import GUI.CatanGUI;
-import GUI.PlayerColorPicker;
-import GUI.ResourcePicker;
+import GUI.*;
 import Player.Player;
 import Player.Item;
 import Player.Settlement;
@@ -246,8 +243,7 @@ public class BoardController {
     //public void lavel
 
     private void rollDiceAndResource() {
-        int number = model.dice.rollDice();
-        System.out.print(number);
+        int number = displayDiceRoll();
         //update view and say what number is rolled
         if(number == 7){
             robberEvent();
@@ -256,6 +252,11 @@ public class BoardController {
                 hex.distributeResources();
             }
         }
+    }
+
+    private int displayDiceRoll(){
+        DiceRoll diceDisplay = new DiceRoll(model.dice);
+        return diceDisplay.showDialog();
     }
 
     private void robberEvent() {

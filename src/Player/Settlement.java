@@ -9,7 +9,7 @@ public class Settlement extends Item{
     public Settlement(Player owner) {
         super(owner);
         addFilePath("./CatanPNGs/Settlement.png");
-        addFilePath("./CatanPNGs/City.png");     //TODO: Make this City
+        addFilePath("./CatanPNGs/City.png");
         this.isCity = false;
     }
 
