@@ -13,8 +13,6 @@ import Player.Road;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -22,8 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static java.awt.Color.white;
 
 public class BoardController {
 
@@ -103,25 +99,34 @@ public class BoardController {
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/RockPort.png",70,70,415,85);
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",70,70,500,230);
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/SheepPort.png",70,70,415,390);
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",80,80,255,465);
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",80,80,90,465);
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/BrickPort.png",80,80,-5,315);
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainPort.png",80,80,-5,135);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",70,70,255,465);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",70,70,90,465);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/BrickPort.png",70,70,-5,315);
+        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/GrainPort.png",70,70,-5,135);
 
         //Port Trading Buttons
         gui.getFour2oneTradeButton().addActionListener(e ->{
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,4);
-            currentPlayer.getHand().removeResource(haveResource,4);
-            Catan.Resource wantResource = promptResourcePicker();
-            currentPlayer.getHand().addResource(wantResource);
-            updateResourceDisplays();
+            bankTrade(haveResource,4);
         });
         gui.getTradeButton(Catan.Resource.DESERT).addActionListener(e -> {
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,3);
-            currentPlayer.getHand().removeResource(haveResource,3);
-            Catan.Resource wantResource = promptResourcePicker();
-            currentPlayer.getHand().addResource(wantResource);
-            updateResourceDisplays();
+            bankTrade(haveResource,3);
+        });
+        gui.getTradeButton(Catan.Resource.WOOD).addActionListener(e -> {
+            bankTrade(Catan.Resource.WOOD,2);
+        });
+        gui.getTradeButton(Catan.Resource.ORE).addActionListener(e -> {
+            bankTrade(Catan.Resource.ORE,2);
+        });
+        gui.getTradeButton(Catan.Resource.GRAIN).addActionListener(e -> {
+            bankTrade(Catan.Resource.GRAIN,2);
+        });
+        gui.getTradeButton(Catan.Resource.WOOL).addActionListener(e -> {
+            bankTrade(Catan.Resource.WOOL,2);
+        });
+        gui.getTradeButton(Catan.Resource.CLAY).addActionListener(e -> {
+            bankTrade(Catan.Resource.CLAY,2);
         });
 
         gui.getTradeButton(Catan.Resource.WOOD).add(gui.portImage("./CatanPNGs/WoodPort.png"));
@@ -384,5 +389,11 @@ public class BoardController {
         player.getHand().removeResource(want,1);
         currentPlayer.getHand().addResource(want);
         updateResourceDisplays();
+    }
+    public void bankTrade(Catan.Resource have, int num){
+        currentPlayer.getHand().removeResource(have,num);
+        currentPlayer.getHand().addResource(promptResourcePicker());
+        updateResourceDisplays();
+
     }
 }
