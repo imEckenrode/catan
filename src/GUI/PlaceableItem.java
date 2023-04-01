@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public class PlaceableItem {
     String imageFile;
@@ -14,6 +13,15 @@ public class PlaceableItem {
     int centerY;
     int height;
     int width;
+    JLabel currentLabel;
+
+    public JLabel getLabel() {
+        return currentLabel;
+    }
+
+    public void setLabel(JLabel currentLabel) {
+        this.currentLabel = currentLabel;
+    }
 
     public String getImageFile() {
         return imageFile;
@@ -72,17 +80,7 @@ public class PlaceableItem {
     }
 
     public void drawImage(JPanel panel){
-            BufferedImage tempImage;
-            try {
-                tempImage = ImageIO.read(new File(imageFile));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
-            panel.add(label);
-            label.setBounds(centerX,centerY,width,height);
-        label.setBounds(centerX-(int) (0.5*(width)),centerY-(int) (0.5*(height)),width,height);
+        drawImage(panel, null);
     }
 
     public void drawImage(JPanel panel, Color playerColor){
@@ -108,6 +106,7 @@ public class PlaceableItem {
         panel.add(label);
         label.setBounds(centerX,centerY,width,height);
         label.setBounds(centerX-(int) (0.5*(width)),centerY-(int) (0.5*(height)),width,height);
+        setLabel(label);
     }
 
     public double getAngle(int clickX, int clickY) {

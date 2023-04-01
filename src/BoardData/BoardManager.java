@@ -21,6 +21,7 @@ public class BoardManager {
 
     public Queue<Item> placementOnClickQueue;
 
+    boolean gameStarted;
 
     public BoardManager() {
         //Initialize the 2d ArrayList
@@ -29,6 +30,7 @@ public class BoardManager {
             numberToTile.add(new ArrayList<>());
         }
 
+        gameStarted = false;
         dice = new Dice();
         placementOnClickQueue = new ArrayDeque<Item>();
         buildCatanBoard();
@@ -121,4 +123,11 @@ public class BoardManager {
         placementOnClickQueue.clear();
     }
 
+    public boolean didGameBegin(){
+        return gameStarted;
+    }
+
+    public void setGameBegin(Boolean bool){
+        gameStarted = bool;
+    }
 }

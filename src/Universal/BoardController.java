@@ -204,11 +204,12 @@ public class BoardController {
         setCurrentPlayer(model.getCurrentPlayer());
         otherPlayers = model.getOtherPlayers();
 
+        updateHandColors();
         //Do all road/settlement placements
 
-        model.getOtherPlayers().remove(2);
 
-        updateHandColors();
+        model.setGameBegin(true);
+        takeTurn(currentPlayer, otherPlayers);
     }
 
 
@@ -262,7 +263,6 @@ public class BoardController {
         //and take turns
         takeTurn(model.getCurrentPlayer(), model.getOtherPlayers());
         //TODO: Refactor and always use getCurrentPlayer and getOtherPlayers
-
     }
 
     private boolean attemptToPlaceItem(JPanel itemsPanel, Item item, int clickX, int clickY) {
@@ -308,11 +308,22 @@ public class BoardController {
         }
 
         double degrees = foundHex.getAngle(clickX, clickY);
-        if(item instanceof Settlement){
+        if(item instanceof Settlement s){
             Vertex v = foundHex.getVertexFromDegrees(degrees);
-            if(isLegalPlacement(foundHex, v, currentPlayer)){
-                v.setSettlement((Settlement) item, itemsPanel);
-                return true;
+            //If this is a city, then only place it on a currentPlayer-owned settlement
+            if(s.isACity()){
+                if(v.getSettlement() == null || v.getSettlement().getOwner() != currentPlayer){
+                    return false;
+                }else {
+                    view.getForm().getItemsPanel().remove(v.getLabel());
+                    v.setSettlement(s, itemsPanel);
+                    return true;
+                }
+            }else{  //Otherwise, be sure to check if the settlement placement is legal
+                if(isLegalPlacement(foundHex, v, currentPlayer)) {
+                    v.setSettlement((Settlement) item, itemsPanel);
+                    return true;
+                }
             }
 
         }else if(item instanceof Road){
@@ -343,6 +354,10 @@ public class BoardController {
     }
 
     private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
+        //First, check if there are no adjacent settlements
+
+        //Next, check for adjacent roads, but only if initial placements are done
+        model.didGameBegin();
         return true;
     }
 
