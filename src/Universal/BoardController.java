@@ -68,20 +68,26 @@ public class BoardController {
                 hex.drawImage(gui.getBoardPanel());
                 //hex.getVertex(1).drawImage(gui.getBoardPanel());
 
-                //PlacePNG(gui.getBoardPanel(), hex.getResourceType().getHexFilePath(), 100, 100, (int)(i * 100), (int)(j * 100));
                 i+=100;
             }
             i-=750;
             j+=85;
         }
         // placing in the background last because null layout
-        Board board = new Board("./CatanPNGs/PlainBoard.png",262,-50,625,525);
+        Board board = new Board("./CatanPNGs/PlainBoard.png",262,262,625,525);
         board.drawImage(gui.getBoardPanel());
 
-        PlacePNG(gui.getBoardPanel(),"./CatanPNGs/PlainBoard.png",625,525,5,-50);
+
+
+
         gui.getItemsPanel().setLayout(null);
         gui.getItemsPanel().setOpaque(false);
         robber = new Robber(gui.getItemsPanel());
+
+        //TODO remove road test code
+        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road0.png",40,40,160,35);
+        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road.png",40,40,190,80);
+        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road2.png",40,40,220,35);
 
         view.pack();
         view.setSize(840,715);
