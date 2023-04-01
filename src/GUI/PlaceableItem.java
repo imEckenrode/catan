@@ -72,7 +72,7 @@ public class PlaceableItem {
     }
 
     public void drawImage(JPanel panel){
-            BufferedImage tempImage = null;
+            BufferedImage tempImage;
             try {
                 tempImage = ImageIO.read(new File(imageFile));
             } catch (IOException e) {
@@ -82,11 +82,11 @@ public class PlaceableItem {
             JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
             panel.add(label);
             label.setBounds(centerX,centerY,width,height);
-            label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
+        label.setBounds(centerX-(int) (0.5*(width)),centerY-(int) (0.5*(height)),width,height);
     }
 
     public void drawImage(JPanel panel, Color playerColor){
-        BufferedImage tempImage = null;
+        BufferedImage tempImage;
         try {
             tempImage = ImageIO.read(new File(imageFile));
         } catch (IOException e) {
@@ -96,7 +96,6 @@ public class PlaceableItem {
         for(int y = 0; y < tempImage.getHeight(); y++){
             for(int x = 0; x<tempImage.getWidth();x++){
                 int pixel = tempImage.getRGB(x,y);
-                Color color = new Color(pixel, true);
                 if((pixel>>24) != 0x00){    //Check for transparency
                     tempImage.setRGB(x,y,playerColor.getRGB());
                 }
@@ -106,35 +105,12 @@ public class PlaceableItem {
         JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
         panel.add(label);
         label.setBounds(centerX,centerY,width,height);
-        label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
-    }
-
-    public void drawImage(JPanel panel, int dir){
-        BufferedImage tempImage = null;
-        try {
-            tempImage = ImageIO.read(new File(imageFile));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        Color[] change = {Color.red,Color.orange,Color.yellow,Color.green,Color.blue,Color.pink};
-        for(int y = 0; y < tempImage.getHeight(); y++){
-            for(int x = 0; x<tempImage.getWidth();x++){
-                int pixel = tempImage.getRGB(x,y);
-                Color color = new Color(pixel, true);
-                if((pixel>>24) != 0x00){    //Check for transparency
-                    tempImage.setRGB(x,y,change[dir].getRGB());
-                }
-            }
-        }
-
-        JLabel label = new JLabel(new ImageIcon(new ImageIcon(tempImage).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
-        panel.add(label);
-        label.setBounds(centerX,centerY,width,height);
-        label.setBounds((centerX-(int)(0.5*(width))),centerY,width,height);
+        label.setBounds(centerX-(int) (0.5*(width)),centerY-(int) (0.5*(height)),width,height);
     }
 
     public double getAngle(int clickX, int clickY) {
-        return Math.toDegrees(Math.atan2(clickY-centerY,clickX-centerX));
+        int deltaX = clickX - centerX;
+        int deltaY = clickY - centerY;
+        return (Math.toDegrees(Math.atan2(deltaX,-deltaY))+360)%360;
     }
 }

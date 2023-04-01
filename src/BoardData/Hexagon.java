@@ -195,20 +195,35 @@ public class Hexagon extends PlaceableItem {
         //drawImage(itemsPanel, dir);
     }
 
-    public void setRobber(Robber robber, JPanel itemsPanel, int dir) {
-        //There is no case where a settlement will be removed from the board.
-        //This makes sure we do not honor the attempt
+    public void setRobber(Robber robber, JPanel itemsPanel) {
         hasRobber = true;
-        setImageFile(robber.getFilePath(dir%3));
-        drawImage(itemsPanel, dir);
+        setImageFile(robber.getFilePath());
+        drawImage(itemsPanel, null);
     }
 
     public void removeRobber(Robber robber, JPanel itemsPanel, int dir) {
-        //There is no case where a settlement will be removed from the board.
-        //This makes sure we do not honor the attempt
+        //Place the tokenHex again
         hasRobber = true;
         setImageFile(robber.getFilePath(dir%3));
-        drawImage(itemsPanel, dir);
+        drawImage(itemsPanel, null);
     }
 
+    public Vertex getVertexFromDegrees(double degrees) {
+        for(int i = 0; i<6; i++){
+            if(degrees<30*(2*i+1)){
+                return getVertex(i);
+            }
+        }
+        return getVertex(0);
+    }
+
+    public Edge getEdgeFromDegrees(double degrees) {
+        //TODO: Customize this to have the further-out roads
+        for(int i = 0; i<6; i++){
+            if(degrees<30*(2*i)){
+                return getEdge(i);
+            }
+        }
+        return getEdge(0);
+    }
 }

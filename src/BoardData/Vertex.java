@@ -8,8 +8,7 @@ import javax.swing.*;
 
 public class Vertex extends PlaceableItem{
     private static final int[] VERTEX_CENTERS_X = new int[]{0,50,50,0,-50,-50};
-    //private static final int[] VERTEX_CENTERS_Y = new int[]{-50,-25,25,50,25,-25};
-    private static final int[] VERTEX_CENTERS_Y = new int[]{-20,25-20,75-20,100-20,75-20,25-20};
+    private static final int[] VERTEX_CENTERS_Y = new int[]{-50,-25,25,50,25,-25};
     Settlement settlement;
 
 
@@ -36,6 +35,7 @@ public class Vertex extends PlaceableItem{
         return settlement;
     }
 
+
     public void setSettlement(Settlement settlement, JPanel itemsPanel) {
         //There is no case where a settlement will be removed from the board.
         //This makes sure we do not honor the attempt
@@ -45,18 +45,6 @@ public class Vertex extends PlaceableItem{
         }
         this.settlement = settlement;
         setImageFile(settlement.getFilePath());
-        drawImage(itemsPanel);
-    }
-
-    public void setSettlement(Settlement settlement, JPanel itemsPanel, int dir) {
-        //There is no case where a settlement will be removed from the board.
-        //This makes sure we do not honor the attempt
-        if(settlement == null){
-            System.out.println("Bad settlement added");
-            return;
-        }
-        this.settlement = settlement;
-        setImageFile(settlement.getFilePath());
-        drawImage(itemsPanel, dir);
+        drawImage(itemsPanel, settlement.getColor());
     }
 }

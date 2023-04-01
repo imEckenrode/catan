@@ -55,7 +55,7 @@ public class Edge extends PlaceableItem {
     }
 
 
-    public void setRoad(Road road, JPanel itemsPanel, int dir) {
+    public void setRoad(Road road, JPanel itemsPanel) {
         //There is no case where a settlement will be removed from the board.
         //This makes sure we do not honor the attempt
         if(road == null){
@@ -63,8 +63,8 @@ public class Edge extends PlaceableItem {
             return;
         }
         this.road = road;
-        setImageFile(road.getFilePath(dir%3));
-        drawImage(itemsPanel, dir);
+        setImageFile(road.getFilePath(tilt));
+        drawImage(itemsPanel, road.getColor());
     }
     public Port getPort(){
         return port;
@@ -74,5 +74,13 @@ public class Edge extends PlaceableItem {
     }
     public void removePort(){
         port = null;
+    }
+
+    public int getTilt() {
+        return tilt;
+    }
+
+    public void setTilt(int tilt) {
+        this.tilt = tilt;
     }
 }

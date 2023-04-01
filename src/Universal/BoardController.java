@@ -54,7 +54,7 @@ public class BoardController {
         //TODO Make desertHex look right
 
         int i = 160;
-        int j = 50;
+        int j = 100;
         for( Hexagon[] temp : model.hMap) {
             for (Hexagon hex : temp) {
                 if (hex == null) {
@@ -150,31 +150,33 @@ public class BoardController {
                 gui.getItemsPanel().repaint();
                 //TODO: Move first line to BuildCard
                 model.addToPlacementQueue(new Settlement(currentPlayer));
+
                 placeItemIfAvailable(gui.getItemsPanel(), model.popOffPlacementQueue(), e.getX(), e.getY());
             }
         });
     }
 
     private void placeItemIfAvailable(JPanel itemsPanel, Item item, int clickX, int clickY) {
-        if(item == null){
+        if (item == null) {
             return;
         }
+
         //The center of the center hex is adjusted to be 0,0
         // Integer division rounds the values towards 0; all four boxes in the center are 0,0 to create symmetry
-        int x = (clickX - FULL_CENTER_X)/25;
-        int y = (clickY - FULL_CENTER_Y)/25;
+        int x = (clickX - FULL_CENTER_X) / 25;
+        int y = (clickY - FULL_CENTER_Y) / 25;
 
-        int yHex = (int) Math.signum(y)*(Math.abs(y)<2 ? 0 : Math.abs(y)<5 ? 1 : 2);
+        int yHex = (int) Math.signum(y) * (Math.abs(y) < 2 ? 0 : Math.abs(y) < 5 ? 1 : 2);
         int xHex;
-        switch(Math.abs(yHex)){
+        switch (Math.abs(yHex)) {
             case 0:     //For five hexagons in the row
-                xHex = (int) Math.signum(x)*(Math.abs(x)<2 ? 0 : Math.abs(x)<6 ? 1 : 2);
+                xHex = (int) Math.signum(x) * (Math.abs(x) < 2 ? 0 : Math.abs(x) < 6 ? 1 : 2);
                 break;
             case 1:     //For four hexagons in the row
-                xHex = (int) Math.signum(x)*(Math.abs(x) < 4? 0 : 1) + (Math.signum(x)< 0 ? -1 : 0);
+                xHex = (int) Math.signum(x) * (Math.abs(x) < 4 ? 0 : 1) + (Math.signum(x) < 0 ? -1 : 0);
                 break;
             case 2:     //For three hexagons in the row
-                xHex = (int) Math.signum(x)*(Math.abs(x)<2 ? 0 : 1);
+                xHex = (int) Math.signum(x) * (Math.abs(x) < 2 ? 0 : 1);
                 break;
             default:
                 xHex = 0;
@@ -182,11 +184,40 @@ public class BoardController {
 
         yHex += 2; //Now yHex is in our standard coordinate system
         xHex += Math.floorDiv((yHex - 1), 2) + 2; //Now xHex is in our standard coordinate system
-        System.out.println(yHex+","+xHex);
+        System.out.println(yHex + "," + xHex);
 
-        double degrees = model.hMap[yHex][xHex].getAngle(clickX, clickY);
-        System.out.println(degrees);
+        Hexagon foundHex = model.hMap[yHex][xHex];
+        //At this point, we have the hexagon coordinates. If we only wanted the hexagon, execute the hexagon method
+        //Otherwise, find further
 
+        //Type sniffing and more is a code smell and should be fixed in the future.
+        //However, this assignment is due very soon, so MVP it is
+        //  Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex
+
+
+        //TokenNum should not be included here
+        if (item instanceof Robber) {
+            foundHex.setRobber((Robber) item, itemsPanel);
+        }
+
+        double degrees = foundHex.getAngle(clickX, clickY);
+
+        /*
+        JLabel test = new JLabel("'");
+        view.getForm().getItemsPanel().add(test);
+        test.setBounds(foundHex.getCenterX(),foundHex.getCenterY(),10,10);
+        */
+
+        if(item instanceof Settlement){
+            foundHex.getVertexFromDegrees(degrees).setSettlement((Settlement) item, itemsPanel);
+        }else if(item instanceof Road){
+            foundHex.getEdgeFromDegrees(degrees).setRoad((Road) item, itemsPanel);
+        }else{
+            System.out.println("How did we get here?");
+            System.exit(1);
+        }
+
+        /*
         for(int i = 0; i<6;i++){
             Edge e = model.hMap[yHex][xHex].getEdge(i);
             //System.out.print(v+", ");
@@ -197,8 +228,7 @@ public class BoardController {
                 System.out.print(e.getRoad());
             }
         }
-        //Will include this within setSettlement eventually
-        //model.hMap[yHex][xHex].getVertex(0).drawImage(itemsPanel);
+         */
     }
 
     private void updateResourceDisplays() {
@@ -215,10 +245,10 @@ public class BoardController {
         ArrayList<Color> standardColors = new ArrayList<>(Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW));
         for(int i = 0; i<4; i++){
             //TODO Uncomment
-            Color chosenColor = Color.WHITE; //promptColorPicker();
-            //if(chosenColor == null){
-            //    chosenColor = standardColors.get(i);
-            //}
+            Color chosenColor =null;//promptColorPicker();
+            if(chosenColor == null){
+                chosenColor = standardColors.get(i);
+            }
             model.players.add(new Player(chosenColor));
         }
 
