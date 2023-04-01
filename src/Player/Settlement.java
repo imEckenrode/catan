@@ -9,14 +9,14 @@ public class Settlement extends Item{
     public Settlement(Player owner) {
         super(owner);
         addFilePath("./CatanPNGs/Settlement.png");
-        addFilePath("./CatanPNGs/brick.png");     //TODO: Make this City
+        addFilePath("./CatanPNGs/City.png");     //TODO: Make this City
         this.isCity = false;
     }
 
     public Settlement(Player owner, boolean isCity) {
         super(owner);
         addFilePath("./CatanPNGs/Settlement.png");
-        addFilePath("./CatanPNGs/brick.png");     //TODO: Make this City
+        addFilePath("./CatanPNGs/City.png");
         this.isCity = isCity;
     }
 
