@@ -357,29 +357,29 @@ public class BoardController {
             Vertex v = foundHex.getVertexFromDegrees(degrees);
             //If this is a city, then only place it on a currentPlayer-owned settlement
             if(s.isACity()){
-                if(!v.hasSettlement() || v.getSettlement().getOwner() != currentPlayer){
+                if(!v.hasSettlement() || v.getSettlement().getOwner() != item.getOwner()){
                     return false;
                 }else {
                     view.getForm().getItemsPanel().remove(v.getLabel());
                     v.placeSettlement(s, itemsPanel);
-                    currentPlayer.raiseSettlementCount();
-                    currentPlayer.lowerCityCount();
+                    item.getOwner().raiseSettlementCount();
+                    item.getOwner().lowerCityCount();
                     return true;
                 }
             }else{  //Otherwise, be sure to check if the settlement placement is legal
-                if(isLegalPlacement(foundHex, v, currentPlayer)) {
+                if(isLegalPlacement(foundHex, v, item.getOwner())) {
                     v.placeSettlement((Settlement) item, itemsPanel);
                     //TODO: Collect Port if available
-                    currentPlayer.lowerSettlementCount();
+                    item.getOwner().lowerSettlementCount();
                     return true;
                 }
             }
 
         }else if(item instanceof Road){
             Edge e = foundHex.getEdgeFromDegrees(degrees);
-            if(isLegalPlacement(foundHex, e, currentPlayer)){
+            if(isLegalPlacement(foundHex, e, item.getOwner())){
                 e.placeRoad((Road) item, itemsPanel);
-                currentPlayer.lowerRoadCount();
+                item.getOwner().lowerRoadCount();
                 return true;
             }
         }else{
@@ -403,6 +403,7 @@ public class BoardController {
          */
     }
 
+    //TODO: Change the name of currentPlayer to simply player?
     private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
         int dir = foundHex.getVertexDir(v);
         //First, check if there are no adjacent settlements
