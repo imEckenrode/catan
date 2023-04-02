@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class BoardView extends JFrame {
     public CatanGUI form;
     public JLabel[] resourceLabels;
+    public JLabel settlementCountLabel;
+    public JLabel roadCountLabel;
+    public JLabel cityCountLabel;
 
     public BoardView(){
         this.form = new CatanGUI();
@@ -24,6 +27,7 @@ public class BoardView extends JFrame {
 
     public void updatePlayerDisplay(Player.Player currentPlayer){
         updateResourceValues(currentPlayer.getHand().getAllResourceCounts());
+        updateItemValues(currentPlayer);
         updatePlayerPorts(currentPlayer);
     }
 
@@ -40,5 +44,15 @@ public class BoardView extends JFrame {
             form.getTradeButton(r).setVisible(currentPlayer.hasResourcePort(r));
         }
         form.getPortsPanel().revalidate();
+    }
+
+    private void updateItemValues(Player.Player currentPlayer){
+        roadCountLabel.setText("x"+currentPlayer.getRoadCount());
+        settlementCountLabel.setText("x"+currentPlayer.getSettlementCount());
+        cityCountLabel.setText("x"+currentPlayer.getCityCount());
+    }
+
+    private void updateBuildingCardValues(Player.Player currentPlayer){
+        return;
     }
 }

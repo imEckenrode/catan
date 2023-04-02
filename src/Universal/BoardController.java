@@ -189,6 +189,25 @@ public class BoardController {
             PlacePNG(gui.getCurrentHandPanel(),r.getCardFilePath(),90,63,r.toIndex()*52,18);
         }
 
+        Player example = new Player(Color.black);
+        view.roadCountLabel = new JLabel("x"+(example.getRoadCount()-2));
+        view.roadCountLabel.setBounds(35,140,100,30);
+        view.roadCountLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+        view.getForm().getCurrentHandPanel().add(view.roadCountLabel);
+        PlacePNG(gui.getCurrentHandPanel(), "./CatanPNGs/Road.png",50,50,0,130);
+
+        view.settlementCountLabel = new JLabel("x"+(example.getSettlementCount()-2));
+        view.settlementCountLabel.setBounds(135,140,100,30);
+        view.settlementCountLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+        view.getForm().getCurrentHandPanel().add(view.settlementCountLabel);
+        PlacePNG(gui.getCurrentHandPanel(), "./CatanPNGs/Settlement.png",50,50,80,130);
+
+        view.cityCountLabel = new JLabel("x"+(example.getCityCount()));
+        view.cityCountLabel.setBounds(225,140,100,30);
+        view.cityCountLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+        view.getForm().getCurrentHandPanel().add(view.cityCountLabel);
+        PlacePNG(gui.getCurrentHandPanel(), "./CatanPNGs/City.png",50,50,170,130);
+
         gui.getBoardPanel().addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
@@ -203,6 +222,7 @@ public class BoardController {
                 if(attemptToPlaceItem(gui.getItemsPanel(), model.peekPlacementQueue(), e.getX(), e.getY())){
                     model.removeFirstFromQueue();
                 };
+                view.updatePlayerDisplay(currentPlayer);
             }
         });
     }
@@ -409,18 +429,6 @@ public class BoardController {
         }
 
         return false;
-        /*
-        for(int i = 0; i<6;i++){
-            Edge e = model.hMap[yHex][xHex].getEdge(i);
-            //System.out.print(v+", ");
-            if(e.getRoad() == null){
-                e.setRoad((Road) item, itemsPanel, i);
-            }else{
-                e.setRoad((Road) item, itemsPanel, i);
-                System.out.print(e.getRoad());
-            }
-        }
-         */
     }
 
 
