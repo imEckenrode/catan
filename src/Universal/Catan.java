@@ -41,9 +41,9 @@ public class Catan {
         view.setVisible(true);
         controller.beginGame();
 
-        model.addToPlacementQueue(new Settlement(model.getCurrentPlayer()));
-        model.addToPlacementQueue(new Settlement(model.getCurrentPlayer(), true));
-        model.addToPlacementQueue(new Road(model.getCurrentPlayer()));
+//        model.addToPlacementQueue(new Settlement(model.getCurrentPlayer()));
+//        model.addToPlacementQueue(new Settlement(model.getCurrentPlayer(), true));
+//        model.addToPlacementQueue(new Road(model.getCurrentPlayer()));
     }
 
     public static void main(String[] args) {

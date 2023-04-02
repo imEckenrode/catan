@@ -45,13 +45,36 @@ public class BoardController {
         gui.getBuildCityButton().add(gui.ButtonImage("./CatanPNGs/BuildCity.png",160,50));
 
         gui.getBuildRoadButton().addActionListener(e -> {
-            //TODO
+            if (currentPlayer.getRoadCount()!=0) {
+                currentPlayer.setRoadCount(currentPlayer.getRoadCount() - 1);
+                currentPlayer.getHand().removeResource(Catan.Resource.WOOD);
+                currentPlayer.getHand().removeResource(Catan.Resource.CLAY);
+                updateResourceDisplays();
+                model.addToPlacementQueue(new Road(currentPlayer));
+            }
         });
         gui.getBuildSettlentButton().addActionListener(e -> {
-            //TODO
+            if (currentPlayer.getSettlementCount()!=0) {
+                currentPlayer.setSettlementCount(currentPlayer.getSettlementCount() - 1);
+                currentPlayer.getHand().removeResource(Catan.Resource.WOOD);
+                currentPlayer.getHand().removeResource(Catan.Resource.CLAY);
+                currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
+                currentPlayer.getHand().removeResource(Catan.Resource.WOOL);
+                updateResourceDisplays();
+                model.addToPlacementQueue(new Settlement(currentPlayer));
+            }
         });
         gui.getBuildCityButton().addActionListener(e -> {
-            //TODO
+            if (currentPlayer.getCityCount()!=0) {
+                currentPlayer.setCityCount(currentPlayer.getCityCount() - 1);
+                currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
+                currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
+                currentPlayer.getHand().removeResource(Catan.Resource.ORE);
+                currentPlayer.getHand().removeResource(Catan.Resource.ORE);
+                currentPlayer.getHand().removeResource(Catan.Resource.ORE);
+                updateResourceDisplays();
+                model.addToPlacementQueue(new Settlement(model.getCurrentPlayer(), true));
+            }
         });
 
         gui.getBoardPanel().setLayout(null);
@@ -174,7 +197,7 @@ public class BoardController {
                 gui.getItemsPanel().revalidate();
                 gui.getItemsPanel().repaint();      */
                 //TODO: Move first line to BuildCard
-                model.addToPlacementQueue(new Road(currentPlayer));
+                //model.addToPlacementQueue(new Road(currentPlayer));
 
                 if(attemptToPlaceItem(gui.getItemsPanel(), model.peekPlacementQueue(), e.getX(), e.getY())){
                     model.removeFirstFromQueue();
