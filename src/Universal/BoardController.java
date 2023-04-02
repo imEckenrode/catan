@@ -239,12 +239,31 @@ public class BoardController {
         setCurrentPlayer(model.getCurrentPlayer());
         otherPlayers = model.getOtherPlayers();
 
+
+        startingSnake(model.players);
+
+
         updateHandColors();
-        //Do all road/settlement placements
-
-
         model.setGameBegin(true);
         takeTurn(currentPlayer, otherPlayers);
+    }
+
+    private void startingSnake(ArrayList<Player> players) {
+        //collectStartingResources(); also
+        for(int i = 0; i<players.size(); i++){
+            //placeSettlement(players.get(i));
+        }
+        for(int i = players.size()-1; i>=0; i--){
+            //placeSettlement(players.get(i));
+        }
+        for(int i = 0; i<players.size(); i++){
+            //placeRoad(players.get(i));
+        }
+        for(int i = players.size()-1; i>=0; i--){
+            //placeRoad(players.get(i));
+        }
+
+        //await()
     }
 
 
