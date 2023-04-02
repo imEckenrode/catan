@@ -13,11 +13,13 @@ public class Hand {
     }
 
     public void addResource(Catan.Resource resource) {
+        if(resource == null){return;}
         int index = resource.toIndex();
         resourceCards.set(index, resourceCards.get(index)+1);
     }
 
     public void removeResource(Catan.Resource resource) {
+        if(resource == null){return;}
         int index = resource.toIndex();
             if (resourceCards.get(index) > 0) {
                 resourceCards.set(index, resourceCards.get(index) - 1);
@@ -27,6 +29,7 @@ public class Hand {
     }
 
     public void removeResource(Catan.Resource resource, int number) {
+        if(resource == null){return;}
         int index = resource.toIndex();
         for (int i = 0; i < number; i++) {
             if (resourceCards.get(index) > 0) {
