@@ -94,13 +94,14 @@ public class BoardController {
                 }
                 hex.setCenterX(i);
                 hex.setCenterY(j);
-                JLabel number = new JLabel(String.valueOf(hex.getTokenNum()));
-                number.setHorizontalAlignment(SwingConstants.CENTER);
-                number.setFont(new Font("Serif", Font.PLAIN, 24));
-                gui.getBoardPanel().add(number);
-                number.setBounds(hex.getCenterX()-25,hex.getCenterY()-25,50,50);
-                PlacePNG(gui.getBoardPanel(),"./CatanPNGs/NumberToken.png",50,50,hex.getCenterX()-25,hex.getCenterY()-25);
-
+                if(hex.getResourceType() != Catan.Resource.DESERT) {
+                    JLabel number = new JLabel(String.valueOf(hex.getTokenNum()));
+                    number.setHorizontalAlignment(SwingConstants.CENTER);
+                    number.setFont(new Font("Serif", Font.PLAIN, 24));
+                    gui.getBoardPanel().add(number);
+                    number.setBounds(hex.getCenterX() - 25, hex.getCenterY() - 25, 50, 50);
+                    PlacePNG(gui.getBoardPanel(), "./CatanPNGs/NumberToken.png", 50, 50, hex.getCenterX() - 25, hex.getCenterY() - 25);
+                }
 
                 hex.drawImage(gui.getBoardPanel());
                 //hex.getVertex(1).drawImage(gui.getBoardPanel());
@@ -388,7 +389,6 @@ public class BoardController {
         However, this assignment is due very soon, so MVP it is
           Technically, Road is EdgeItem, since it is always used for Edge, and same for Settlement and Vertex */
 
-        //TokenNum should not be included here
         if (item instanceof Robber) {
             if(foundHex.getResourceType() == Catan.Resource.DESERT){
                 return false;

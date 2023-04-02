@@ -89,11 +89,11 @@ public class Hexagon extends PlaceableItem {
     }   //Orientation is what side of the hexagon is the middle
 
     // Spin around clockwise until you find a hex without a token
-    public Hexagon getNextTokenlessHex(int dir) throws IndexOutOfBoundsException {
+    public int getNextTokenlessHex(int dir) throws IndexOutOfBoundsException {
         for(int cDir = dir; cDir != (dir+5)%6; cDir=(cDir+1)%6) {
             try{
                 if(!adjacentHexes[cDir].hasTokenNum()){
-                    return adjacentHexes[cDir];
+                    return cDir;
                 }
             }catch(Exception e){        //If there is not a hex in that direction, catch.
                 continue;

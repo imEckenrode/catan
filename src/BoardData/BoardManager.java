@@ -83,20 +83,22 @@ public class BoardManager {
         Hexagon nextHex = hMap[0][0];
         int dir = 1;
         while(!numberList.isEmpty()) {
-            if (nextHex.resource != DESERT) {
+            if (nextHex.resource == DESERT) {
+                nextHex.setTokenNum(1);
+            }else{
                 int num = numberList.remove(0);
                 nextHex.setTokenNum(num);
                 numberToTile.get(num).add(nextHex);
             }
 
             try {
-                nextHex = nextHex.getNextTokenlessHex(dir);
+                dir = nextHex.getNextTokenlessHex(dir);
+                nextHex = nextHex.adjacentHexes[dir];
             } catch (IndexOutOfBoundsException e) {   //Once there are no more to number, we are done
                 break;
             }
         }
     }
-
 
     public Player getCurrentPlayer(){
         return players.get(0);
