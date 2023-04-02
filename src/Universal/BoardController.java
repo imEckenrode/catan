@@ -94,7 +94,14 @@ public class BoardController {
                 }
                 hex.setCenterX(i);
                 hex.setCenterY(j);
-                JLabel test = new JLabel("O");
+                JLabel number = new JLabel(String.valueOf(hex.getTokenNum()));
+                number.setHorizontalAlignment(SwingConstants.CENTER);
+                number.setFont(new Font("Serif", Font.PLAIN, 24));
+                gui.getBoardPanel().add(number);
+                number.setBounds(hex.getCenterX()-25,hex.getCenterY()-25,50,50);
+                PlacePNG(gui.getBoardPanel(),"./CatanPNGs/NumberToken.png",50,50,hex.getCenterX()-25,hex.getCenterY()-25);
+
+
                 hex.drawImage(gui.getBoardPanel());
                 //hex.getVertex(1).drawImage(gui.getBoardPanel());
 
