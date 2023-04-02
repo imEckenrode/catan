@@ -404,8 +404,8 @@ public class BoardController {
          */
     }
 
-    //TODO: Change the name of currentPlayer to simply player?
-    private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
+
+    private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player player) {
         int dir = foundHex.getVertexDir(v);
         //First, check if there are no adjacent settlements
         if (foundHex.getVertex((dir + 1) % 6).hasSettlement()
@@ -424,7 +424,7 @@ public class BoardController {
             for(Edge e: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir), foundHex.getEdge((dir+5)%6),foundHex.getOutsideEdge(dir)))){
                 if (e != null) {
                 if(e.hasRoad()){
-                if(e.getRoad().getOwner() == currentPlayer){
+                if(e.getRoad().getOwner() == player){
                     return true;
                 }}}
             }
@@ -434,26 +434,33 @@ public class BoardController {
         }
     }
 
-    private boolean isLegalPlacement(Hexagon foundHex, Edge e, Player currentPlayer) {
+    private boolean isLegalPlacement(Hexagon foundHex, Edge e, Player player) {
         int dir = foundHex.getEdgeDir(e);
-        if (foundHex.getEdge(foundHex.getEdgeDir(e)).hasRoad()) {
+        if (foundHex.getEdge(dir).hasRoad()) {
             return false;
         }
+
+        //TODO: Need to make sure this road does not pass through an opponent settlement
+
+
         if (model.didGameBegin()) {
-            for (Edge edge : new ArrayList<>(Arrays.asList(foundHex.getEdge(dir+5%6),
-                    foundHex.getEdge(dir+1%6), foundHex.getOutsideEdge(dir), foundHex.getOutsideEdge(dir+1%6)))){
+            for (Edge edge : new ArrayList<>(
+                    Arrays.asList(foundHex.getEdge((dir+5)%6),
+                                    foundHex.getEdge((dir+1)%6),
+                                    foundHex.getOutsideEdge(dir),
+                                    foundHex.getOutsideEdge((dir+1)%6)))){
                 if (edge != null) {
                     if (edge.hasRoad()) {
-                        if (edge.getRoad().getOwner() == currentPlayer) {
+                        if (edge.getRoad().getOwner() == player) {
                             System.out.println("test");
                             return true;
                         }}}
             }
             return false;
         }else{
+            //TODO: Check if this is by a settlement for snaking purposes, then make sure this settlement does not already have a road
             return true;
         }
-
     }
 
 
