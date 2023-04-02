@@ -60,8 +60,9 @@ public class BoardController {
                 currentPlayer.getHand().removeResource(Catan.Resource.CLAY);
                 currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
                 currentPlayer.getHand().removeResource(Catan.Resource.WOOL);
-                updateResourceDisplays();
                 model.addToPlacementQueue(new Settlement(currentPlayer));
+                updateResourceDisplays();
+
             }
         });
         gui.getBuildCityButton().addActionListener(e -> {
@@ -407,16 +408,17 @@ public class BoardController {
     private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
         int dir = foundHex.getVertexDir(v);
         //First, check if there are no adjacent settlements
-        if(foundHex.getVertex((dir+1)%6).hasSettlement()
-                || foundHex.getVertex((dir+5)%6).hasSettlement()
-                || v.hasSettlement()){
+        if (foundHex.getVertex((dir + 1) % 6).hasSettlement()
+                || foundHex.getVertex((dir + 5) % 6).hasSettlement()
+                || v.hasSettlement()) {
             return false;
         }
-        if(foundHex.getOutsideVertex(dir) != null){ //Need a special case in case outsideVertex doesn't exist
-            if(foundHex.getOutsideVertex(dir).hasSettlement()){
+        if (foundHex.getOutsideVertex(dir) != null) { //Need a special case in case outsideVertex doesn't exist
+            if (foundHex.getOutsideVertex(dir).hasSettlement()) {
                 return false;
             }
         }
+
         //Next, check for adjacent current-player-owned roads, but only if initial placements are done
         if(model.didGameBegin()){
             for(Edge e: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir), foundHex.getEdge((dir+5)%6),foundHex.getOutsideEdge(dir)))){
@@ -432,8 +434,26 @@ public class BoardController {
         }
     }
 
-    private boolean isLegalPlacement(Hexagon foundHex, Edge v, Player currentPlayer) {
-        return true;
+    private boolean isLegalPlacement(Hexagon foundHex, Edge e, Player currentPlayer) {
+        int dir = foundHex.getEdgeDir(e);
+        if (foundHex.getEdge(foundHex.getEdgeDir(e)).hasRoad()) {
+            return false;
+        }
+        if (model.didGameBegin()) {
+            for (Edge edge : new ArrayList<>(Arrays.asList(foundHex.getEdge(dir+5%6),
+                    foundHex.getEdge(dir+1%6), foundHex.getOutsideEdge(dir), foundHex.getOutsideEdge(dir+1%6)))){
+                if (edge != null) {
+                    if (edge.hasRoad()) {
+                        if (edge.getRoad().getOwner() == currentPlayer) {
+                            System.out.println("test");
+                            return true;
+                        }}}
+            }
+            return false;
+        }else{
+            return true;
+        }
+
     }
 
 
