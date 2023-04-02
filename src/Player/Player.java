@@ -131,5 +131,24 @@ public class Player {
     public void addPort(Port port){
         portsOwned.add(port);
     }
+
+    public void raiseSettlementCount() {
+        settlementCount++;
+        victoryPoints--;
+    }
+
+    public void lowerCityCount() {
+        cityCount--;
+        victoryPoints++;
+    }
+
+    public void lowerSettlementCount() {
+        settlementCount--;
+        victoryPoints++;
+    }
+
+    public void lowerRoadCount() {
+        roadCount--;
+    }
 }
 

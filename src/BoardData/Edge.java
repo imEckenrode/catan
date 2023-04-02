@@ -1,7 +1,6 @@
 package BoardData;
 import GUI.PlaceableItem;
 import Player.Road;
-import Player.Settlement;
 
 import javax.swing.*;
 
@@ -30,7 +29,7 @@ public class Edge extends PlaceableItem {
         return road;
     }
 
-    public void setRoad(Road road) {
+    public void placeRoad(Road road) {
         this.road = road;
         setImageFile(road.getFilePath(0));
     }
@@ -50,7 +49,7 @@ public class Edge extends PlaceableItem {
     }
 
 
-    public void setRoad(Road road, JPanel itemsPanel) {
+    public void placeRoad(Road road, JPanel itemsPanel) {
         //There is no case where a settlement will be removed from the board.
         //This makes sure we do not honor the attempt
         if(road == null){

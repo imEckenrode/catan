@@ -40,7 +40,7 @@ public class Vertex extends PlaceableItem{
     }
 
 
-    public void setSettlement(Settlement settlement, JPanel itemsPanel) {
+    public void placeSettlement(Settlement settlement, JPanel itemsPanel) {
         //There is no case where a settlement will be removed from the board.
         //This makes sure we do not honor the attempt
         if(settlement == null){

@@ -290,7 +290,6 @@ public class BoardController {
         }
         updateResourceDisplays();
         model.addToPlacementQueue(robber);
-        //TODO: perhaps a popup?
     }
 
     private void nextTurn(){
@@ -362,13 +361,16 @@ public class BoardController {
                     return false;
                 }else {
                     view.getForm().getItemsPanel().remove(v.getLabel());
-                    v.setSettlement(s, itemsPanel);
+                    v.placeSettlement(s, itemsPanel);
+                    currentPlayer.raiseSettlementCount();
+                    currentPlayer.lowerCityCount();
                     return true;
                 }
             }else{  //Otherwise, be sure to check if the settlement placement is legal
                 if(isLegalPlacement(foundHex, v, currentPlayer)) {
-                    v.setSettlement((Settlement) item, itemsPanel);
+                    v.placeSettlement((Settlement) item, itemsPanel);
                     //TODO: Collect Port if available
+                    currentPlayer.lowerSettlementCount();
                     return true;
                 }
             }
@@ -376,7 +378,8 @@ public class BoardController {
         }else if(item instanceof Road){
             Edge e = foundHex.getEdgeFromDegrees(degrees);
             if(isLegalPlacement(foundHex, e, currentPlayer)){
-                e.setRoad((Road) item, itemsPanel);
+                e.placeRoad((Road) item, itemsPanel);
+                currentPlayer.lowerRoadCount();
                 return true;
             }
         }else{
@@ -403,20 +406,24 @@ public class BoardController {
     private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
         int dir = foundHex.getVertexDir(v);
         //First, check if there are no adjacent settlements
-        if(foundHex.getOutsideVertex(dir).hasSettlement()
-                || foundHex.getVertex((dir+1)%6).hasSettlement()
+        if(foundHex.getVertex((dir+1)%6).hasSettlement()
                 || foundHex.getVertex((dir+5)%6).hasSettlement()
                 || v.hasSettlement()){
             return false;
         }
+        if(foundHex.getOutsideVertex(dir) != null){ //Need a special case in case outsideVertex doesn't exist
+            if(foundHex.getOutsideVertex(dir).hasSettlement()){
+                return false;
+            }
+        }
         //Next, check for adjacent current-player-owned roads, but only if initial placements are done
         if(model.didGameBegin()){
             for(Edge e: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir), foundHex.getEdge((dir+5)%6),foundHex.getOutsideEdge(dir)))){
+                if (e != null) {
                 if(e.hasRoad()){
-                    if(e.getRoad().getOwner() == currentPlayer){
-                        return true;
-                    }
-                }
+                if(e.getRoad().getOwner() == currentPlayer){
+                    return true;
+                }}}
             }
             return false;
         }else{
