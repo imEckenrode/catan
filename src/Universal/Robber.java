@@ -14,10 +14,10 @@ public class Robber extends Item {
 
     public Robber(JPanel inPanel) {
         super(null);
-        addFilePath("./CatanPNGs/Rock.png");
-        robberDisplay = new JLabel(new ImageIcon(new ImageIcon(getFilePath()).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+        addFilePath("./CatanPNGs/Robber.png");
+        robberDisplay = new JLabel(new ImageIcon(new ImageIcon(getFilePath()).getImage().getScaledInstance(20, 40, Image.SCALE_DEFAULT)));
         inPanel.add(robberDisplay);
-        robberDisplay.setBounds(20,20,20,20);
+        robberDisplay.setBounds(20,20,20,40);
     }
 
     public void moveTo(Hexagon foundHex) {
