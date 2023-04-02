@@ -6,6 +6,7 @@ import Universal.Catan;
 import Universal.Robber;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 //import static BoardData.Dir6.rot60;
 
@@ -251,4 +252,26 @@ public class Hexagon extends PlaceableItem {
         }
         return null;
     }
+
+    public int getVertexDir(Vertex v) {
+        for (int i = 0; i < 6; i++) {
+            if (v == vertices[i]) {
+                return i;
+            }
+        }
+        System.out.println("Could not find vertex, returning 0");
+        return 0;
+    }
+
+    public int getEdgeDir(Edge e) {
+        for (int i = 0; i < 6; i++) {
+            if (e == edges[i]) {
+                return i;
+            }
+        }
+        System.out.println("Could not find edge, returning 0");
+        return 0;
+    }
+
+
 }

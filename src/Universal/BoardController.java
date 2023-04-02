@@ -335,7 +335,7 @@ public class BoardController {
             Vertex v = foundHex.getVertexFromDegrees(degrees);
             //If this is a city, then only place it on a currentPlayer-owned settlement
             if(s.isACity()){
-                if(v.getSettlement() == null || v.getSettlement().getOwner() != currentPlayer){
+                if(!v.hasSettlement() || v.getSettlement().getOwner() != currentPlayer){
                     return false;
                 }else {
                     view.getForm().getItemsPanel().remove(v.getLabel());
@@ -345,6 +345,7 @@ public class BoardController {
             }else{  //Otherwise, be sure to check if the settlement placement is legal
                 if(isLegalPlacement(foundHex, v, currentPlayer)) {
                     v.setSettlement((Settlement) item, itemsPanel);
+                    //TODO: Collect Port if available
                     return true;
                 }
             }
@@ -377,11 +378,27 @@ public class BoardController {
     }
 
     private boolean isLegalPlacement(Hexagon foundHex, Vertex v, Player currentPlayer) {
+        int dir = foundHex.getVertexDir(v);
         //First, check if there are no adjacent settlements
-
-        //Next, check for adjacent roads, but only if initial placements are done
-        model.didGameBegin();
-        return true;
+        if(foundHex.getOutsideVertex(dir).hasSettlement()
+                || foundHex.getVertex((dir+1)%6).hasSettlement()
+                || foundHex.getVertex((dir+5)%6).hasSettlement()
+                || v.hasSettlement()){
+            return false;
+        }
+        //Next, check for adjacent current-player-owned roads, but only if initial placements are done
+        if(model.didGameBegin()){
+            for(Edge e: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir), foundHex.getEdge((dir+5)%6),foundHex.getOutsideEdge(dir)))){
+                if(e.hasRoad()){
+                    if(e.getRoad().getOwner() == currentPlayer){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }else{
+            return true;
+        }
     }
 
     private boolean isLegalPlacement(Hexagon foundHex, Edge v, Player currentPlayer) {

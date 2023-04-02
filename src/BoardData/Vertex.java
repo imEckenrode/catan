@@ -35,6 +35,10 @@ public class Vertex extends PlaceableItem{
         return settlement;
     }
 
+    public boolean hasSettlement(){
+        return settlement != null;
+    }
+
 
     public void setSettlement(Settlement settlement, JPanel itemsPanel) {
         //There is no case where a settlement will be removed from the board.

@@ -71,11 +71,19 @@ public class Edge extends PlaceableItem {
         port = null;
     }
 
+    public boolean hasPort(){
+        return (port != null);
+    }
+
     public int getTilt() {
         return tilt;
     }
 
     public void setTilt(int tilt) {
         this.tilt = tilt;
+    }
+
+    public boolean hasRoad() {
+        return road != null;
     }
 }

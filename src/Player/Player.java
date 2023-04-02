@@ -127,5 +127,9 @@ public class Player {
     public void setRoadCount(int roads) {
         this.roadCount = roads;
     }
+
+    public void addPort(Port port){
+        portsOwned.add(port);
+    }
 }
 
