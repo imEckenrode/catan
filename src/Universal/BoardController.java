@@ -422,6 +422,7 @@ public class BoardController {
 
         }else if(item instanceof Road){
             Edge e = foundHex.getEdgeFromDegrees(degrees);
+            foundHex = foundHex.getEdgeHexFromDegrees(degrees);
             if(isLegalPlacement(foundHex, e, item.getOwner())){
                 e.placeRoad((Road) item, itemsPanel);
                 item.getOwner().lowerRoadCount();
@@ -495,9 +496,7 @@ public class BoardController {
                         System.out.println("owner");
                         for(Edge edge: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir+i),foundHex.getEdge((dir+i+5)%6),foundHex.getOutsideEdge(dir+i)))){
                             if (edge !=null) {
-                                System.out.println("not null");
                                 if (edge.hasRoad()) {
-                                    System.out.println("road");
                                     return false;
                                 }
                             }
@@ -561,9 +560,13 @@ public class BoardController {
         if(have==null){
             return;
         }
-        //TODO: Show a pop-up telling the other player to get ready, then show his/her hand
         Catan.Resource want = promptResourcePicker();
         if(want==null){
+            return;
+        }
+
+        TradeOffer confirm = new TradeOffer(player, currentPlayer, want, have);
+        if(!confirm.showDialog()) {
             return;
         }
         //Could add Accept or Decline Trade before completing trade (optional to code in)

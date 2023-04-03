@@ -261,4 +261,20 @@ public class Hexagon extends PlaceableItem {
     }
 
 
+    public Hexagon getEdgeHexFromDegrees(double degrees) {
+            for(int i = 0; i<6; i++){
+                if(degrees<60*(i+1)){
+                    if(degrees - 60*i > 55){
+                        System.out.println(degrees);
+                        Edge e = getOutsideEdge((i+1)%6);
+                        return e != null ? adjacentHexes[(i+1)%6] : this;
+                    }else if(degrees - 60*i < 5) {
+                        Edge e = getOutsideEdge(i);
+                        return e != null ? adjacentHexes[i] : this;
+                    }
+                    return this;
+                }
+            }
+            return this;
+        }
 }
