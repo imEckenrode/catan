@@ -8,8 +8,7 @@ import java.util.*;
 public class Hand {
     ArrayList<Integer> resourceCards;
     public Hand() {
-        this.resourceCards = new ArrayList<>(Arrays.asList(50,50,50,50,50));
-        //this.resourceCards = new ArrayList<>(Arrays.asList(0,0,0,0,0));
+        this.resourceCards = new ArrayList<>(Arrays.asList(0,0,0,0,0));
     }
 
     public void addResource(Catan.Resource resource) {

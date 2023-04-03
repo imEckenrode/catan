@@ -66,7 +66,7 @@ public class BoardController {
                 }
         });
         gui.getBuildCityButton().addActionListener(e -> {
-            if (currentPlayer.getCityCount()!=0) {
+            if ((currentPlayer.getCityCount()!=0) && (currentPlayer.getHand().hasResource(Catan.Resource.ORE,3))&&(currentPlayer.getHand().hasResource(Catan.Resource.GRAIN,2))) {
                 currentPlayer.setCityCount(currentPlayer.getCityCount() - 1);
                 currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
                 currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
