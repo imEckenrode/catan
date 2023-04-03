@@ -217,9 +217,10 @@ public class BoardController {
                     model.totalItemsPlaced++;
                 }
                 view.updatePlayerDisplay(currentPlayer);
-                if(model.totalItemsPlaced==model.players.size()*4){
+                if(model.totalItemsPlaced == model.players.size()*4){
                     model.setGameBegin(true);
                     System.out.println("Let's Play!");
+                    model.totalItemsPlaced++;   //To stop it from calling again
                 }
             }
         });

@@ -138,9 +138,10 @@ public class BoardManager {
     }
 
     private void giveStartingResources() {
-        //TODO: This
+        for(ArrayList<Hexagon> hexList: numberToTile){
+            for(Hexagon h: hexList){
+                h.distributeResources();
+            }
+        }
     }
-
-
-
 }
