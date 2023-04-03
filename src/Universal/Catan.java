@@ -47,7 +47,7 @@ public class Catan {
     }
 
     public static void main(String[] args) {
-        int vpToWin = 10;
+        int vpToWin = 7;
         Catan game = new Catan(vpToWin);
         //game.playGame(vpToWin);
     }
