@@ -382,8 +382,17 @@ public class BoardController {
                 return false;
             }
             robber.moveTo(foundHex);
-            //TODO: Implement robber plunder with a selected settlement on the hex
-            //robber.selectPlunder(foundHex, currentPlayer);
+            ArrayList<Player> stealOptions = new ArrayList<Player>();
+
+            for(int i = 0;i<6;i++){
+                if(foundHex.getVertex(i).hasSettlement()){
+                    if(!(stealOptions.contains(foundHex.getVertex(i).getSettlement().getOwner()))){
+                        stealOptions.add(foundHex.getVertex(i).getSettlement().getOwner());
+                    }
+                }
+            }
+
+            Player stealPlayer = new PlayerPicker(stealOptions).showDialog();
             return true;
         }
 
