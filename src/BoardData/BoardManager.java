@@ -131,5 +131,14 @@ public class BoardManager {
 
     public void setGameBegin(Boolean bool){
         gameStarted = bool;
+        if(bool){
+            giveStartingResources();
+        }
     }
+
+    private void giveStartingResources() {
+        //TODO: This
+    }
+
+
 }

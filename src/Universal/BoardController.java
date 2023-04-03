@@ -128,7 +128,12 @@ public class BoardController {
         //Now for the buttons
 
         gui.getEndTurnButton().addActionListener(e->{
-            nextTurn();
+            if(model.didGameBegin()){
+                nextTurn();
+            }else{
+                model.setGameBegin(true);
+                takeTurn(currentPlayer, otherPlayers);
+            }
         });
         //Placing port Images
         PlacePNG(gui.getBoardPanel(),"./CatanPNGs/3For1Port.png",70,70,95,-10);
@@ -213,14 +218,6 @@ public class BoardController {
         gui.getBoardPanel().addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                //TODO: REMOVE TESTS
-                /*
-                gui.getItemsPanel().removeAll();
-                gui.getItemsPanel().revalidate();
-                gui.getItemsPanel().repaint();      */
-                //TODO: Move first line to BuildCard
-                //model.addToPlacementQueue(new Road(currentPlayer));
-
                 if(attemptToPlaceItem(gui.getItemsPanel(), model.peekPlacementQueue(), e.getX(), e.getY())){
                     model.removeFirstFromQueue();
                 };
@@ -266,8 +263,6 @@ public class BoardController {
         startingSnake(model.players);
 
         updateHandColors();
-        //model.setGameBegin(true);
-        //takeTurn(currentPlayer, otherPlayers);
     }
 
     private void startingSnake(ArrayList<Player> players) {
@@ -284,8 +279,6 @@ public class BoardController {
         for(int i = players.size()-1; i>=0; i--){
             model.addToPlacementQueue(new Road(players.get(i)));
         }
-
-        //await()
     }
 
 
@@ -485,7 +478,6 @@ public class BoardController {
             }
             return false;
         }else{
-            //TODO: Check if this is by a settlement for snaking purposes, then make sure this settlement does not already have a road
             //for (Vertex vertex : new ArrayList<>(Arrays.asList(foundHex.getVertex(dir), foundHex.getVertex((dir+1)%6)))){
             for(int i=0;i<2;i++){
                 if (foundHex.getVertex(dir+i).hasSettlement()){
