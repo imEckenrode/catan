@@ -46,7 +46,7 @@ public class Hand {
     }
 
     public Catan.Resource removeRandomResource(Dice dice){
-       int lostNum = dice.randomInt(totalResourceCount());
+       int lostNum = dice.randomInt(totalResourceCount())+1;
        for(Catan.Resource r: Catan.Resource.values()){
             lostNum -= resourceCards.get(r.toIndex());
             if(lostNum<=0){
@@ -54,8 +54,8 @@ public class Hand {
                 return r;
             }
        }
-       System.out.println("Error: Could not return resource, defaulting to wood.");
-       return Catan.Resource.WOOD;
+       System.out.println("Evaded robber!");
+       return null;
     }
 
     public void setResourceCount(Catan.Resource resource, int number) {

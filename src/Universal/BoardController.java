@@ -312,6 +312,7 @@ public class BoardController {
                 hex.distributeResources();
             }
         }
+        updateResourceDisplays();
     }
 
     private int displayDiceRoll(){
