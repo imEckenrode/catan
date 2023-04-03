@@ -123,11 +123,6 @@ public class BoardController {
         gui.getItemsPanel().setOpaque(false);
         robber = new Robber(gui.getItemsPanel());
 
-        //TODO remove road test code
-        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road0.png",40,40,160,35);
-        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road.png",40,40,190,80);
-        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/Road2.png",40,40,220,35);
-        PlacePNG(gui.getItemsPanel(),"./CatanPNGs/City.png",40,40,100,100);
 
         view.pack();
         view.setSize(840,715);
@@ -492,18 +487,22 @@ public class BoardController {
             return false;
         }else{
             //TODO: Check if this is by a settlement for snaking purposes, then make sure this settlement does not already have a road
-            for (Vertex vertex : new ArrayList<>(Arrays.asList(foundHex.getVertex(dir), foundHex.getVertex(dir+1%6)))){
-                if (vertex.hasSettlement()){
-                    if (vertex.getSettlement().getOwner() == player){
-                        for(Edge edge: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir),foundHex.getEdge(dir+5%6),foundHex.getOutsideEdge(dir)))){
+            //for (Vertex vertex : new ArrayList<>(Arrays.asList(foundHex.getVertex(dir), foundHex.getVertex((dir+1)%6)))){
+            for(int i=0;i<2;i++){
+                if (foundHex.getVertex(dir+i).hasSettlement()){
+                    System.out.println("Settlement");
+                    if (foundHex.getVertex(dir+i).getSettlement().getOwner() == player){
+                        System.out.println("owner");
+                        for(Edge edge: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir+i),foundHex.getEdge((dir+i+5)%6),foundHex.getOutsideEdge(dir+i)))){
                             if (edge !=null) {
+                                System.out.println("not null");
                                 if (edge.hasRoad()) {
-                                    System.out.println("test");
+                                    System.out.println("road");
                                     return false;
                                 }
                             }
                         }
-                    return true;
+                        return true;
                     }
                 }
             }
