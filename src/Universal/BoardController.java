@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 public class BoardController {
 
@@ -270,25 +271,24 @@ public class BoardController {
 
         startingSnake(model.players);
 
-
         updateHandColors();
-        model.setGameBegin(true);
-        takeTurn(currentPlayer, otherPlayers);
+        //model.setGameBegin(true);
+        //takeTurn(currentPlayer, otherPlayers);
     }
 
     private void startingSnake(ArrayList<Player> players) {
         //collectStartingResources(); also
         for(int i = 0; i<players.size(); i++){
-            //placeSettlement(players.get(i));
+            model.addToPlacementQueue(new Settlement(players.get(i)));
         }
         for(int i = players.size()-1; i>=0; i--){
-            //placeSettlement(players.get(i));
+            model.addToPlacementQueue(new Settlement(players.get(i)));
         }
         for(int i = 0; i<players.size(); i++){
-            //placeRoad(players.get(i));
+            model.addToPlacementQueue(new Road(players.get(i)));
         }
         for(int i = players.size()-1; i>=0; i--){
-            //placeRoad(players.get(i));
+            model.addToPlacementQueue(new Road(players.get(i)));
         }
 
         //await()
@@ -486,16 +486,31 @@ public class BoardController {
                 if (edge != null) {
                     if (edge.hasRoad()) {
                         if (edge.getRoad().getOwner() == player) {
-                            System.out.println("test");
                             return true;
                         }}}
             }
             return false;
         }else{
             //TODO: Check if this is by a settlement for snaking purposes, then make sure this settlement does not already have a road
-            return true;
+            for (Vertex vertex : new ArrayList<>(Arrays.asList(foundHex.getVertex(dir), foundHex.getVertex(dir+1%6)))){
+                if (vertex.hasSettlement()){
+                    if (vertex.getSettlement().getOwner() == player){
+                        for(Edge edge: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir),foundHex.getEdge(dir+5%6),foundHex.getOutsideEdge(dir)))){
+                            if (edge !=null) {
+                                if (edge.hasRoad()) {
+                                    System.out.println("test");
+                                    return false;
+                                }
+                            }
+                        }
+                    return true;
+                    }
+                }
+            }
+             return false;
+            }
         }
-    }
+
 
 
     //PlacePNG take a .png file, turns it into a Buffered Image, then turns the Buffered image into a ImageIcon,
