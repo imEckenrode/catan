@@ -12,19 +12,4 @@ public class BuildingCard extends PlaceableItem {
     public BuildingCard(String imageFile, int centerX, int centerY, int height, int width) {
         super(imageFile, centerX, centerY, height, width);
     }
-
-    public void buyThing(Player player, BoardManager model, int i){
-        switch(i){
-            case 0:
-                //Buy a settlement
-                model.addToPlacementQueue(new Settlement(player));
-                break;
-            case 1:
-                model.addToPlacementQueue(new Road(player));
-                break;
-            case 2:
-                //TODO: Find a way to upgrade from settlement to city
-                break;
-        }
-    }
 }

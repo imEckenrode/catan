@@ -52,16 +52,12 @@ public class Player {
     }
 
     public boolean hasResourcePort(Catan.Resource resource){
-
-        //TODO REMOVE THIS LINE
-        return true;
-
-//        for(Port p: portsOwned){
-//            if(p.getResource() == resource){
-//                return true;
-//            }
-//        }
-//        return false;
+        for(Port p: portsOwned){
+            if(p.getResource() == resource){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setVictoryPoints(int victoryPoints) {

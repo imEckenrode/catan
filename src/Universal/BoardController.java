@@ -81,8 +81,6 @@ public class BoardController {
         gui.getBoardPanel().setLayout(null);
 
         //Loops Though hMap and places all the hexes in the correct spaces visually
-        //TODO Verify the i and j values for this loop
-        //TODO Make desertHex look right
 
         gui.getItemsPanel().setLayout(null);
         gui.getItemsPanel().setOpaque(false);
@@ -174,7 +172,7 @@ public class BoardController {
         gui.getTradeButton(Catan.Resource.ORE).add(gui.ButtonImage("./CatanPNGs/RockPort.png",40,40));
 
 
-        //TODO: Code in buttons dynamically to allow for any number of players
+        //Could code in buttons dynamically to allow for any number of players
         gui.getHand1Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(0)));
         gui.getHand2Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(1)));
         gui.getHand3Button().addActionListener(e -> tradeWithPlayer(otherPlayers.get(2)));
@@ -240,8 +238,7 @@ public class BoardController {
         //Abstract these 4 into an actual function call
         ArrayList<Color> standardColors = new ArrayList<>(Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW));
         for(int i = 0; i<4; i++){
-            //TODO Uncomment
-            Color chosenColor =null;//promptColorPicker();
+            Color chosenColor = promptColorPicker();
             if(chosenColor == null){
                 chosenColor = standardColors.get(i);
             }
@@ -256,7 +253,7 @@ public class BoardController {
             model.players.add(player);
         }
 
-        //TODO: Replace local variables with function calls
+        //Could replace local variables with function calls
         setCurrentPlayer(model.getCurrentPlayer());
         otherPlayers = model.getOtherPlayers();
 
@@ -329,7 +326,7 @@ public class BoardController {
 
     private void nextTurn(){
         if (whoWon(vpToWin) != null) {
-            //TODO: DEFINE WIN SCREEN?
+            //Could Define Win Screen
             view.getForm().getEndTurnButton().setText("You have won Catan!");
             view.getForm().getEndTurnButton().setEnabled(false);
             System.out.println("You are the settler of Catan!");
@@ -340,7 +337,6 @@ public class BoardController {
         model.clearPlacementQueue();
         //and take turns
         takeTurn(model.getCurrentPlayer(), model.getOtherPlayers());
-        //TODO: Refactor and always use getCurrentPlayer and getOtherPlayers
     }
 
     private boolean attemptToPlaceItem(JPanel itemsPanel, Item item, int clickX, int clickY) {
@@ -550,6 +546,7 @@ public class BoardController {
         if(have==null){
             return;
         }
+        //TODO: Show a pop-up telling the other player to get ready, then show his/her hand
         Catan.Resource want = promptResourcePicker();
         if(want==null){
             return;

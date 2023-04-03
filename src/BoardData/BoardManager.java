@@ -50,9 +50,8 @@ public class BoardManager {
                 resource = resources.remove(rng.nextInt(resources.size()));
                 hMap[j][i] = new Hexagon(resource);
 
-                //TODO: REMOVE
-                hMap[j][i].setCenterX(i);
-                hMap[j][i].setCenterY(j);
+                //hMap[j][i].setCenterX(i);
+                //hMap[j][i].setCenterY(j);
             }
         }
 

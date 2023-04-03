@@ -16,7 +16,7 @@ public class Catan {
         WOOL(3,"Sheep","./CatanPNGs/SheepHex.png","./CatanPNGs/sheep.png", null),
         CLAY(4,"Brick","./CatanPNGs/BrickHex.png","./CatanPNGs/brick.png", null),
         DESERT (-1,"Desert","./CatanPNGs/desert.png",null, null);
-        //TODO rename desert.png to desertHex.png
+
         private final int index;
         private final String name;
         private final String hexagonFile;
