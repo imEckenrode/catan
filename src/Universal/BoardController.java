@@ -85,6 +85,10 @@ public class BoardController {
         //TODO Verify the i and j values for this loop
         //TODO Make desertHex look right
 
+        gui.getItemsPanel().setLayout(null);
+        gui.getItemsPanel().setOpaque(false);
+        robber = new Robber(gui.getItemsPanel());
+
         int i = 160;
         int j = 100;
         for( Hexagon[] temp : model.hMap) {
@@ -102,6 +106,8 @@ public class BoardController {
                     gui.getBoardPanel().add(number);
                     number.setBounds(hex.getCenterX() - 25, hex.getCenterY() - 25, 50, 50);
                     PlacePNG(gui.getBoardPanel(), "./CatanPNGs/NumberToken.png", 50, 50, hex.getCenterX() - 25, hex.getCenterY() - 25);
+                }else{
+                    robber.moveTo(hex);
                 }
 
                 hex.drawImage(gui.getBoardPanel());
@@ -115,14 +121,6 @@ public class BoardController {
         // placing in the background last because null layout
         Board board = new Board("./CatanPNGs/PlainBoard.png",262,262,625,525);
         board.drawImage(gui.getBoardPanel());
-
-
-
-
-        gui.getItemsPanel().setLayout(null);
-        gui.getItemsPanel().setOpaque(false);
-        robber = new Robber(gui.getItemsPanel());
-
 
         view.pack();
         view.setSize(840,715);
@@ -256,7 +254,8 @@ public class BoardController {
 
         //cycle until the winner of the dice toss is selected
         for(int i=0; i<model.dice.randomInt(4); i++){
-            model.players.add(model.players.remove(0));
+            Player player = model.players.remove(0);
+            model.players.add(player);
         }
 
         //TODO: Replace local variables with function calls
