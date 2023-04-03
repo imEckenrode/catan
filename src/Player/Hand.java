@@ -79,4 +79,11 @@ public class Hand {
         }
         return total;
     }
+
+    public boolean hasResource(Catan.Resource resource, int i) {
+        if (resourceCards.get(resource.toIndex())>=i){
+            return true;
+        }
+        return false;
+    }
 }

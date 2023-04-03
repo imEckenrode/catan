@@ -137,7 +137,6 @@ public class ResourcePicker extends JDialog {
     public Catan.Resource showDialog() {
         //setSize(875,315);
         setSize(1150,300);
-        //TODO: Could create an actual label instead of using radio button's built-in label, then go back to previous size
         setVisible(true);
         return pickedResource;
     }

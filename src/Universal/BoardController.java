@@ -46,25 +46,25 @@ public class BoardController {
         gui.getBuildCityButton().add(gui.ButtonImage("./CatanPNGs/BuildCity.png",160,50));
 
         gui.getBuildRoadButton().addActionListener(e -> {
-            if (currentPlayer.getRoadCount()!=0) {
-                currentPlayer.setRoadCount(currentPlayer.getRoadCount() - 1);
-                currentPlayer.getHand().removeResource(Catan.Resource.WOOD);
-                currentPlayer.getHand().removeResource(Catan.Resource.CLAY);
-                updateResourceDisplays();
-                model.addToPlacementQueue(new Road(currentPlayer));
+            if ((currentPlayer.getRoadCount()>0) && (currentPlayer.getHand().hasResource(Catan.Resource.WOOD,1))){
+                if((currentPlayer.getHand().removeResource(Catan.Resource.WOOD))&& (currentPlayer.getHand().removeResource(Catan.Resource.CLAY))) {
+                    updateResourceDisplays();
+                    model.addToPlacementQueue(new Road(currentPlayer));
+                }
             }
         });
         gui.getBuildSettlentButton().addActionListener(e -> {
-            if (currentPlayer.getSettlementCount()!=0) {
-                currentPlayer.setSettlementCount(currentPlayer.getSettlementCount() - 1);
-                currentPlayer.getHand().removeResource(Catan.Resource.WOOD);
-                currentPlayer.getHand().removeResource(Catan.Resource.CLAY);
-                currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
-                currentPlayer.getHand().removeResource(Catan.Resource.WOOL);
-                model.addToPlacementQueue(new Settlement(currentPlayer));
-                updateResourceDisplays();
+            if ((currentPlayer.getSettlementCount()!=0) && (currentPlayer.getHand().hasResource(Catan.Resource.WOOD,1)) &&
+                    (currentPlayer.getHand().hasResource(Catan.Resource.CLAY,1))&& (currentPlayer.getHand().hasResource(Catan.Resource.GRAIN,1))&&
+                    (currentPlayer.getHand().hasResource(Catan.Resource.WOOL,1))){
 
-            }
+                    currentPlayer.getHand().removeResource(Catan.Resource.WOOD);
+                    currentPlayer.getHand().removeResource(Catan.Resource.CLAY);
+                    currentPlayer.getHand().removeResource(Catan.Resource.GRAIN);
+                    currentPlayer.getHand().removeResource(Catan.Resource.WOOL);
+                    model.addToPlacementQueue(new Settlement(currentPlayer));
+                    updateResourceDisplays();
+                }
         });
         gui.getBuildCityButton().addActionListener(e -> {
             if (currentPlayer.getCityCount()!=0) {
@@ -462,8 +462,6 @@ public class BoardController {
         }
 
         //TODO: Need to make sure this road does not pass through an opponent settlement
-
-
         if (model.didGameBegin()) {
             for (Edge edge : new ArrayList<>(
                     Arrays.asList(foundHex.getEdge((dir+5)%6),

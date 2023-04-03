@@ -59,7 +59,6 @@ public class DiceRoll extends JDialog {
     public int showDialog() {
         //setSize(875,315);
         setSize(400,300);
-        //TODO: Could create an actual label instead of using radio button's built-in label, then go back to previous size
         setVisible(true);
         return result;
     }

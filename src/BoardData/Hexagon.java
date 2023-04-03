@@ -73,9 +73,6 @@ public class Hexagon extends PlaceableItem {
             hexes[cDir].setVertex((cDir+4)%6, vertices[cDir]);
             hexes[(cDir+5)%6].setVertex((cDir+2)%6, vertices[cDir]);
         }
-
-        //TODO: I have to actually assign the adjacent hexes instead of passing around nulls
-
         //Now connect the needed components for the 2nd ring of hexagons, with dir + 3 providing the objects
         hexes[(dir+2)%6].setAdjHexAndBack((dir+4)%6, hexes[(dir + 3)%6]);
         hexes[(dir+2)%6].setEdge((dir+4)%6, hexes[(dir + 3)%6].getEdge((dir+1)%6));
@@ -197,15 +194,6 @@ public class Hexagon extends PlaceableItem {
             i++;
         }
     }
-
-    public void setNumberToken(JPanel itemsPanel) {
-        //There is no case where a settlement will be removed from the board.
-        //This makes sure we do not honor the attempt
-        hasRobber = true;   //TODO
-        //setImageFile(getFilePath(tokenNum));
-        //drawImage(itemsPanel, dir);
-    }
-
     public Vertex getVertexFromDegrees(double degrees) {
         for(int i = 0; i<6; i++){
             if(degrees<30*(2*i+1)){
@@ -216,7 +204,6 @@ public class Hexagon extends PlaceableItem {
     }
 
     public Edge getEdgeFromDegrees(double degrees) {
-        //TODO: Customize this to have the further-out roads
         for(int i = 0; i<6; i++){
             if(degrees<60*(i+1)){
                 if(degrees - 60*i > 55){
