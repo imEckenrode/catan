@@ -473,7 +473,7 @@ public class BoardController {
             return false;
         }
 
-        //TODO: Need to make sure this road does not pass through an opponent settlement
+        //Could make sure this road does not pass through an opponent settlement
         if (model.didGameBegin()) {
             for (Edge edge : new ArrayList<>(
                     Arrays.asList(foundHex.getEdge((dir+5)%6),
@@ -486,7 +486,6 @@ public class BoardController {
                             return true;
                         }}}
             }
-            return false;
         }else{
             //for (Vertex vertex : new ArrayList<>(Arrays.asList(foundHex.getVertex(dir), foundHex.getVertex((dir+1)%6)))){
             for(int i=0;i<2;i++){
@@ -505,9 +504,9 @@ public class BoardController {
                     }
                 }
             }
-             return false;
-            }
         }
+        return false;
+    }
 
 
 
