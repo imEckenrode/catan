@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
 
 public class BoardController {
 
@@ -128,11 +127,8 @@ public class BoardController {
         //Now for the buttons
 
         gui.getEndTurnButton().addActionListener(e->{
-            if(model.didGameBegin()){
+            if(model.didGameBegin()) {
                 nextTurn();
-            }else{
-                model.setGameBegin(true);
-                takeTurn(currentPlayer, otherPlayers);
             }
         });
         //Placing port Images
@@ -220,8 +216,13 @@ public class BoardController {
             public void mouseClicked(MouseEvent e){
                 if(attemptToPlaceItem(gui.getItemsPanel(), model.peekPlacementQueue(), e.getX(), e.getY())){
                     model.removeFirstFromQueue();
-                };
+                    model.totalItemsPlaced++;
+                }
                 view.updatePlayerDisplay(currentPlayer);
+                if(model.totalItemsPlaced==model.players.size()*4){
+                    model.setGameBegin(true);
+                    System.out.println("Let's Play!");
+                }
             }
         });
     }
@@ -258,7 +259,6 @@ public class BoardController {
         //TODO: Replace local variables with function calls
         setCurrentPlayer(model.getCurrentPlayer());
         otherPlayers = model.getOtherPlayers();
-
 
         startingSnake(model.players);
 

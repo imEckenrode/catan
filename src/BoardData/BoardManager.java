@@ -20,6 +20,7 @@ public class BoardManager {
     public  Hexagon[][] hMap;
 
     public Queue<Item> placementOnClickQueue;
+    public int totalItemsPlaced;    //This includes robbers
 
     boolean gameStarted;
 
@@ -29,6 +30,7 @@ public class BoardManager {
         for(int i = 0; i<13;i++){
             numberToTile.add(new ArrayList<>());
         }
+        totalItemsPlaced = 0;
 
         gameStarted = false;
         dice = new Dice();
@@ -139,6 +141,7 @@ public class BoardManager {
     private void giveStartingResources() {
         //TODO: This
     }
+
 
 
 }
