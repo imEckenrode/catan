@@ -391,8 +391,8 @@ public class BoardController {
                     }
                 }
             }
-
             Player stealPlayer = new PlayerPicker(stealOptions).showDialog();
+            currentPlayer.getHand().addResource(stealPlayer.getHand().removeRandomResource(model.dice));
             return true;
         }
 
