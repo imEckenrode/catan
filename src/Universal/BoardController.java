@@ -143,11 +143,15 @@ public class BoardController {
         //Port Trading Buttons
         gui.getFour2oneTradeButton().addActionListener(e ->{
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,4);
-            bankTrade(haveResource,4);
+            if(haveResource != null) {
+                bankTrade(haveResource, 4);
+            }
         });
         gui.getTradeButton(Catan.Resource.DESERT).addActionListener(e -> {
             Catan.Resource haveResource = promptResourcePicker(currentPlayer,3);
-            bankTrade(haveResource,3);
+            if(haveResource != null){
+                bankTrade(haveResource,3);
+            }
         });
         gui.getTradeButton(Catan.Resource.WOOD).addActionListener(e -> {
             bankTrade(Catan.Resource.WOOD,2);
@@ -216,12 +220,12 @@ public class BoardController {
                     model.removeFirstFromQueue();
                     model.totalItemsPlaced++;
                 }
-                view.updatePlayerDisplay(currentPlayer);
                 if(model.totalItemsPlaced == model.players.size()*4){
                     model.setGameBegin(true);
                     System.out.println("Let's Play!");
                     model.totalItemsPlaced++;   //To stop it from calling again
                 }
+                view.updatePlayerDisplay(currentPlayer);
             }
         });
     }
@@ -400,7 +404,17 @@ public class BoardController {
             }else{  //Otherwise, be sure to check if the settlement placement is legal
                 if(isLegalPlacement(foundHex, v, item.getOwner())) {
                     v.placeSettlement((Settlement) item, itemsPanel);
-                    //TODO: Collect Port if available
+                    int dir = foundHex.getVertexDir(v);
+                    //Now, check if there is a port you can gain
+                    for(Edge e: new ArrayList<>(Arrays.asList(foundHex.getEdge(dir),
+                                                foundHex.getEdge((dir+5)%6),
+                                                foundHex.getOutsideEdge(dir)))){
+                        if(e != null) {
+                        if(e.hasPort()){
+                            item.getOwner().addPort(e.getPort());
+                        }}
+                    }
+
                     item.getOwner().lowerSettlementCount();
                     return true;
                 }
@@ -560,9 +574,11 @@ public class BoardController {
         updateResourceDisplays();
     }
     public void bankTrade(Catan.Resource have, int num){
-        currentPlayer.getHand().removeResource(have,num);
-        currentPlayer.getHand().addResource(promptResourcePicker());
-        updateResourceDisplays();
-
+        Catan.Resource r = promptResourcePicker();
+        if(r!=null){
+            currentPlayer.getHand().removeResource(have,num);
+            currentPlayer.getHand().addResource(r);
+            updateResourceDisplays();
+        }
     }
 }
