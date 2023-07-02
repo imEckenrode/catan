@@ -1,10 +1,4 @@
 # catan
-A Java recreation of Settlers of Catan
+A Java recreation of Settlers of Catan created for Penn State's CMPSC 221
 
-### TODO
-* Add Ports to BoardManager
-* Test BoardManager
-* Make rest of TODOs
-
-
-* Wait until GUI is functional to implement rules easily
+Does not feature Development Cards due to time constraints
