@@ -4,6 +4,7 @@ import Player.Player;
 import Universal.Catan;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.event.*;
 
 public class TradeOffer extends JDialog {
@@ -22,6 +23,8 @@ public class TradeOffer extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonAccept);
+
+        contentPane.setBorder(BorderFactory.createLineBorder(accepting.getColor(),10));
 
         acceptButtonsPanel.setBackground(asking.getColor());
         tradeDescLabel.setText("Want 1 "+taking.toString()+" for 1 "+giving.toString()+".");
